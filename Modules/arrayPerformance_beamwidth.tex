@@ -1,0 +1,58 @@
+The half power beamwidth (HPBW), denoted as $\dThetaHPBW$ quantifies the array's main lobe narrowness.
+It marks the DOA where the beampattern's energy reduces to half of its maximal value.
+For standard ULA, assuming large $N$ values, it is known \cite{van2004optimum} that
+$$\dThetaHPBW/2= 1.4/N.$$
+\par In App.~\ref{apdx_HPBW} we extend this known result for any $r\geq 0$. It turns out that for large $N$, the HPBW is obtained by solving for $x$ the equality
+\begin{equation}\label{eq_HPBW}
+    % \resizebox{1\linewidth}{!}{
+        \begin{split}
+            \rBrace{r^{2}-4r+2}\frac{\sin{\rBrace{x}}^{2}}{x^{2}}+r\frac{\sin{\rBrace{2x}}}{x}-1=0
+        \end{split}
+    % }
+\end{equation}
+where we define $x\triangleq{} N\dTheta_{HPBW}/2$. In Fig.~\ref{fig_feedbackULA_HPBW_Nx_vs_N_variousR} we plot the numerical solution of \eqref{eq_HPBW} for various values of $r$ and $N$, showing that $x$ reaches its limit around $N=20$. Also note that for $r=0$ we obtain the known result of standard ULA with the limiting factor of $1.4$.
+Having the limiting factors for various values of the gain mismatch $r$, we investigate the feedback related improvement and express the HPBW by
+\[
+\dThetaHPBW/2\approx \frac{1.4}{f(r)N}.
+\]
+Note that $f(r)$ represents the array aperture improvement factor, compared to the standard ULA. 
+Numerical evaluation (see Fig.~\ref{fig_feedbackULA_beamwidth_limit_r_dependent}) shows that $f(r)$ may be approximated with a second order polynomial
+\begin{equation}
+    \label{eq_Bapprox}
+    f\rBrace{r}\approx\frac{1.4}{\rBrace{1-r}\rBrace{-0.4r+1.4}}.
+\end{equation}
+Note that for accurate gain match (i.e., $r\to1$), the RHS of \eqref{eq_Bapprox} tends towards infinity, implying that the equivalent array has an infinite number  of elements ($f\rBrace{r}N$), hence obtaining perfect spatial selectivity.
+\begin{figure}[t]
+    \begin{center}
+        \begin{overpic}[width=0.65\linewidth, 
+        %grid, 
+        tics=10,trim=0 0 0 0]{./Media/spatial_IIR_MATLAB/arrayParameters/HPBW_vs_N_various_r.eps}
+            \put (4, 75){\footnotesize{$N\dThetaHPBW/2$}}
+            \put (50, 62.5) {\footnotesize{$r=0$}}
+            \put (50, 54) {\footnotesize{$r=0.1$}}
+            \put (50, 39.5) {\footnotesize{$r=0.3$}}
+            \put (50, 28.5) {\footnotesize{$r=0.5$}}
+            \put (50, 19.75) {\footnotesize{$r=0.7$}}
+            \put (50, 12.5) {\footnotesize{$r=0.9$}}
+            \put (50, 2) {\footnotesize{$N$}}
+        \end{overpic}
+    \end{center}
+     \caption{Plot of $x=N\dThetaHPBW/2$ vs. $N$, for various $r$ values, obtained by numerically solving \eqref{eq_HPBW}.}
+    \label{fig_feedbackULA_HPBW_Nx_vs_N_variousR}
+\end{figure}
+\begin{figure}[t]
+    \begin{center}
+        \begin{overpic}[width=0.65\linewidth, 
+        % grid, 
+        tics=10,trim=0 0 0 0]{./Media/HPBW_limit_vs_r.eps}
+            \put (39.5, 63.5) {\scriptsize{Numerical solution of \eqref{eq_HPBW}}}
+            \put (39.5, 58.25) {\scriptsize{Polynomial fitting \eqref{eq_Bapprox}}}
+            \put (39.5, 52.5) {\footnotesize{$\log_{10}f\rBrace{r}$}}
+            \put (85, 75) {\footnotesize{$\log_{10}f\rBrace{r}$}}
+            \put (4, 75){\footnotesize{$N\dThetaHPBW/2$}}
+            \put (50, 2) {\footnotesize{$r$}}
+        \end{overpic}
+    \end{center}
+    \caption{Evaluation of $N\dThetaHPBW/2$ for $N=100$ and its approximation $1.4/f\rBrace{r}$  (marked by red diamonds). $f\rBrace{r}$ is also presented, in logarithmic scale (dotted curve).} 
+    \label{fig_feedbackULA_beamwidth_limit_r_dependent}
+\end{figure}

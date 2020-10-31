@@ -1,0 +1,113 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%      Document flags     %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \def\showDev{}
+% \def\showTodo{}
+\def\showTodoNew{}
+% \def\useOmega{}
+\def\DEFIncludeAttenuation{}
+\def\DEFInclueApplication{}
+%%%%%%%%%%%%  Document Code starts here %%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%    aliases    %%%%%%%%%%%%%%
+\newcommand{\omegaB}{\ifdefined\useOmega\rBrace{\omega}\fi}
+
+% \newcommand{\Brace}[1]{\left\{{#1}\right\}}
+\newcommand{\rBrace}[1]{\left({#1}\right)}
+\newcommand{\lBrace}[1]{\left|{#1}\right|}
+\newcommand{\vBrace}[1]{\left[{#1}\right]}
+\newcommand{\cBrace}[1]{\left\{{#1}\right\}}
+\newcommand{\dTheta}{\Delta\theta\omegaB}
+\newcommand{\dPhi}{\Delta\phi\omegaB}
+\newcommand{\dThetaO}{\Delta\theta\rBrace{\omega}}
+\newcommand{\dPhiO}{\Delta\phi\rBrace{\omega}}
+\newcommand{\dThetaHPBW}{\Delta\theta_{\text{HPBW}}}
+\newcommand{\dOmega}{\Delta\omega}
+\newcommand{\dR}{\Delta{R}}
+\newcommand{\dTau}{CHANGE_TO_DPHI}
+% \newcommand{\D}[2]{\mathcal{D}\rBrace{#1,#2}}
+% \newcommand{\Dp}[2]{\mathcal{D}^{#2}\rBrace{#1}}
+\newcommand{\D}[2]{\text{D}\rBrace{#1,#2}}
+\newcommand{\Dp}[2]{\text{D}^{#2}\rBrace{#1}}
+% \newcommand{\coefSetName}{\text{CB}}
+\newcommand{\coefSetName}{\text{CB}}
+\newcommand{\vd}{\vecnot{d}\omegaB}
+\newcommand{\vdO}{\vecnot{d}\rBrace{\omega}}
+\newcommand{\vdC}{\vecnot{d}^{\ast}\omegaB}
+\newcommand{\vx}{\vecnot{x}}
+\newcommand{\vAlpha}{\vecnot{\alpha}\omegaB}
+\newcommand{\vBeta}{\vecnot{\beta}\omegaB}
+
+\ifdefined\useOmega
+    \newcommand{\vdI}[1]{\vecnot{d}\rBrace{\omega_{#1}}}
+    \newcommand{\vdHatI}[1]{\hat{\vecnot{d}}\rBrace{\omega_{#1}}}
+    \newcommand{\vdHatIC}[1]{\hat{\vecnot{d}}^{\ast}\rBrace{\omega_{#1}}}
+    \newcommand{\vdTI}[1]{\vecnot{d}^{T}\rBrace{\omega_{#1}}}
+    \newcommand{\gI}[1]{g\rBrace{\omega_{#1}}}
+    \newcommand{\gIHat}[1]{\hat{g}\rBrace{\omega_{#1}}}
+    \newcommand{\phiI}[1]{\phi\rBrace{\omega_{#1}}}
+    \newcommand{\phiIHat}[1]{\hat{\phi}\rBrace{\omega_{#1}}}
+    \newcommand{\vAlphaTI}[1]{\vecnot{\alpha}^{T}\rBrace{\omega_{#1}}}
+    \newcommand{\vBetaTI}[1]{\vecnot{\beta}^{T}\rBrace{\omega_{#1}}}
+    \newcommand{\vAlphaI}[1]{\vecnot{\alpha}\rBrace{\omega_{#1}}}
+    \newcommand{\vBetaI}[1]{\vecnot{\beta}\rBrace{\omega_{#1}}}
+    
+\else
+    \newcommand{\vdI}[1]{\vecnot{d}_{#1}}
+    \newcommand{\vdHatI}[1]{\hat{\vecnot{d}}_{#1}}
+    \newcommand{\vdHatIC}[1]{\hat{\vecnot{d}}^{\ast}_{#1}}
+    \newcommand{\vdTI}[1]{\vecnot{d}^{T}_{#1}}
+    \newcommand{\gI}[1]{g_{#1}}
+    \newcommand{\gIHat}[1]{\hat{g}_{#1}}
+    \newcommand{\phiI}[1]{\phi_{#1}}
+    \newcommand{\phiIHat}[1]{\hat{\phi}_{#1}}
+    \newcommand{\vAlphaTI}[1]{\vecnot{\alpha}^{T}_{#1}}
+    \newcommand{\vAlphaHI}[1]{\vecnot{\alpha}^{H}_{#1}}
+    \newcommand{\vBetaTI}[1]{\vecnot{\beta}^{T}_{#1}}
+    \newcommand{\vBetaHI}[1]{\vecnot{\beta}^{H}_{#1}}
+    \newcommand{\vAlphaI}[1]{\vecnot{\alpha}_{#1}}
+    \newcommand{\vAlphaCI}[1]{\vecnot{\alpha}^{*}_{#1}}
+    \newcommand{\vBetaI}[1]{\vecnot{\beta}_{#1}}
+    \newcommand{\vBetaCI}[1]{\vecnot{\beta}^{*}_{#1}}
+\fi
+
+\newcommand{\vAlphaIW}[1]{\vecnot{\alpha}_{#1}\omegaB}
+\newcommand{\vBetaIW}[1]{\vecnot{\beta}_{#1}\omegaB}
+\newcommand{\vAlphaC}{\vecnot{\alpha}^{\ast}\omegaB}
+\newcommand{\vBetaC}{\vecnot{\beta}^{\ast}\omegaB}
+\newcommand{\vBetaFB}{\vecnot{\beta}_{\coefSetName}\omegaB}
+\newcommand{\vBetaCFB}{\vecnot{\beta}^{*}_{\coefSetName}\omegaB}
+\newcommand{\vAlphaFB}{\vecnot{\alpha}_{\coefSetName}\omegaB}
+\newcommand{\vAlphaCFB}{\vecnot{\alpha}^{*}_{\coefSetName}\omegaB}
+\newcommand{\vdT}{\vecnot{d}^{T}\omegaB}
+\newcommand{\vxT}{\vecnot{x}^{T}}
+\newcommand{\vAlphaT}{\vecnot{\alpha}^{T}\omegaB}
+\newcommand{\vBetaT}{\vecnot{\beta}^{T}\omegaB}
+\newcommand{\vdH}{\vecnot{d}^{H}\omegaB}
+\newcommand{\vdHat}{\hat{\vecnot{d}}\omegaB}
+\newcommand{\vdHatC}{\hat{\vecnot{d}}^{\ast}\omegaB}
+\newcommand{\vxH}{\vecnot{x}^{H}}
+\newcommand{\vAlphaH}{\vecnot{\alpha}^{H}\omegaB}
+\newcommand{\vBetaH}{\vecnot{\beta}^{H}\omegaB}
+\newcommand{\vEta}{\vecnot{\eta}}
+\newcommand{\vEtaT}{\vEta^{T}}
+\newcommand{\vEtaH}{\vEta^{H}}
+%\newcommand{\F}[1]{#1^{\mathcal{F}}}
+\newcommand{\F}[1]{\text{\MakeUppercase{#1}}}
+\newcommand{\ePhi}[1]{\exp{\rBrace{#1j\phi}}}
+\newcommand{\thetaD}{\theta_{\text{d}}}
+\newcommand{\Hba}{H_{\vBeta,\vAlpha}\omegaB}
+\newcommand{\HbaFB}{H_{\vecnot{\beta}_{\coefSetName},\vecnot{\alpha}_{\coefSetName}}\omegaB}
+\newcommand{\vp}{\vecnot{p}}
+\newcommand{\vpi}[1]{\vp_{#1}}
+\newcommand{\vpt}{\vp_{\text{t}}}
+\newcommand{\Steer}[1]{\vd_{#1}} 
+\newcommand{\aTd}{\vAlphaT\Steer{}} 
+\newcommand{\aHd}{\vAlphaH\Steer{}} 
+\newcommand{\bTd}{\vBetaT\Steer{}}
+\newcommand{\bHd}{\vBetaH\Steer{}}
+\newcommand{\Hr}{\mathcal{H}}
+\newcommand{\HrTPr}{\mathcal{H}_{\Delta\theta,\Delta\phi,r}}
+\newcommand{\myTodo}[2]{\ifdefined\showTodo{\todo[#1]{#2}}\fi}
+\newcommand{\myTodoNew}[2]{\ifdefined\showTodoNew{\todo[#1]{#2}}\fi}
+\newcommand{\Tx}{\text{T}_{\text{x}}} 

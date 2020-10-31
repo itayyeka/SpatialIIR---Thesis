@@ -1,0 +1,185 @@
+As demonstrated in the previous section, the beampattern \eqref{eq_generalH} is sensitive to range errors.
+We now propose an architecture which obtains the desired beampattern $\Hr_{\Delta\theta,\Delta\phi\to0,r}$ even for relatively large range errors $\Delta R_{\text{rt}}$. Also, we show that the suggested architecture achieves high performance at moderately low signal-to-noise ratio (SNR) scenarios.
+
+\subsection*{Intuition}
+Bearing in mind that the system's phase alignment sensitivity resides in \eqref{eq_generalH} via the  term $\exp\Brack{j\dPhi}=\exp\Brack{j\omega\Delta\tau_{pd}}$ and that the round-trip delay ($\tau_{pd}$) cannot be controlled, one may suggest to use lower frequencies. 
+Unfortunately, aiming for practical range estimation errors, the transmission of such low frequencies is physically unfeasible. 
+Instead, we suggest simultaneous transmission of several frequencies in order to resolve the range error sensitivity. In the following, we suggest a dual frequency (DF) waveform, utilizing two harmonics, $\omega_1$ and $\omega_2$.
+
+\subsection*{Suggested processing scheme}
+\begin{figure}[t!]
+    \begin{center}
+        \begin{overpic}[width=0.9\linewidth, 
+        % grid, 
+        tics=10,trim={0 0 0 0}]{./Media/SpatialIIR_APP.png}
+            \put (12.5, 64){$\text{FB}_{\vAlphaI{1},\vBetaI{1}}$}
+            \put (61, 64){$\text{FB}_{\vAlphaI{2},\vBetaI{2}}$}
+            \put (4.5, 59){$z_{1}\rBrace{t}$}
+            \put (54, 59){$z_{2}\rBrace{t}$}
+            \put (12.9, 41.5){$\text{BPF}_{\omega_{1}}$}
+            \put (61.65, 41.5){$\text{BPF}_{\omega_{2}}$}
+            \put (6, 51.5){+}
+            \put (55, 51.5){+}
+            \put (16, 51.5){\footnotesize{$\text{n}_{1}\rBrace{t}$}}
+            \put (64.75, 51.5){\footnotesize{$\text{n}_{2}\rBrace{t}$}}
+            \put (24.5, 59){\footnotesize{$\Tx_{1}\rBrace{t}$}}
+            \put (73.5, 59){\footnotesize{$\Tx_{2}\rBrace{t}$}}
+            \put (36.25, 64){\scriptsize{$s_{1}\rBrace{t}$}}
+            \put (43, 64){\scriptsize{$s_{2}\rBrace{t}$}}
+            \put (18.25, 13){\footnotesize{Harmonic mean}}
+            \put (32, 2){$Z_{\text{DF}}$}
+            \put (54.75, 24){$\Sigma$}
+            \put (21.75, 25){\footnotesize{$\mathcal{F}_{\omega_{1}}$}}
+            \put (30.75, 25){\footnotesize{$\mathcal{F}_{\omega_{2}}$}}
+        \end{overpic}
+    \end{center}
+    \caption{Dual-frequency beamformer, consisting of two independent FB blocks and narrowband bandpass filters. The blocks marked by $\mathcal{F}_{\omega_{i}}$ compute the Fourier coefficients in $\omega_{i}$ and their outputs feed the harmonic mean calculator, which generates the DF beamformer's output.}
+    \label{fig_app}
+\end{figure}
+In Fig.~\ref{fig_app}, we demonstrate the use of two independently configured FB instances (see also Fig.~\ref{fig:Proposed_spatialIIR_ARCH}), where each instance is designed to treat a specific frequency band.
+A bandpass filter $\text{BPF}_{\omega_{i}},\;i=1,2$ filters a narrowband slice around $\omega_{i}=2\pi f_i$. These filters are used to generate both the transmitted feedback signal ($\text{Tx}_{i}$) and the outputs $z_{i}$. 
+The inputs $s_{i}(t) = \exp\Brack{j\omega_{i}t}$  are the two narrowband stimuli signals and $\text{n}_{i}(t)$ describe the additive noise. 
+
+Note that in the suggested architecture we do not add array elements, but merely double the beamformer processing effort. 
+\par For each FB block, its output is given by
+\[
+z_{i}(t)=H_{\vBetaI{i},\vAlphaI{i}}\rBrace{\omega_{i}}\exp{\rBrace{j\omega_{i}t}}\ \ {i\in\cBrace{1,2}},
+\]
+where $\vBetaI{i},\vAlphaI{i}$ are the coefficients of the $i$'th beamformer.
+Motivated by the desire to mitigate the $\Delta\phi$ dependency of the system, which appears in the denominator of \eqref{eq_generalH}, we compute the reciprocal of each frequency response, average, and compute the reciprocal again. This leads to the harmonic mean of both beamformers' outputs (see Fig.~\ref{fig_app}), which formally, up to a constant term, takes the form
+\begin{equation}
+    \label{eqn_HDF_def}
+    Z_{\text{DF}} = \abs{H^{-1}_{\vBetaI{1}\vAlphaI{1}}\rBrace{\omega_{1}}+H^{-1}_{\vBetaI{2},\vAlphaI{2}}\rBrace{\omega_{2}}}^{-1}.
+\end{equation}
+% Note that, as in IIR filters, the system stabilizes after a certain period, therefore the Fourier weights should be calculated after stabilization.
+% As a rule of thumb, simulations show that the stabilization period is around $100R/c$. 
+\ifdefined\useOmega
+Straight forward derivations, Allowing $g$ to be frequency dependent, leads to
+\else
+For convenience, we use subscripts instead of formal $\omega$ dependency such that $\phiI{i}\triangleq\phi\rBrace{\omega_{i}}, \gI{i}\triangleq{}g\rBrace{\omega_{i}}, \vdI{i}\triangleq\vecnot{d}\rBrace{\omega_{i}}$.
+Also, $r_i\triangleq{}\gI{i}/\gIHat{i}$ is denoted to be the gain mismatch at $\omega_i$.
+
+
+\begin{theorem}
+\label{thrm_DF}
+Consider the architecture suggested in Fig.~\ref{fig_app}, and let \textit{$\vAlphaI{i},\vBetaI{i}$} be the coefficients of the $i$'th FB. Then setting 
+\begin{equation}\label{eqn_simpleBeta}
+    \vAlphaI{1}~=~\vBetaI{1},\ \vAlphaI{2}=-\vBetaI{2}=\vBrace{1/\gIHat{2},0,\hdots,0},
+\end{equation}
+results in 
+\begin{equation}
+    Z_{\text{DF}} = \lBrace{\frac{\gI{1}\vBetaHI{1}\vdI{1}}{1-
+    \rBrace{\gI{1}\vBetaHI{1}\vdI{1}/r_{2}}\exp\rBrace{-j\rBrace{\phiI{1}-\phiI{2}}}
+    }},
+    \label{eqn_H_DF_general}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+See App.~\ref{apdx_thrm_DF}. 
+\end{proof}
+\par Assuming close frequencies, $Z_{\text{DF}}$ in  \eqref{eqn_H_DF_general} closely resembles the single frequency (SF) beampattern in  \eqref{eqn:GeneralFeedbackTransferFunction}, where the range related phase $\phi$ is now replaced by  $\phiI{1}-\phiI{2}=(\omega_1-\omega_2)\tau_{pd}$. 
+Hence, one may significantly mitigate the range mismatch distortion of the beampattern by selecting close stimuli frequencies.
+% Also, $\tau_n$ is arbitrary, hence the discussion is not restricted to a specific array geometry.
+We also note that throughout the development of \eqref{eqn_H_DF_general}, we did not assume any specific array geometry, hence this result is valid for arbitrary arrays and not just ULA.
+\subsection*{Numerical example}
+Consider a radio frequency carrier of $10$~GHz and typical range error of $\Delta{}R_{\text{rt}}=10$~m, which is $333\frac{1}{3}\lambda$ (assuming  speed of light, $c=3\cdot 10^{8}$~m/s). The single frequency beampattern distortion, being periodic in $\lambda$, will closely resemble the $0.3\lambda$ error plot presented in Fig.~\ref{fig_rangError}. Assume that we aim to achieve a maximal phase error of $\Delta \phi=0.01\pi$. Hence, when using DF architecture, the dictated frequency separation must satisfy
+\begin{equation}\label{eq_DF_phErr}
+\abs{(\omega_1-\omega_2)\frac{\Delta{}R_{\text{rt}}}{c}}<0.01\pi.
+\end{equation}
+or equivalently, for maximal range error of $10$~m, a frequency separation of
+\[
+\abs{f_1-f_2}<0.005 c/\Delta{}R_{\text{rt}}=150 \,\text{kHz}
+\]
+is required. 
+
+\subsection*{Dual frequency simulation}
+We now simulate \eqref{eqn_H_DF_general} for the DF structured FB,
+generalizing the $\coefSetName$ approach and setting
+\begin{equation*}
+    \vBetaCI{1}=\frac{-\vdHatIC{1}\exp\rBrace{j\rBrace{\phiIHat{1}-\phiIHat{2}}}}{\hat{\gI{1}}\norm{\vdHatI{1}}^2}.
+\end{equation*}
+% where $\vdHatI{1}$ is the estimated steering vector, as in \eqref{eq:d_hat}.
+With this choice, and similarly to \eqref{eq:SF_CB}, \eqref{eqn_H_DF_general} becomes
+\begin{equation}
+    \label{eqn_H_DF_CB}
+    \resizebox{.89\linewidth}{!}{
+        \begin{split}
+            H_{\text{DF,\coefSetName}}\rBrace{\omega} =
+            \lBrace{\frac{r_{1}\D{\dTheta/2}{N}}{1-
+            \kappa\D{\dTheta/2}{N}\exp\rBrace{-j\rBrace{\phiI{2}-\phiI{1}+(N-1)\dTheta/2}}}
+            },
+        \end{split}
+    }
+\end{equation}
+where $\kappa\triangleq{}r_{1}/r_{2}$ is the gain mismatch ratio.
+For close frequencies, one may assume that $r_{1}\approx{}r_{2}$, hence $\kappa$ tends towards unity, thus significantly mitigating the gain mismatch effect even when both feedback beamformers are mismatched.
+\par Simulating the DF architecture, configured to mitigate range estimation errors as in \eqref{eq_DF_phErr} and plotting its normalized (to $0$~dB peak gain) beampattern together with the perfectly range aligned scenario, we show in Fig.~\ref{fig_dualfreq_rangeErrorHighSnr} that the DF architecture achieves near-optimal performance, despite the inherent range error of $\Delta{}R_{\text{rt}}=10$~m.
+In Fig.~\ref{fig_dualfreq_perfectAlignLowSnr}, we repeat the simulation while adding white Gaussian noise to the output of each feedback beamformer. Evidently, even in the noisy case, the DF beamformer achieves close-to-ideal beampattern, while the SF beamformer suffers severe distortions.
+\begin{figure}[t!]
+    \begin{center}
+        \begin{overpic}[width=.65\linewidth, 
+        % grid, 
+        tics=10,trim=0 0 0 0]{./Media/fig_dualfreq_rangeErrorHighSnr.eps}
+            \put (48, 43){\scriptsize{Ideal}}
+            \put (48, 37.5){\scriptsize{SF}\tiny{$_{\Delta{}R_{\text{rt}}=10_{m}}$}}
+            \put (48, 32){\scriptsize{DF}\tiny{$_{\Delta{}R_{\text{rt}}=10_{m}}$}}
+            \put (2, 37.5){\footnotesize{dB}}
+            \put (47,0){\footnotesize{$\thetaD/\pi$}}
+        \end{overpic}
+    \end{center}
+    \caption{Simulating the 3 element ULA with $r_1=0.6^{2},\; r_2=0.6$ (hence $\kappa=0.6$), assuming an infinite SNR. For each target direction $\thetaD$, the DF beamformer output $Z_\text{DF}$ is evaluated where the beamformer is set to enhance signals impinging from $\thetaD=\pi/2$. 
+    The (modulus $\lambda$) range error is $\Delta{}R_{\text{rt}}=0.3\lambda$.
+    The single frequency (SF) beamformer (red squares) and the dual-frequency (DF) solution (green diamonds) are compared to the ideal response  $\Delta{}R_{\text{rt}}=0$ (blue dots) as a reference. 
+    }
+    \label{fig_dualfreq_rangeErrorHighSnr}
+\end{figure}
+% \begin{figure}[t!]
+%     \begin{center}
+%         \begin{overpic}[width=0.9\linewidth, 
+%         % grid, 
+%         tics=10,
+%         % trim={<left> <lower> <right> <upper>}
+%         trim={1.75cm 0 1.75cm 0}
+%         ]{./Media/fig_dualfreq_rangeErrorLowSnr.eps}
+%             \put (42.25, 17.5){\scriptsize{Ideal}}
+%             \put (42.25, 14.5){\scriptsize{SF}}
+%             \put (42.25, 11.5){\scriptsize{DF}}
+%             \put (-1, 26.5){\footnotesize{dB}}
+%             \put (22, 0){\footnotesize{$\thetaD/\pi$}}
+%             \put (74.5, 0){\footnotesize{$\thetaD/\pi$}}
+%             \put (19,17){\scriptsize{$\text{SNR}=6_{dB}$}}
+%             \put (71.5,17){\scriptsize{$\text{SNR}=0_{dB}$}}
+%         \end{overpic}
+%     \end{center}
+%     \caption{Directional response of the 3 element ULA, as in Fig.~\ref{fig_dualfreq_rangeErrorHighSnr}, simulated for the noisy scenario. The additive noises $\text{n}_1(t)$ and $\text{n}_2(t)$ (see Fig.~\ref{fig_app}), are set to obtain SNR of $6_{dB}$ (left plot) and $0_{dB}$ (right plot).}
+%     \label{fig_dualfreq_perfectAlignLowSnr}
+% \end{figure}
+\begin{figure}[t!]
+    \begin{center}
+        \begin{overpic}[width=.9\linewidth, 
+        % grid, 
+        tics=10,
+        % trim={<left> <lower> <right> <upper>}
+        trim={1.75cm 0 1.75cm 0}
+        ]{./Media/fig_dualfreq_rangeErrorLowSnr_NEW.eps}
+            \put (9, 30){\scriptsize{Ideal}}
+            \put (9, 25.5){\scriptsize{SF}}
+            \put (9, 21){\scriptsize{DF}}
+            \put (-4, 60){\footnotesize{dB}}
+            \put (53, 60){\footnotesize{dB}}
+            \put (25, 20){\footnotesize{dB}}
+            \put (20, 42){\footnotesize{$\thetaD/\pi$}}
+            \put (77, 42){\footnotesize{$\thetaD/\pi$}}
+            \put (49, 2){\footnotesize{$\thetaD/\pi$}}
+            \put (16,52){\scriptsize{$\text{SNR}=6_{dB}$}}
+            \put (74,52){\scriptsize{$\text{SNR}=0_{dB}$}}
+            \put (44.5,12){\scriptsize{$\text{SNR}=-6_{dB}$}}
+            \put (4,42.5){\footnotesize{(a)}}
+            \put (60.5,42.5){\footnotesize{(b)}}
+            \put (32,2){\footnotesize{(c)}}
+        \end{overpic}
+    \end{center}
+    \caption{Directional response of the 3 element ULA, as in Fig.~\ref{fig_dualfreq_rangeErrorHighSnr}, simulated for the noisy scenario. The additive noises $\text{n}_1(t)$ and $\text{n}_2(t)$ (see Fig.~\ref{fig_app}), are set to obtain SNRs of $6$~dB (a), $0$~dB (b) and $-6$~dB (c).}
+    \label{fig_dualfreq_perfectAlignLowSnr}
+\end{figure}

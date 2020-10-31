@@ -1,0 +1,116 @@
+%general:
+%Box and color definitions:
+%--------------------------
+%General definitions:
+%-------------------
+\newcommand{\etal}{{\em {et al.}}}
+% \newcommand{\B}[1]{\mathbf{#1}}
+\newcommand{\df}{\triangleq}
+\newcommand{\norm}[1]{\left\Vert#1\right\Vert}
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\newcommand{\RE}{\operatorname{Re}}
+\newcommand{\IM}{\operatorname{Im}}
+\newcommand{\sgma}[3]{\sum\limits_{{#1}={#2}}^{#3}}
+\newcommand{\Brace}[1]{\left\{{#1}\right\}} %Braces
+\newcommand{\Brack}[1]{\left({#1}\right)} %Brackets
+\newcommand{\sBrack}[1]{\left[{#1}\right]} %square Brackets
+
+%\newcommand{\ip}[2]{{\langle{#1},{#2}\rangle}} %inner-product
+\newcommand{\ipLW}[3]{{\langle{#1},{#2}\rangle}_{{#3}}} %weighted inner-product
+
+\newcommand{\Tr}[1]{Tr\Brack{#1}}
+\newcommand{\Mtr}[2] %short notation for 2x1 Matrix.
+{\begin{bmatrix}
+  #1 \\
+  #2
+\end{bmatrix}}
+\newcommand{\cMtr}[2] %short notation for 2x1 Matrix with curves.
+{\left(
+\begin{array}{c}
+    {#1} \\
+    {#2} \\
+\end{array}
+\right)}
+\newcommand{\Mtrs}[2] %short notation for 2x1 Matrix star (adjoint)
+{\begin{bmatrix}
+  #1 &
+  #2
+\end{bmatrix}}
+\newcommand{\Mtrt}[3] %short notation for 3x1 Matrix.
+{\begin{bmatrix}
+  #1 \\
+  #2 \\
+  #3
+\end{bmatrix}}
+
+\newcommand{\Cases}[4]{
+\left\{
+\begin{tabular}{lcl}
+    $#1$ & $=$ & $#2$\\
+    $#3$     & $=$ & $#4$
+\end{tabular}
+\right. }
+
+\newcommand{\und}{\underline} %How lazy can I get?
+\newcommand{\ovr}{\overline}
+\newcommand{\conj}[1]{{#1}^\ast} %Conjugation
+
+
+\newcommand{\er}[1]{{(\ref{#1})}} %equation reference
+
+\newtheorem{Lemma}{Lemma}{}
+\newtheorem{Prop}{Proposition}{}
+% \newtheorem{theorem}{Theorem}{}
+
+
+\newenvironment{alg}[5]
+{
+\begin{figure}[htbp]
+\begin{center}
+\fbox{
+  \begin{ColorBoxedminipage}{13cm}
+%    \leftline{\color{Black}\bf {#1}}
+    {#4}
+   \end{ColorBoxedminipage}
+   }
+\end{center}
+  \bcaptionff{#1}{#2}{}{#3}
+  \label{#5}
+\end{figure}
+}{}
+
+%Just body, caption and label.
+\newenvironment{algo}[3]
+{
+\begin{figure}[htbp]
+\begin{center}
+\fbox{
+  \begin{ColorBoxedminipage}{7.5cm}
+%    \leftline{\color{Black}\bf {#1}}
+    {#1}
+   \end{ColorBoxedminipage}
+   }
+\end{center}
+  \caption{#2}
+  \label{#3}
+\end{figure}
+}{}
+
+\newenvironment{BOX}[1]
+{
+\begin{center}
+\fbox{
+  \begin{ColorBoxedminipage}{16cm}
+%    \leftline{\color{Black}\bf {#1}}
+    {#1}
+   \end{ColorBoxedminipage}
+   }
+\end{center}
+}{}
+
+\newcommand\vecnot[1]{\boldsymbol{#1}}
+\newcommand\optvecnot[1]{\vecnot{#1}_{opt}}
+
+\usepackage{amsmath}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}

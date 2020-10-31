@@ -1,0 +1,74 @@
+\section{Range Error Sensitivity}
+\label{sec_sim}
+In this section, we investigate $\HrTPr$ for the general case, where also range misalignment phase term $\dPhi$ is possibly non zero. In Fig.~\ref{fig_hDUDTContour}, we plot $\abs{\HrTPr}$ in logarithmic scale, with respect to both steer and range misalignments.
+Close inspection of the range error related beampattern behaviour sheds light to some important points.
+First, we notice that although setting $r\to1$ (i.e., close to perfect gain match), sharpens the beampattern's main lobe  (i.e., higher spatial selectivity), it also amplifies the range error ($\dPhi$) related sensitivity as the main lobe's support over the $\dPhi/\pi$ axis shrinks. 
+Next, as evident from \eqref{eq_generalH}, the range error related sensitivity is $2\pi$-periodic with respect to $\dPhi$ (see Fig.~\ref{fig_hDUDTContour_mutliPeak}).
+To establish our final observation, we first recall that
+\[
+\phi\triangleq\omega\tau_{pd}=\frac{2\pi R_{\text{rt}}}{\lambda},
+\]
+where $R_{\text{rt}}=2R$ is the round-trip distance between the array and the target of interest. 
+Define
+\[
+\Delta R_{\text{rt}}\omegaB=\frac{\dPhi\lambda}{2\pi} 
+\]
+to be the range estimation error.
+Figure~\ref{fig_rangError} shows that even minor range errors of $\Delta R_{\text{rt}}\sim0.1\lambda$ significantly distort the beampattern.
+\begin{figure}[t!]
+    \begin{center}
+        \begin{overpic}[width=.9\linewidth, 
+        % grid, 
+        tics=10,
+        % trim={<left> <lower> <right> <upper>}
+        trim={0cm 0cm 1.5cm 0cm}
+        ]{./Media/spatialIIR_amb_N3_all_r.eps}
+            \put (91, 74) {\footnotesize{dB}}
+            \put (-2, 22) {$\frac{\dPhi}{\pi}$}
+            \put (5, 74) {\footnotesize{$r=0.4$}}
+            \put (51, 74) {\footnotesize{$r=0.6$}}
+            \put (5, 38) {\footnotesize{$r=0.7$}}
+            \put (51, 38) {\footnotesize{$r=0.8$}}
+            \put (19, 3) {\footnotesize{$\dTheta/\pi$}}
+        \end{overpic}
+    \end{center}
+    \caption{Evaluation of $10\log_{10}\abs{\Hr_{\dTheta,\dPhi,r}}^2$, considering both steer ($\dTheta$) and range related ($\dPhi$) errors. Centered in each plot, is the 3dB main lobe (white color fill), exemplifying that as the gain mismatch $r$ is set closer to one, we observe an increase of the spatial selectivity (regarding  both $\dTheta$ and $\dPhi$).}
+  \label{fig_hDUDTContour}
+\end{figure}
+\begin{figure}[t!]
+    \begin{center}
+        \begin{overpic}[width=0.6\linewidth, 
+        % grid, 
+        tics=10,
+        % trim={<left> <lower> <right> <upper>}
+        trim={0 0 0 0}
+        ]{./Media/spatialIIR_amb_N3r04_multiPeak.eps}
+            \put (83, 71) {\tiny{dB}}
+            \put (42, -0.5) {\scriptsize{$\dTheta/\pi$}}
+            \put (0, 37) {$\frac{\dPhi}{\pi}$}
+        \end{overpic}
+    \end{center}
+    \caption{Evaluation of $10\log_{10}\abs{\Hr_{\dTheta,\dPhi,r=0.4}}^2$ for $-3\pi\leq\dPhi\leq 3\pi$. The response is $2\pi$ periodic.}
+  \label{fig_hDUDTContour_mutliPeak}
+\end{figure}
+\begin{figure}[t!]
+    \begin{center}
+        \begin{overpic}[width=0.6\linewidth, 
+        % grid, 
+        tics=10,
+        % trim={<left> <lower> <right> <upper>}
+        trim={0 0 0 0}
+        ]{./Media/rangeError_r06.eps}
+            \put (-1, 74) {\footnotesize{$10\log_{10}\abs{\Hr_{\dTheta,\dPhi,r}}^2$}}
+            \put (46, -1) {\footnotesize{$\dTheta/\pi$}}
+            \put (0, 37) {\footnotesize{dB}}
+            \put (92, 40) {\footnotesize{$\Delta R_{\text{rt}}=0.1\lambda$}}
+            \put (92, 50) {\footnotesize{$\Delta R_{\text{rt}}=0.3\lambda$}}
+            \put (92, 30) {\footnotesize{$\Delta R_{\text{rt}}=0$}}
+        \end{overpic}
+    \end{center}
+    \caption{Evaluation of the array response (where $r=0.4$) for several values of range error $\Delta R_{\text{rt}}$ . Even minor range errors significantly distort the beampattern.}
+  \label{fig_rangError}
+\end{figure}
+\par At first glance, this sensitivity to range errors renders the system being too sensitive for any practical use.
+This leads us to seek robust implementations, as elaborated in Sec.~\ref{sec_app}. 
