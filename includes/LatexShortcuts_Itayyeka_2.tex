@@ -14,7 +14,10 @@
 \newcommand{\Brace}[1]{\left\{{#1}\right\}} %Braces
 \newcommand{\Brack}[1]{\left({#1}\right)} %Brackets
 \newcommand{\sBrack}[1]{\left[{#1}\right]} %square Brackets
-
+\newcommand{\rBrace}[1]{\left({#1}\right)}
+\newcommand{\lBrace}[1]{\left|{#1}\right|}
+\newcommand{\vBrace}[1]{\left[{#1}\right]}
+\newcommand{\cBrace}[1]{\left\{{#1}\right\}}
 %\newcommand{\ip}[2]{{\langle{#1},{#2}\rangle}} %inner-product
 \newcommand{\ipLW}[3]{{\langle{#1},{#2}\rangle}_{{#3}}} %weighted inner-product
 
@@ -56,7 +59,7 @@
 \newcommand{\conj}[1]{{#1}^\ast} %Conjugation
 
 
-\newcommand{\er}[1]{{(\ref{#1})}} %equation reference
+\newcommand{\er}[1]{{\rBrace{\ref{#1}}}} %equation reference
 
 \newtheorem{Lemma}{Lemma}{}
 \newtheorem{Prop}{Proposition}{}

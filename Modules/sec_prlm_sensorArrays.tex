@@ -1,0 +1,33 @@
+Microphone arrays consist of sets of microphones positioned in a way to function as a directional acoustic antenna. 
+Microphone arrays are utilized for filtering signals in a space-time field. 
+Filtering is enabled by exploitation of the incoming signals spatial characteristics. 
+A desirable spatial filtering, i.e., beamforming, should result in enhancement of signals of interest, originated in a specific direction, while forcing suppression of undesired signals originated in other directions.
+Microphone arrays are utilized for solving many signal processing problems: dereverberation, localization of a single source, noise reduction and source separation \cite{cohen2004multichannel,habets2006dual,pavlidi2013real}.
+\par 
+Numerous factors must be taken into consideration when designing a microphone array configuration.
+Initially, the geometry of the microphone array plays an important role in the formulation of the processing algorithms, as it forces fundamental constraints on the array’s operation. 
+In most cases, the array geometry is the first consideration in array design due to practical and physical constraints of the design. 
+Therefore, the degree of freedom in choosing the array geometry is limited. 
+Nevertheless, in some other crucial problems such as noise reduction or source separation, the geometry of the array may have little importance. 
+For instance, Uniform Linear Arrays (ULA) can only handle one source direction at a time resulting in uncertainties and possibly direction ambiguities.
+Therefore, ULA configurations must be ruled out when handling several signal sources.
+Other array geometries such as non-uniform linear arrays and circular arrays, have been studied in the field \cite{liu2008design,van2004optimum}.
+This work is based on ULA and therefore we elaborate on this geometry.
+A conventional beamformer \cite{van2004optimum} is composed of a ULA of microphones. 
+That is, the microphones are positioned on an axis with a uniform spacing between the microphones.
+The general expression of the microphone positioning in a ULA is given by:
+\begin{equation}
+x_{m}=m\cdot{d}, m=0, 1, \dots, M-1
+\end{equation}
+where $m$ denotes the microphone index; $x_{m}$ denotes the position of the microphone having index $m$, where $x_{m} = 0$ corresponds to the left-hand side of the array, i.e., the location where the microphone indexed by $m = 0$ is positioned; $d$ denotes the spacing between microphones, and $M$ is the array size, i.e., the number of microphones in the array, as demonstrated in Fig.~\ref{fig_ULA}.
+\begin{figure}[h!]
+    \begin{center}
+        \begin{overpic}[width=0.5\linewidth, 
+        %grid, 
+        tics=10,trim=0 0 0 0]{./Media/fig_ULA.png}
+            % \put (50, 62.5) {\footnotesize{$r=0$}}
+        \end{overpic}
+    \end{center}
+     \caption{A uniform linear array of size M and spacing d.}
+    \label{fig_ULA}
+\end{figure}

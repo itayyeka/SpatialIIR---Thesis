@@ -1,0 +1,24 @@
+Numerous performance measures are utilized for evaluating the microphone array capabilities. 
+Each of the measures aims to quantify a significant aspect of either the response of an array to the signal environment or of the sensitivity to an array design error.
+First, we review the concept of beampatterns. 
+Beampatterns are the main tool in assessing an array performance as they express the beamformer response for various frequencies and signal angles. 
+Let $P\rBrace{\omega,\theta}$ denote the frequency and DOA dependent beamformer response. It is given by:
+\begin{equation}
+P\rBrace{\omega,\theta}=\sum_{m=0}^{M-1}e^{-j\omega\tau_{m}w_{m}^{*}}=\vecnot{w}^{H}\vecnot{v}\rBrace{\omega,\theta}    
+\end{equation}
+where $\vecnot{w}=\vBrace{w_{0},\dots,w_{M-1}}^{T}$ and $^{H}$ denotes Hermitian transpose operation, and let $D\rBrace{\omega,\theta}$ denote the beampattern of a given beamformer. 
+It is expressed by:
+\begin{equation}
+D\rBrace{\omega,\theta}=20\log_{10}\abs{P\rBrace{\omega,\theta}},
+\end{equation}
+where $\abs{\cdot}$ denotes the absolute value. 
+For a given angular frequency $\omega$, the beampattern $D\rBrace{\omega,\theta}$ is a function of the angle $\theta$ and the beamwidth is measured in terms of $\theta$.
+In this work, the beamwidth is measured between the two lowest values at both sides of the main lobe.
+\par
+A major challenge in practical beamformer applications is the potential sensitivity to mismatches between the actual array attributes and the model used to derive the desired beamformer. 
+In practical applications, mismatches can occur either by array location perturbations, production faults or filter perturbations. 
+The sensitivity function often used as a criterion for assessing the affect of mismatches on the array response is defined in \cite{van2004optimum} by:
+\begin{equation}
+T_{se}=A^{-1}_{w}=\abs{\abs{\vecnot{w}}}^{2},
+\end{equation}
+where $A_{w}^{-1}$ is the inverse expression of the white noise gain given by $A_{w}=\text{SNR}_{out}\rBrace{k}/\text{SNR}_{in}\rBrace{k}$ and $\vecnot{w}$ is the weight vector corresponding to all of the FIR filter channels in the $k$-th frequency bin. Therefore, as the white noise gain increases, the sensitivity decreases and the array would be more robust to mismatch.

@@ -126,11 +126,12 @@
 % document author has loaded whatever it is they intend to use
 
 \RequirePackage{polyglossia}
-\setmainlanguage{english} % Palestine was under British rule after all
+\setmainlanguage{english}
 \IfFileExists{bidi.sty}{}{\ClassError{\filename}{The bidi package is not available for loading}{}}
 \AtEndPreamble{
  \setotherlanguage[numerals=arabic,calendar=gregorian]{hebrew}
  \newfontfamily\hebrewfont[Script=Hebrew]{David CLM}
+ \csname @Latintrue\endcsname
 }
 
 %--------------------------------
@@ -270,7 +271,7 @@
 \iitthesis@thesisdatafield{thesisbibstyle}{IEEEtran}
 % the following should be a comma-separate list of relative filenames,
 % e.g. {backmatter/compsci.bib,backmatter/math.bib,specific.bib}
-\iitthesis@thesisdatafield{thesisbibfiles}{misc/LocalBib.bib}
+\iitthesis@thesisdatafield{thesisbibfiles}{}
 
 %--------------------------------
 

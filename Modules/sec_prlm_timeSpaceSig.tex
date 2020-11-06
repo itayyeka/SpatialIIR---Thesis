@@ -1,0 +1,38 @@
+The incoming signals are spatially sampled by the array microphones, then the samples are processed to attenuate signals from undesired directions and extract the signal from a desired direction. 
+A spatial response of the microphone array is obtained via a beam (main-lobe) directed to the desired signal while nulls are directed to the undesired signals.
+\begin{figure}[ht!]
+    \begin{center}
+        \begin{overpic}[width=0.5\linewidth, 
+        %grid, 
+        tics=10,trim=0 0 0 0]{./Media/fig_ULA_imping.png}
+            % \put (50, 62.5) {\footnotesize{$r=0$}}
+        \end{overpic}
+    \end{center}
+     \caption{A simple beamformer design.}
+    \label{fig_ULA_imping}
+\end{figure}
+Fig.~\ref{fig_ULA_imping} illustrates a beamformer design based on a ULA of Fig.~\ref{fig_ULA}.
+Let $\vecnot{f}\rBrace{t,\vecnot{x}}$ denote the set of signals sampled by the microphone array at time $t$, expressed by
+\begin{equation}
+\vecnot{f}\rBrace{t,\vecnot{x}} = \vBrace{f\rBrace{t,x_{0}},\dots,f\rBrace{t,x_{M-1}}}^{T},
+\end{equation}
+where $x_{m}$ denotes the microphone position, $t$ denotes the continuous-time variable and $^{T}$ denotes the transpose operation. 
+The beamformer output $y\rBrace{t}$ is expressed by:
+\begin{equation}
+y\rBrace{t} = \sum_{m=0}^{M-1}{f\rBrace{t,x_{m}}\omega_{m}^{*}},
+\end{equation}
+where $\omega_{m}$ is a complex weight of the microphone having index $m$, as shown in Fig.~\ref{fig_ULA_imping} and $^{*}$ denotes complex conjugation. 
+The simplest beamformer design architecture has uniform weights, $\omega_{m}=\frac{1}{M}, m=0,\dots,M-1$.
+Let $f_{\omega}\rBrace{t,x} = e^{j\omega{t}}$ denote a plane wave propagating at angular frequency $\omega$, and let $\theta \in \vBrace{-\frac{\pi}{2},\frac{\pi}{2}}$ denote the direction of arrival (DOA) angle measured with respect to the broadside of the linear array, as shown in Fig.~\ref{fig_ULA_imping}.
+The wave signals spatially sampled by the microphone array inputs are given by:
+\begin{equation}
+\label{eq_prlm_timeSpace_outputVec}
+\vecnot{f}\rBrace{t,x} = \vBrace{f_{\omega}\rBrace{t-\tau_{0}}, \dots, f_{\omega}\rBrace{t-\tau_{M-1}}}^{T}, \tau_{m} = \frac{\sin{\theta}\cdot{}x_{m}}{c},
+\end{equation}
+where $\tau_{m}$ is the propagation delay for the incoming signal and $c$ is the wave's velocity in the medium.
+A value of $\tau_{m}=0, \forall{m}$ implies a DOA of $\theta = 0$, i.e. a plane wave parallel to the array, propagating perpendicularly to the array.
+Let $\kappa=\frac{\omega}{c}\sin{\theta}=\frac{2\pi}{\lambda}\sin{\theta}$ denote the wavenumber for plane waves in a locally homogeneous medium, where λ denotes the wavelength corresponding to the angular frequency $\vecnot{v}\rBrace{\kappa}$ denote the \emph{array manifold vector} \cite{van2004optimum}, featuring all of the spatial characteristics of the microphone array.
+Based on \eqref{eq_prlm_timeSpace_outputVec}, and the definition of κ above, the manifold vector can be expressed as
+\begin{equation}
+\vecnot{v}\rBrace{\kappa}=\vBrace{e^{-j\kappa{}x_{0}},\dots,e^{-j\kappa{}x_{M-1}}}^{T}.
+\end{equation}

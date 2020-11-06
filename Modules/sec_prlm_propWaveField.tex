@@ -1,0 +1,60 @@
+In array signal processing, propagating waves carry signals from the source to the array.
+Therefore, these signals are represented in the time-space domain. The space domain is represented by either the three dimensional Cartesian coordinates $\rBrace{x,y,z}$ or the three dimensional spherical coordinates $\rBrace{r,\phi,\theta}$, where $0 \leq \phi \leq 2\pi$, $0 \leq \theta \leq \pi$ are the azimuth and elevation angles, respectively. The time domain is represented by $t$.
+Finally, let $f\rBrace{t,\vecnot{r}}$ denote the time-space representation of the input signal, where $\vecnot{r}$ is the radius-vector in the three-dimensional system. The relations between the Cartesian and spherical coordinates are given in Fig.~\ref{fig_coordinates}.
+$f\rBrace{t,x,y,z}$ describes the signal impinging the microphone array. The physics of propagation within a homogeneous (constant speed of propagation), dispersion free (no signal degradation due to other frequencies) and lossless (no signal gain attenuation) medium is described by the wave equation:
+\begin{equation}
+\label{eq_prlm_waveEq}
+\nabla^{2}f\rBrace{t,x,y,z}=\frac{1}{c^2}\frac{\partial^{2}f\rBrace{t,x,y,z}}{\partial{t^{2}}}
+\end{equation}
+Where $\nabla^{2}$ represents the Laplacian operator and $c$ represents the wave's velocity.
+\begin{figure}[h!]
+    \begin{center}
+        \begin{overpic}[width=0.5\linewidth, 
+        %grid, 
+        tics=10,trim=0 0 0 0]{./Media/fig_coordinates.png}
+            % \put (50, 62.5) {\footnotesize{$r=0$}}
+        \end{overpic}
+    \end{center}
+     \caption{A three dimensional coordinate system with Cartesian and spherical coordinates.}
+    \label{fig_coordinates}
+\end{figure}
+Let $f_p\rBrace{t,x,y,z}$ denote a possible solution to \eqref{eq_prlm_waveEq} of a complex exponential form:
+\begin{equation}
+\label{eq_prlm_waveEq_pSol}
+f_p\rBrace{t,x,y,z} = A\exp{j\rBrace{\omega{t}-k_{x}x-k_{y}y-k_{z}z}}
+\end{equation}
+Where $A$ is a complex constant, $\omega$ denotes a constant temporal frequency and $k_{x}x,k_{y},k_{z}$ are real constants. 
+Substituting \eqref{eq_prlm_waveEq_pSol} into \eqref{eq_prlm_waveEq} yields:
+\begin{equation}
+\label{eq_prlm_waveEq_subs}
+k_{x}^{2}-k_{y}^{2}-k_{z}^{2} = \frac{\omega^{2}}{c^{2}}.
+\end{equation}
+This solution is called a monochromatic plane wave. The term plane wave is derived from the fact that at any given time, $t_{0}$, the value of $f\rBrace{t_{0},x,y,z}$ is the same at all points on a plane given by $k_{x}x+k_{y}y+k_{z}z = constant$.
+Finally, writing the solution to \eqref{eq_prlm_waveEq} using vector notation we obtain:
+\begin{equation}
+\label{eq_prlm_waveEq_finSol}
+f\rBrace{t,\vecnot{x}}=A\exp{j\rBrace{\omega{t}-\vecnot{k}\vecnot{x}}}.
+\end{equation}
+Let $\vecnot{k}\vecnot{x}=constant$ denote planes of constant phase. 
+If the signal $f\rBrace{t,\vecnot{x}}$ is indeed propagating, planes of constant phase move by small steps of $\delta{\vecnot{x}}$, with small time increments of $\delta{t}$, i.e. $f\rBrace{t+\delta{t},\vecnot{x}+\delta{\vecnot{x}}} = f\rBrace{t,\vecnot{x}}$, which yields
+\begin{equation}
+\omega\delta{t}-\vecnot{k}\delta\vecnot{x}=0.
+\end{equation}
+Assuming $\delta\vecnot{x}$ and $\vecnot{k}$ have the same direction, $\vecnot{k}\delta\vecnot{x} = \abs{\vecnot{k}}\abs{\delta\vecnot{x}}$ and $\frac{\delta{\vecnot{x}}}{\delta{t}} = \frac{\omega}{\abs{\vecnot{k}}}$, where $\frac{\delta{\vecnot{x}}}{\delta{t}}$ can designate the propagation speed of the plane wave. 
+Since $\vecnot{k}$ and $\omega$ are related by $\abs{\vecnot{k}}^{2}=\frac{\omega^{2}}{c^{2}}$, we have
+\begin{equation}
+\label{eq_prlm_waveEq_stepsEq}
+\frac{\delta{\vecnot{x}}}{\delta{t}}=c,
+\end{equation}
+Assuming that $c>0$.
+Thus, the speed of propagation is indeed $c$.
+Let $\lambda$ denote the distance the plane wave propagated during a single temporal period of $T=\frac{2\pi}{\omega}$.
+This distance is referred to as the \emph{wavelength}. 
+Due to its spatial traits, after one period the monochromatic plane wave appears the same as one period before, but moved forward.
+Let $\vecnot{k}$ denote the \emph{wavelength vector}. 
+Its magnitude $\abs{\vecnot{k}}$ expresses the number of cycles in radians per meter of length that the plane wave has exhibited in the propagation direction.
+Using \eqref{eq_prlm_waveEq_stepsEq} with $delta{t} = \frac{2\pi}{\omega}$, we obtain:
+\begin{equation}
+\lambda=\delta{\vecnot{x}}=\frac{2\pi}{\abs{\vecnot{k}}}.
+\end{equation}
+Therefore, the wavenumber vector can be considered to represent spatial frequency, similarly to the manner $\omega$ represents temporal frequency.

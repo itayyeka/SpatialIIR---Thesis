@@ -1,0 +1,39 @@
+Delay-and-sum beamformers, as shown in Fig.~\ref{XXX}, utilize a single weight for each microphone. 
+This makes them ineffective when dealing with wideband signals, the signals of interest in speech and audio processing, as each of the signals is composed of various frequency components. 
+In order to design a beamformer for wideband signals, the weight values in \eqref{XXX} must be altered for different frequencies in order to obtain the desired beamformer output. 
+That is, the weights should be frequency dependent, i.e., in the form of $\vecnot{w}\rBrace{\omega}=\vBrace{w_{0}\rBrace{\omega},\dots,w_{M-1}\rBrace{\omega}}^{T}$. 
+This can be acheived by introducing discrete FIR filters \cite{yan2005design,liu2010wideband}.
+FIR filters perform temporal filtering in order to compensate for the phase differences of the input wideband signals’ various frequency components. 
+Fig.\ref{XXX} shows the realization of frequency dependent weights by FIR filters connected to the microphone array.
+Let $y\rBrace{t}$ denote the output of the FIR-based beamformer. 
+It is expressed by:
+\begin{equation}
+y\rBrace{t}=\sum_{m=0}^{M-1}\sum_{n=0}^{N-1}f\rBrace{t-nT_{s},x_{m}}\cdot{}w_{m,n}^{*}
+\end{equation}
+where $N$ denotes the number of FIR filter coefficients connected to each of the $M$ sensors, $w_{m,n}^{*}$ is the $n$-th coefficient of the FIR filter connected to the microphone indexed by $m$, and $T_{s}$ denotes the delay between adjacent filter elements. 
+Given a complex plane wave signal, the beamformer output is given by:
+\begin{equation}
+y\rBrace{t}=e^{j\omega{}t}P\rBrace{\omega,\theta}=e^{j\omega{}t}\sum_{m=0}^{M-1}\sum_{n=0}^{N-1}e^{-j\omega\rBrace{\tau_{m}+nT_{s}}}\cdot{}w_{m,n}^{*}
+\end{equation}
+Let $\vecnot{v}_{s}\rBrace{\omega,\theta}$ denote a \emph{stacked array manifold vector} of dimension $M\cdot{}N$, where each subvector of dimension $M$ epresents the array manifold vector associated with a specific FIR filter coefficient in \eqref{XXX}, i.e. the first subvector, $\vBrace{e^{-j\omega\tau_{0}},\dots,e^{-j\omega\tau_{M-1}}}^{T}$, is associated with the coefficient indexed by $n=0$ and all of the array microphones, indexed by $m=0,\dots,M-1$.
+Thus, it is denoted by $\vecnot{v}_{0}\rBrace{\omega,\theta}$.
+The second subvector, $\vBrace{e^{=j\omega\rBrace{\tau_{0}+T_{s}}},\dots,e^{=j\omega\rBrace{\tau_{M-1}+T_{s}}}}^{T}$, is associated with the coefficient indexed by $n=1$ and all of the array microphones.
+Thus, it is denoted by $\vecnot{v}_{1}\rBrace{\omega,\theta}$, and so on.
+This form of expression is called vector stacking, and $\vecnot{v}_{s}\rBrace{\omega,\theta}$ is given by:
+\begin{align}
+\vecnot{v}_{s}\rBrace{\omega,\theta} &= 
+\begin{bmatrix}
+   \vecnot{v}_{0}\rBrace{\omega,\theta} \\
+   \vecnot{v}_{1}\rBrace{\omega,\theta} \\
+   \vdots \\
+   \vecnot{v}_{N-1}\rBrace{\omega,\theta}
+\end{bmatrix}.
+\end{align}
+Given a ULA of $M$ sensors, sensor spacing $d$, and $M$ FIR filters, each composed of $N$ coefficients, and connected to a respective microphone. 
+Then, from \eqref{XXX} and
+\eqref{XXX}, the beamformer response can be expressed as:
+\begin{equation}
+    P\rBrace{\omega,\theta}=    \sum_{m=0}^{M-1}e^{-j\omega\tau_{m}}\sum_{n=0}^{N-1}e^{jn\omega{}T_{s}}\cdot{}w_{m,n}^{*}=\vecnot{w}_{s}^{H}\vecnot{v}_{s}\rBrace{\omega,\theta},
+\end{equation}
+where $\vecnot{w}_{s}$ denotes the composite stacked weight vector of dimension $M\cdot{}N$ created by vector stacking, having $\vecnot{w}_{0}=\vBrace{w_{0,0},w_{1,0},\dots,w_{M-1,0}}^{T}$ as its first subvector, $\vecnot{w}_{1}=\vBrace{w_{0,1},w_{1,1},\dots,w_{M-1,1}}^{T}$ as its second subvector, and so on.
+The design specification of the FIR filters will be addressed in Chapter \ref{XXX}. Fig.\ref{XXX} illustrates an FIR beamformer architecture.
