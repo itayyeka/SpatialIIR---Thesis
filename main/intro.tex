@@ -7,13 +7,32 @@ The array size and the number of its elements ($N$) has significant influence on
 \par In pursuit of spatial performance improvement, namely higher spatial separation and selectivity of arriving signals, many approaches were suggested.  
 One approach, commonly referenced as ``virtual arrays'' \cite{pal2010nested,chevalier2005virtual,dogan1995applications} deals with the extraction of samples originated in sensors that do not really exist by using high (higher than 2) order statistics and manipulating multiple statistical cross-terms in order to estimate statistical characteristics of signals impinging in missing sensors.
 Using a similar approach, the $2q$-MUSIC algorithm \cite{chevalier2006high}, enables the use of $N^{2q}$ ``virtual elements'', by calculating the $q$'th order statistics.
-Another approach, involving different array geometries, examined minimum redundancy arrays \cite{moffet1968minimum,pillai1985new,pillai1987statistical,Kupershtein2013}, aiming to reduce the spatial ambiguity. The basic concept was minimization of the inter-element spacing redundancy in order to increase the overall resolution. Adaptive processing schemes \cite{frost1972algorithm,manolakis2000statistical}, being a wide and active  research area, were also suggested trying to adaptively estimate and suppress the noise component in impinging signals by minimization of the receiver's output energy with some constraints.
+Another approach, involving different array geometries, examined minimum redundancy arrays \cite{moffet1968minimum,pillai1985new,pillai1987statistical,Kupershtein2013}, aiming to reduce the spatial ambiguity. The basic concept was minimization of the inter-element spacing redundancy in order to increase the overall resolution.
+The main advantage of the first (i.e. virtual array) over the latter (i.e. minimum redundancy) is the obtainable analytical expression for the improvement in spatial selectivity when using virtual arrays.
+In the minimum redundancy approach no such expression is available.
+On the other side, the computation effort is considerably higher when the 2-nd order statistics are computed.
+Although the $q$-th order statistics based approach promises substantial improvement, both noise sensitivity and impractical computation amount are dominant drawbacks, limiting the usage of such methods in practical applications.   
+Adaptive processing schemes \cite{frost1972algorithm,manolakis2000statistical}, being a wide and active research area, were also suggested trying to adaptively estimate and suppress the noise component in impinging signals by minimization of the receiver's output energy with some constraints.
+In \cite{manolakis2000statistical}, two main approaches to adaptive processing are discussed. The block adaptive scheme (which is also called \textit{sample matrix inversion}) and the sample-by-sample method.
+In both methods, after a certain amount of time, the system refreshes the spatial filter coefficients, trying to better suppress the received noise.
+As in many adaptive processing applications, the two methods rely on steepest descend optimization, which expose the adaptive processing approach to errors related to optimization parameters choices such step size etc. 
 \par Pursuing other approaches to improve the array's spatial performance, ULA spatial array processing analogy to finite impulse response (FIR) \cite{van1988beamforming} and the infinite impulse response (IIR) superior performance (e.g. narrower transition regions and higher sidelobes attenuation) gave rise to the question ``what are the equivalent spatial domain processing methods which will be analogous to temporal IIR filtering?''
 \par Achieving spatial IIR response has also motivated other works.
 In \cite{wen2013extending} two methods were considered.
-The first one was to estimate the time of arrival (TOA) difference between two consecutive sensors and to synthetically generate the recursive part of the IIR filter, entirely in the time-domain. The second approach suggested to consider overlapping subsets of one large ULA as finite approximation to an infinite array. 
-Surely, the former approach heavily relies on the accuracy of the delay estimation and the latter approach does not achieve a recursive spatial response. In both cases, there is no true spatial feedback between the array and the source of interest.
-Also, ultra-wideband (UWB) filters, which sample spatial snapshots of the signal and recursively process it in temporal domain were designed in \cite{bruton1983highly}, using the $2D$ spatio-temporal plane wave representation as a straight line angled according to the DOA.
+The first one was to estimate the time of arrival (TOA) difference between two consecutive sensors and to synthetically generate the recursive part of the IIR filter, entirely in the time-domain.
+The second approach suggested to consider overlapping subsets of one large ULA as finite approximation to an infinite array. 
+The former approach heavily relies on the accuracy of the delay estimation which are amplified due to the fact that both the desired signal and the errors are continuously fed back into the filter.
+Close inspection of the latter approach reveals that even though the sub-arrays are each weighted separately, each sensor's output is eventually linearly weighted when taking into account all related sub-arrays.
+Clearly, this is just another possible implementation of basic FIR like ULA spatial processor, so in both cases, there is no true spatial feedback between the array and the source of interest.
+Also, ultra-wideband (UWB) filters, which sample spatial snapshots of the signal and recursively process it in temporal domain were designed in \cite{Hum2009BeamformingFilters}, using the $2D$ spatio-temporal plane wave representation as a straight line angled according to the DOA.
+\par
+TODO: Elaborate on the 2/3D planar from (by order)
+\begin{itemize}
+    \item Highly Selective Three-Dimensional Recursive Beam Filters Using Intersecting Resonant Planes 
+    \item Three-Dimensional Cone Filter Banks
+    \item A Speed-Optimized Systolic Array ProcessorArchitecture for Spatio-Temporal 2-D IIRBroadband Beam Filters
+    \item UWB Beamforming Using 2-D Beam Digital Filters
+\end{itemize}
 \par In this contribution, we present a low-complexity sensor array processing approach which achieves the desired spatial domain exclusive IIR-like beampattern, while avoiding any temporal processing of the signal.
 To this end, we arbitrarily choose to formulate the problem in the context of a localization problem, hence our goal is to estimate the direction and the range of some target of interest. 
 \par The novelty, compared to traditional array processing, is the incorporation of spatial feedback, which we prove to be the spatial domain equivalent of temporal domain IIR filtering.
