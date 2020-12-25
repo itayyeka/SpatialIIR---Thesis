@@ -9,7 +9,7 @@ Instead, we suggest simultaneous transmission of several frequencies in order to
 \subsection*{Suggested processing scheme}
 \begin{figure}[t!]
     \begin{center}
-        \begin{overpic}[width=0.9\linewidth, 
+        \begin{overpic}[width=0.99\linewidth, 
         % grid, 
         tics=10,trim={0 0 0 0}]{./Media/SpatialIIR_APP.png}
             \put (12.5, 64){$\text{FB}_{\vAlphaI{1},\vBetaI{1}}$}
@@ -26,10 +26,10 @@ Instead, we suggest simultaneous transmission of several frequencies in order to
             \put (73.5, 59){\footnotesize{$\Tx_{2}\rBrace{t}$}}
             \put (36.25, 64){\scriptsize{$s_{1}\rBrace{t}$}}
             \put (43, 64){\scriptsize{$s_{2}\rBrace{t}$}}
-            \put (18.25, 13){\footnotesize{Harmonic mean}}
+            \put (18.75, 13){\footnotesize{Harmonic mean}}
             \put (32, 2){$Z_{\text{DF}}$}
             \put (54.75, 24){$\Sigma$}
-            \put (21.75, 25){\footnotesize{$\mathcal{F}_{\omega_{1}}$}}
+            \put (22, 25){\footnotesize{$\mathcal{F}_{\omega_{1}}$}}
             \put (30.75, 25){\footnotesize{$\mathcal{F}_{\omega_{2}}$}}
         \end{overpic}
     \end{center}
@@ -38,7 +38,7 @@ Instead, we suggest simultaneous transmission of several frequencies in order to
 \end{figure}
 In Fig.~\ref{fig_app}, we demonstrate the use of two independently configured FB instances (see also Fig.~\ref{fig:Proposed_spatialIIR_ARCH}), where each instance is designed to treat a specific frequency band.
 A bandpass filter $\text{BPF}_{\omega_{i}},\;i=1,2$ filters a narrowband slice around $\omega_{i}=2\pi f_i$. These filters are used to generate both the transmitted feedback signal ($\text{Tx}_{i}$) and the outputs $z_{i}$. 
-The inputs $s_{i}(t) = \exp\Brack{j\omega_{i}t}$  are the two narrowband stimuli signals and $\text{n}_{i}(t)$ describe the additive noise. 
+The inputs $s_{i}(t) = \exp\Brack{j\omega_{i}t}$  are the two narrowband stimuli signals and $\text{n}_{i}(t)$ represents the additive noise. 
 
 Note that in the suggested architecture we do not add array elements, but merely double the beamformer processing effort. 
 \par For each FB block, its output is given by
@@ -46,19 +46,15 @@ Note that in the suggested architecture we do not add array elements, but merely
 z_{i}(t)=H_{\vBetaI{i},\vAlphaI{i}}\rBrace{\omega_{i}}\exp{\rBrace{j\omega_{i}t}}\ \ {i\in\cBrace{1,2}},
 \]
 where $\vBetaI{i},\vAlphaI{i}$ are the coefficients of the $i$'th beamformer.
-Motivated by the desire to mitigate the $\Delta\phi$ dependency of the system, which appears in the denominator of \eqref{eq_generalH}, we compute the reciprocal of each frequency response, average, and compute the reciprocal again. This leads to the harmonic mean of both beamformers' outputs (see Fig.~\ref{fig_app}), which formally, up to a constant term, takes the form
+Motivated by the desire to mitigate the $\Delta\phi$ dependency of the system, which appears in the denominator of \eqref{eq_generalH}'s RHS, we compute the reciprocal of each frequency response, average, and compute the reciprocal again. This leads to the harmonic mean of both beamformers' outputs (see Fig.~\ref{fig_app}), which formally, up to a constant term, takes the form
 \begin{equation}
     \label{eqn_HDF_def}
     Z_{\text{DF}} = \abs{H^{-1}_{\vBetaI{1}\vAlphaI{1}}\rBrace{\omega_{1}}+H^{-1}_{\vBetaI{2},\vAlphaI{2}}\rBrace{\omega_{2}}}^{-1}.
 \end{equation}
 % Note that, as in IIR filters, the system stabilizes after a certain period, therefore the Fourier weights should be calculated after stabilization.
 % As a rule of thumb, simulations show that the stabilization period is around $100R/c$. 
-\ifdefined\useOmega
-Straight forward derivations, Allowing $g$ to be frequency dependent, leads to
-\else
 For convenience, we use subscripts instead of formal $\omega$ dependency such that $\phiI{i}\triangleq\phi\rBrace{\omega_{i}}, \gI{i}\triangleq{}g\rBrace{\omega_{i}}, \vdI{i}\triangleq\vecnot{d}\rBrace{\omega_{i}}$.
 Also, $r_i\triangleq{}\gI{i}/\gIHat{i}$ is denoted to be the gain mismatch at $\omega_i$.
-
 
 \begin{theorem}
 \label{thrm_DF}
@@ -83,11 +79,11 @@ Hence, one may significantly mitigate the range mismatch distortion of the beamp
 % Also, $\tau_n$ is arbitrary, hence the discussion is not restricted to a specific array geometry.
 We also note that throughout the development of \eqref{eqn_H_DF_general}, we did not assume any specific array geometry, hence this result is valid for arbitrary arrays and not just ULA.
 \subsection*{Numerical example}
-Consider a radio frequency carrier of $10$~GHz and typical range error of $\Delta{}R_{\text{rt}}=10$~m, which is $333\frac{1}{3}\lambda$ (assuming  speed of light, $c=3\cdot 10^{8}$~m/s). The single frequency beampattern distortion, being periodic in $\lambda$, will closely resemble the $0.3\lambda$ error plot presented in Fig.~\ref{fig_rangError}. Assume that we aim to achieve a maximal phase error of $\Delta \phi=0.01\pi$. Hence, when using DF architecture, the dictated frequency separation must satisfy
+Consider a radio frequency carrier of $10$~GHz and typical range error of $\Delta{}R_{\text{rt}}=10$~m, which is $333\frac{1}{3}\lambda$ (assuming  speed of light, $c=3\cdot 10^{8}$~m/s). The single frequency beampattern distortion, being periodic in $\lambda$, will closely resemble the $0.3\lambda$ error plot presented in Fig.~\ref{fig_rangError}. Assume that we aim to achieve a maximal phase error of $\Delta \phi=0.01\pi$. Hence, when using the DF architecture, the dictated frequency separation must satisfy
 \begin{equation}\label{eq_DF_phErr}
 \abs{(\omega_1-\omega_2)\frac{\Delta{}R_{\text{rt}}}{c}}<0.01\pi.
 \end{equation}
-or equivalently, for maximal range error of $10$~m, a frequency separation of
+or equivalently, for a maximal range error of $10$~m, a frequency separation of
 \[
 \abs{f_1-f_2}<0.005 c/\Delta{}R_{\text{rt}}=150 \,\text{kHz}
 \]
@@ -114,8 +110,8 @@ With this choice, and similarly to \eqref{eq:SF_CB}, \eqref{eqn_H_DF_general} be
 \end{equation}
 where $\kappa\triangleq{}r_{1}/r_{2}$ is the gain mismatch ratio.
 For close frequencies, one may assume that $r_{1}\approx{}r_{2}$, hence $\kappa$ tends towards unity, thus significantly mitigating the gain mismatch effect even when both feedback beamformers are mismatched.
-\par Simulating the DF architecture, configured to mitigate range estimation errors as in \eqref{eq_DF_phErr} and plotting its normalized (to $0$~dB peak gain) beampattern together with the perfectly range aligned scenario, we show in Fig.~\ref{fig_dualfreq_rangeErrorHighSnr} that the DF architecture achieves near-optimal performance, despite the inherent range error of $\Delta{}R_{\text{rt}}=10$~m.
-In Fig.~\ref{fig_dualfreq_perfectAlignLowSnr}, we repeat the simulation while adding white Gaussian noise to the output of each feedback beamformer. Evidently, even in the noisy case, the DF beamformer achieves close-to-ideal beampattern, while the SF beamformer suffers severe distortions.
+\par Simulating the DF architecture, configured to mitigate range estimation errors as in \eqref{eq_DF_phErr} and plotting its normalized (to $0$~dB peak gain) beampattern together with the perfectly range aligned scenario, we show in Fig.~\ref{fig_dualfreq_rangeErrorHighSnr} that the DF architecture achieves a near-optimal performance, despite the inherent range error of $\Delta{}R_{\text{rt}}=10$~m.
+In Fig.~\ref{fig_dualfreq_perfectAlignLowSnr}, we repeat the simulation while adding white Gaussian noise to the output of each feedback beamformer. Evidently, even in the noisy case, the DF beamformer achieves a close-to-ideal beampattern, while the SF beamformer suffers from severe distortions.
 \begin{figure}[t!]
     \begin{center}
         \begin{overpic}[width=.65\linewidth, 
@@ -128,7 +124,7 @@ In Fig.~\ref{fig_dualfreq_perfectAlignLowSnr}, we repeat the simulation while ad
             \put (47,0){\footnotesize{$\thetaD/\pi$}}
         \end{overpic}
     \end{center}
-    \caption{Simulating the 3 element ULA with $r_1=0.6^{2},\; r_2=0.6$ (hence $\kappa=0.6$), assuming an infinite SNR. For each target direction $\thetaD$, the DF beamformer output $Z_\text{DF}$ is evaluated where the beamformer is set to enhance signals impinging from $\thetaD=\pi/2$. 
+    \caption{Simulating a 3 element ULA with $r_1=0.6^{2},\; r_2=0.6$ (hence $\kappa=0.6$), assuming an infinite SNR. For each target direction $\thetaD$, the DF beamformer output $Z_\text{DF}$ is evaluated where the beamformer is set to enhance signals impinging from $\thetaD=\pi/2$. 
     The (modulus $\lambda$) range error is $\Delta{}R_{\text{rt}}=0.3\lambda$.
     The single frequency (SF) beamformer (red squares) and the dual-frequency (DF) solution (green diamonds) are compared to the ideal response  $\Delta{}R_{\text{rt}}=0$ (blue dots) as a reference. 
     }
@@ -157,7 +153,7 @@ In Fig.~\ref{fig_dualfreq_perfectAlignLowSnr}, we repeat the simulation while ad
 % \end{figure}
 \begin{figure}[t!]
     \begin{center}
-        \begin{overpic}[width=.9\linewidth, 
+        \begin{overpic}[width=.99\linewidth, 
         % grid, 
         tics=10,
         % trim={<left> <lower> <right> <upper>}

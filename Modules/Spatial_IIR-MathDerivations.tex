@@ -19,7 +19,7 @@ Expressing the Fourier transform of \eqref{eqn:SingleSensorTemporalEquality},
             \exp\rBrace{-j\omega\rBrace{\tau_{pd}+\tau_{n}}}
             \\&+\sum_{m=0}^{N-1}
             {
-            \alpha^{*}_{m}\omegaB\F{x}_{m}
+            \alpha^{*}_{m}\F{x}_{m}
             \exp\rBrace{-j\omega\rBrace{\tau_{pd}+\tau_{n}}}
             }\Bigg),
         \end{split}
@@ -27,7 +27,7 @@ Expressing the Fourier transform of \eqref{eqn:SingleSensorTemporalEquality},
 \end{equation}
 and its vector from,
 $$
-\F{\vx} = g\rBrace{\F{s}+\vAlphaH \F{\vx}}\vd\exp{\rBrace{-j\omega\tau\_{pd}}},
+\F{\vx} = g\rBrace{\F{s}+\vAlphaH \F{\vx}}\vd\exp{\rBrace{-j\omega\tau_{pd}}},
 $$
 we find that it can be simplified to
 $$
@@ -61,16 +61,16 @@ g\bHd{}\exp\rBrace{-j\phi}
 }.
 \end{equation}
 \par Note that this architecture achieves a controllable (via setting of $\vBeta$ and $\vAlpha$) and recursive (non-trivial denominator) spatial response.
-As will be shown, high directivity and narrow beamwidth are obtainable by proper selection of the weights. Compared to traditional beamformers (i.e., without feedback), the performance improvement will be expressed in terms of increased aperture, narrower beamwidth and improved sidelobe attenuation.
-One may observe that opposed to traditional beamformers, the array response, $\Hba,$ is not only influenced by the impinging signal DOA, for it is also range selective due to its $\phi$ dependency.
+As will be shown, high directivity and narrow beamwidth are obtainable by a proper selection of the weights. Compared to traditional beamformers (i.e., without feedback), the performance improvement will be expressed in terms of increased aperture, narrower beamwidth and improved sidelobe attenuation.
+One may observe that opposed to traditional beamformers, the array response, $\Hba,$ is not only influenced by the impinging signal DOA, since it is also range selective due to its $\phi$ dependency.
 As demonstrated in Fig.~\ref{fig_rangeAzimuthSelectivity}, the combination of both angular and range selectivity enables the designer to enhance signals arriving from specific locations (grey area) rather than only specific directions.
 \begin{figure}[t!]
     \begin{center}
-        \begin{overpic}[width=0.65\linewidth, 
+        \begin{overpic}[width=0.75\linewidth, 
         % grid, 
         tics=10,trim=0 0 0 0]{./Media/azimuthRangSelectivity.png}
             \put (20, 23){\rotatebox{0}{\footnotesize{Angular response}}}
-            \put (30.5, 47){\rotatebox{0}{\footnotesize{Enhanced radial slice}}}
+            \put (32, 47){\rotatebox{0}{\footnotesize{Enhanced radial slice}}}
         \end{overpic}
     \end{center}
     \caption{

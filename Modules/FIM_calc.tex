@@ -1,22 +1,22 @@
-Following \eqref{eq_beamPatternFreqDomain_FIM}, we elaborate the steps leading to \eqref{eqn_FIMelements}. First, we express the parial derivatives of $\F{z}$ with respect to $\vEta$, resulting in
+Following \eqref{eq_beamPatternFreqDomain_FIM}, we elaborate the steps leading to \eqref{eqn_FIMelements}. First, we express the partial derivatives of $\F{z}$ with respect to $\vEta$, resulting in
 \begin{equation*}
     \resizebox{.9\linewidth}{!}{
         \begin{split}
             \frac{1}{\F{s}}\frac{\partial{\F{z}}}{\partial{\thetaD}} &= 
             \frac{
-            g\vBetaH{}\vecnot{A}\omegaB\vd\ePhi{-}\rBrace{1-g\aHd\ePhi{-}}+g^{2}\bHd\vAlphaH{}\vecnot{A}\omegaB\vd\ePhi{-2}
+            g\vBetaH{}\vecnot{A}\vd\ePhi{-}\rBrace{1-g\aHd\ePhi{-}}+g^{2}\bHd\vAlphaH{}\vecnot{A}\vd\ePhi{-2}
             }{
             \rBrace{1-g\aHd\ePhi{-}}^{2}
             }
             \\&=
             \frac{
-            g\vBetaH{}\vecnot{A}\omegaB\vd\ePhi{-}-g^{2}\vBetaH{}\rBrace{\vecnot{A}\omegaB\vd\vdT-\vd\vdT{}\vecnot{A}\omegaB}\vAlphaC\ePhi{-2}
+            g\vBetaH{}\vecnot{A}\vd\ePhi{-}-g^{2}\vBetaH{}\rBrace{\vecnot{A}\vd\vdT-\vd\vdT{}\vecnot{A}}\vAlphaC\ePhi{-2}
             }{
             \rBrace{1-g\aHd\ePhi{-}}^{2}
             }
             \\&=
             \frac{
-            g\vBetaH{}\vecnot{A}\omegaB\vd\ePhi{-}+g^{2}\vBetaH{}\vecnot{B}\omegaB\vAlphaC\ePhi{-2}
+            g\vBetaH{}\vecnot{A}\vd\ePhi{-}+g^{2}\vBetaH{}\vecnot{B}\vAlphaC\ePhi{-2}
             }{
             \rBrace{1-g\aHd\ePhi{-}}^{2}
             }
@@ -42,26 +42,26 @@ and
         \end{split}
     },
 \end{equation*}
-where we defined $\vecnot{B}\omegaB\triangleq\vd\vdT{}\vecnot{A}\omegaB-\vecnot{A}\omegaB\vd\vdT$. 
+where we defined $\vecnot{B}\triangleq\vd\vdT{}\vecnot{A}-\vecnot{A}\vd\vdT$. 
 The main diagonal elements of the FIM are 
 \begin{equation*}
     \resizebox{.9\linewidth}{!}{
         \begin{split}
-            J_{\thetaD\thetaD} &= \Re\cBrace{\frac{1}{2\pi\sigma^{2}}\int_{-\omega_{s}/2}^{\omega_{s}/2}\lBrace{\frac{\partial{\F{z}\omegaB}}{\partial{\thetaD}}}^{2}d\omega}
+            J_{\thetaD\thetaD} &= \Re\cBrace{\frac{1}{2\pi\sigma^{2}}\int_{-\omega_{s}/2}^{\omega_{s}/2}\lBrace{\frac{\partial{\F{z}}}{\partial{\thetaD}}}^{2}d\omega}
             \\&=
             \frac{1}{2\pi\sigma^{2}}\int_{-\omega_{s}/2}^{\omega_{s}/2}{\frac{
-            \lBrace{g\vBetaH{}\vecnot{A}\omegaB\vd-g^{2}\vBetaH{}\vecnot{B}\omegaB\vAlphaC\ePhi{-}}^{2}
+            \lBrace{g\vBetaH{}\vecnot{A}\vd-g^{2}\vBetaH{}\vecnot{B}\vAlphaC\ePhi{-}}^{2}
             }{
             \lBrace{1-g\aHd\ePhi{-}}^{4}
-            }\lBrace{\F{s}\omegaB}^{2}d\omega},
+            }\lBrace{\F{s}}^{2}d\omega},
             \\
-            J_{\phi\phi} &= \Re\cBrace{\frac{1}{2\pi\sigma^{2}}\int_{-\omega_{s}/2}^{\omega_{s}/2}\lBrace{\frac{\partial{\F{z}\omegaB}}{\partial{\phi}}}^{2}d\omega}
+            J_{\phi\phi} &= \Re\cBrace{\frac{1}{2\pi\sigma^{2}}\int_{-\omega_{s}/2}^{\omega_{s}/2}\lBrace{\frac{\partial{\F{z}}}{\partial{\phi}}}^{2}d\omega}
             \\&=
             \frac{1}{2\pi\sigma^{2}}\int_{-\omega_{s}/2}^{\omega_{s}/2}{\frac{
             \lBrace{g\bHd}^{2}
             }{
             \lBrace{1-g\aHd\ePhi{-}}^{4}
-            }\lBrace{\F{s}\omegaB}^{2}d\omega}
+            }\lBrace{\F{s}}^{2}d\omega}
         \end{split}
     }
 \end{equation*}
@@ -71,21 +71,21 @@ and the cross terms are
         \begin{split}
             &J_{\thetaD\phi} = J_{\phi\thetaD}^{\ast} = 
             \\&= \Re\cBrace{\frac{1}{2\pi\sigma^{2}}\int_{-\omega_{s}/2}^{\omega_{s}/2}
-            \rBrace{\frac{\partial{\F{z}\omegaB}}{\partial{\phi}}}^{\ast}
-            \frac{\partial{\F{z}\omegaB}}{\partial{\thetaD}}d\omega}
+            \rBrace{\frac{\partial{\F{z}}}{\partial{\phi}}}^{\ast}
+            \frac{\partial{\F{z}}}{\partial{\thetaD}}d\omega}
             \\&=
             \Re\cBrace{\frac{1}{2\pi\sigma^{2}}\int_{-\omega_{s}/2}^{\omega_{s}/2}{\frac{
-            jg^{2}\vBetaT\vdC\vBetaH{}\rBrace{\vecnot{A}\omegaB\vd+g\vecnot{B}\omegaB\vAlphaC\ePhi{-}}
+            jg^{2}\vBetaT\vdC\vBetaH{}\rBrace{\vecnot{A}\vd+g\vecnot{B}\vAlphaC\ePhi{-}}
             }{
             \lBrace{1-g\aHd\ePhi{-}}^{4}
-            }\lBrace{\F{s}\omegaB}^{2}d\omega}}.
+            }\lBrace{\F{s}}^{2}d\omega}}.
         \end{split}
     }.
 \end{equation*}
-Notice that when the weights are proportional to the conjugated steering vector, i.e., $$\vAlpha,\vBeta\propto\vd^{\ast},$$ the $\vBetaT{}B\omegaB\vAlpha$~term vanish.
-% Setting the coefficients as $$\vAlpha,\vBeta\propto\vd^{\ast}$$ causes the $\vBetaT{}B\omegaB\vAlpha$~term to vanish. 
-Assuming real input waveform $s(t)$, the function
+Notice that when the weights are proportional to the conjugated steering vector, i.e., $$\vAlpha,\vBeta\propto\vd^{\ast},$$ the $\vBetaT{}B\vAlpha$~term vanishes.
+% Setting the coefficients as $$\vAlpha,\vBeta\propto\vd^{\ast}$$ causes the $\vBetaT{}B\vAlpha$~term to vanish. 
+Assuming a real input waveform $s(t)$, the function
 \[
-\frac{\lBrace{\F{s}\omegaB}^{2}}{\lBrace{1-g\aHd\ePhi{-}}^{4}}
+\frac{\lBrace{\F{s}}^{2}}{\lBrace{1-g\aHd\ePhi{-}}^{4}}
 \]
-is even with respect to $\omega$, and $$\vBetaH{}\vecnot{A}\omegaB\vd\propto\vdH{}\vecnot{A}\vd=\sum_{n=0}^{N-1}A_{n,n}\abs{\vdI_{n}}^{2}\propto\omega$$ is odd, hence the cross terms vanish.
+is even with respect to $\omega$, and $$\vBetaH{}\vecnot{A}\vd\propto\vdH{}\vecnot{A}\vd=\sum_{n=0}^{N-1}A_{n,n}\abs{\vdI_{n}}^{2}\propto\omega$$ is odd, hence the cross terms vanish.

@@ -1,42 +1,26 @@
 \chapter{Introduction}
 \label{chap:intro}
-% do we need to add TOC lines?
-
-%\begin{figure}
-%  \centering
-%  \includegraphics[width=0.75\textwidth]{main/graphics/a_blowup.pdf}
-%  \caption{This is a caption}
-%\end{figure}
-
-Here you can introduce the field, survey past results, give context, use citations of course... (e.g. \cite{Papadimitriou1994}). It is probably worthwhile to clarify the goals or targets of the research and describe the process, unless this is done later.
-
-You can also introduce \emph{a key concept} (or rather, several) without formally defining them until later on.
-
-\subsection*{An unnumbered subsection}
-
-You may want to break up the intro into parts with titles. Subsectioning without numbering is an option you might want to consider.
-
-Some people include a specific section overviewing the results ("In Chapter so-and-so, we will see how etc.") which is also a way of describing the structure of the thesis. But this is not necessary.
-
-\subsection*{Thesis options and appearance}
-
-Please note that the \texttt{iitthesis} class has several options when you use it, such as:
-\begin{itemize}
-\item \texttt{fullpageDraft} to avoid the margins necessary for proper binding when you make the final print
-\item \texttt{beforeDefense} makes the personal acknowledgements invisible; use this to print the copies you submit initially to the grad school for sending to the opponent panel, i.e. thesis readers (who shouldn't see those parts). For the final submission, after having successfully defended --- drop this option. 
-\item \texttt{noabbrevs} no notation \& abbreviations list will be included in the thesis.
-\end{itemize}
-
-\subsection*{Setting thesis meta-data and publication information}
-
-The document class used to generate this document defines several commands you can use to set information  regarding your thesis, which is used in the title pages and elsewhere in the front matter.  Every (or almost every) command has an English and a Hebrew variant, with a \texttt{English} or \texttt{Hebrew} suffix to the command name. Examples:
-\begin{itemize}
-\item \verb|\titleHebrew|, \verb|\titleEnglish|
-\item \verb|\authorHebrew|, \verb|\authorEnglish|
-\item \verb|\JewishDateHebrew|, \verb|\JewishDateEnglish|
-\item \verb|\GregorianDateHebrew|, \verb|\GregorianDateEnglish|
-\item \verb|\publicationinfoHebrew|, \verb|\publicationinfoEnglish|
-\end{itemize}
-
-The file \texttt{misc/thesis-fields.tex} contains invocations of several such commands (some of them commented-out with \texttt{\%}), and some additional information about them.
-
+The general field of array processing has been thoroughly studied throughout several decades.
+The array sensors' spatial diversity enables the extraction of spatial information about impinging signals, thus laying the ground for wide range of applications, such as localizing a transmitting source \cite{skolnik2008radar,long2019}, blindly separating mixtures of impinging signals \cite{comon1994independent}, improving signal to noise ratio (SNR) \cite{verdu1998multiuser}, and many more. 
+\par A uniform linear array (ULA) has always been a point of interest, due to its simplicity of analysis \cite{van2004optimum,benesty2018}. 
+The array size and the number of its elements ($N$) has significant influence on the obtained array performance, such as SNR improvement, spatial separation capabilities and its spatial response's degrees of freedom (DOF). For example, the influential MUSIC algorithm \cite{schmidt1986multiple} enables the localization of signals arriving from up to $N-1$ distinctive directions of arrival (DOA), by projecting the array manifold onto the noise subspace.
+\par In pursuit of spatial performance improvement, namely higher spatial separation and selectivity of arriving signals, many approaches were suggested.  
+One approach, commonly referenced as ``virtual arrays'' \cite{pal2010nested,chevalier2005virtual,dogan1995applications} deals with the extraction of samples originated in sensors that do not really exist by using high (higher than 2) order statistics and manipulating multiple statistical cross-terms in order to estimate statistical characteristics of signals impinging in missing sensors.
+Using a similar approach, the $2q$-MUSIC algorithm \cite{chevalier2006high}, enables the use of $N^{2q}$ ``virtual elements'', by calculating the $q$'th order statistics.
+Another approach, involving different array geometries, examined minimum redundancy arrays \cite{moffet1968minimum,pillai1985new,pillai1987statistical,Kupershtein2013}, aiming to reduce the spatial ambiguity. The basic concept was minimization of the inter-element spacing redundancy in order to increase the overall resolution. Adaptive processing schemes \cite{frost1972algorithm,manolakis2000statistical}, being a wide and active  research area, were also suggested trying to adaptively estimate and suppress the noise component in impinging signals by minimization of the receiver's output energy with some constraints.
+\par Pursuing other approaches to improve the array's spatial performance, ULA spatial array processing analogy to finite impulse response (FIR) \cite{van1988beamforming} and the infinite impulse response (IIR) superior performance (e.g. narrower transition regions and higher sidelobes attenuation) gave rise to the question ``what are the equivalent spatial domain processing methods which will be analogous to temporal IIR filtering?''
+\par Achieving spatial IIR response has also motivated other works.
+In \cite{wen2013extending} two methods were considered.
+The first one was to estimate the time of arrival (TOA) difference between two consecutive sensors and to synthetically generate the recursive part of the IIR filter, entirely in the time-domain. The second approach suggested to consider overlapping subsets of one large ULA as finite approximation to an infinite array. 
+Surely, the former approach heavily relies on the accuracy of the delay estimation and the latter approach does not achieve a recursive spatial response. In both cases, there is no true spatial feedback between the array and the source of interest.
+Also, ultra-wideband (UWB) filters, which sample spatial snapshots of the signal and recursively process it in temporal domain were designed in \cite{bruton1983highly}, using the $2D$ spatio-temporal plane wave representation as a straight line angled according to the DOA.
+\par In this contribution, we present a low-complexity sensor array processing approach which achieves the desired spatial domain exclusive IIR-like beampattern, while avoiding any temporal processing of the signal.
+To this end, we arbitrarily choose to formulate the problem in the context of a localization problem, hence our goal is to estimate the direction and the range of some target of interest. 
+\par The novelty, compared to traditional array processing, is the incorporation of spatial feedback, which we prove to be the spatial domain equivalent of temporal domain IIR filtering.
+Assuming the target of interest has a mirror-like behaviour (i.e., reflects its impinging signals), the spatial feedback between the array and the target is created by continuously re-transmitting a synthesized version of the impinging signal (and its reflections) to the target.
+Note that the initial stimulus can be generated by the target or the array itself. In the text to follow, we assume this is the latter. 
+Furthermore, as opposed to the passive target case (i.e., a target which merely reflects the impinging signal), one may consider a cooperative target, which receives, enhances and re-transmits the signal back to the array. 
+% \par The outline of this paper is as follows. We first formulate the classic spatial beamforming setup in Sec.~\ref{sec:setup}. Then, in Sec.~\ref{sec_introduceFeedback}, we propose our novel feedback-based architecture, and formulate its spatial response.
+% Searching for localization performance maximization, Sec.~ \ref{sec_FIM} discusses the information-theory related considerations for the array configuration, utilizing the Fisher Information Matrix (FIM) in the context of the target's range and DOA estimation.
+% In Sec.~\ref{sec_Performance}, we evaluate some key features of the proposed beamforming with feedback. Specifically, we compute the array beamwidth, its peak-to-sidelobe ratio and the array directivity, showing significant improvement compared to traditional beamforming without spatial feedback. 
+% In Sec.~\ref{sec_app}, we simulate the proposed processing scheme, and emphasize its sensitivity to range errors. We then suggest a strategy which mitigates this sensitivity. Finally, concluding remarks are given in Sec.~\ref{sec_conclusions}.

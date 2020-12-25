@@ -246,11 +246,17 @@
 }
 
 \iitthesis@thesisdatafield{authorEnglish}{Itay Yehezkel Karo}
-\iitthesis@thesisdatafield{authorHebrew}{שם המחבר}
-\iitthesis@thesisdatafield{titleEnglish}{Thesis Title}
-\iitthesis@thesisdatafield{titleHebrew}{כותרת החיבור}
-\iitthesis@thesisdatafield{disciplineEnglish}{Discipline Name}
-\iitthesis@thesisdatafield{disciplineHebrew}{שם התחום המדעי}
+\iitthesis@thesisdatafield{authorHebrew}{
+איתי יחזקאל קארו 
+}
+\iitthesis@thesisdatafield{titleEnglish}{Spatial IIR - Source Localization With Feedback Based Beamforming}
+\iitthesis@thesisdatafield{titleHebrew}{
+איכון מטרות בעזרת  מסנן מרחבי בעל תגובה אינסופית להלם
+}
+\iitthesis@thesisdatafield{disciplineEnglish}{Electrical Engineering}
+\iitthesis@thesisdatafield{disciplineHebrew}{
+הנדסת חשמל
+}
 \iitthesis@thesisdatafield{supervisionEnglish}{Information regarding the supervision and supervisors}
 \iitthesis@thesisdatafield{supervisionHebrew}{מידע על המנחים וההנחיה}
 \iitthesis@thesisdatafield{publicationInfoHebrew}{ציון אם העבודה פורסמה בכתבי עת או  הוצגה בכנסים. הרשימה תכתב בהתאם לכללי הציטוט (כולל הכותר ושמות השותפים). במקרה של שיתוף פעולה, פירוט תרומת המגיש.}
@@ -718,9 +724,7 @@
   \end{english}
   \setlength{\parindent}{0pt}
   \setlength{\parskip}{10pt}
-בה דגלךכחידגכףלךדגימכהףךדזלמהזדףגךלעהףך
   \iitthesis@abstractHebrew
-
   \end{hebrew}
 }
 

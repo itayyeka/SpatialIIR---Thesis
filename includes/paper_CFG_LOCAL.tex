@@ -1,20 +1,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%      Document flags     %%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \def\showDev{}
-% \def\showTodo{}
-\def\showTodoNew{}
-% \def\useOmega{}
 \def\DEFIncludeAttenuation{}
 \def\DEFInclueApplication{}
 %%%%%%%%%%%%  Document Code starts here %%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%    aliases    %%%%%%%%%%%%%%
-\newcommand{\omegaB}{\ifdefined\useOmega\rBrace{\omega}\fi}
 
 % \newcommand{\Brace}[1]{\left\{{#1}\right\}}
-\newcommand{\dTheta}{\Delta\theta\omegaB}
-\newcommand{\dPhi}{\Delta\phi\omegaB}
+\newcommand{\dTheta}{\Delta\theta}
+\newcommand{\dPhi}{\Delta\phi}
 \newcommand{\dThetaO}{\Delta\theta\rBrace{\omega}}
 \newcommand{\dPhiO}{\Delta\phi\rBrace{\omega}}
 \newcommand{\dThetaHPBW}{\Delta\theta_{\text{HPBW}}}
@@ -27,64 +22,46 @@
 \newcommand{\Dp}[2]{\text{D}^{#2}\rBrace{#1}}
 % \newcommand{\coefSetName}{\text{CB}}
 \newcommand{\coefSetName}{\text{CB}}
-\newcommand{\vd}{\vecnot{d}\omegaB}
+\newcommand{\vd}{\vecnot{d}}
 \newcommand{\vdO}{\vecnot{d}\rBrace{\omega}}
-\newcommand{\vdC}{\vecnot{d}^{\ast}\omegaB}
+\newcommand{\vdC}{\vecnot{d}^{\ast}}
 \newcommand{\vx}{\vecnot{x}}
-\newcommand{\vAlpha}{\vecnot{\alpha}\omegaB}
-\newcommand{\vBeta}{\vecnot{\beta}\omegaB}
-
-\ifdefined\useOmega
-    \newcommand{\vdI}[1]{\vecnot{d}\rBrace{\omega_{#1}}}
-    \newcommand{\vdHatI}[1]{\hat{\vecnot{d}}\rBrace{\omega_{#1}}}
-    \newcommand{\vdHatIC}[1]{\hat{\vecnot{d}}^{\ast}\rBrace{\omega_{#1}}}
-    \newcommand{\vdTI}[1]{\vecnot{d}^{T}\rBrace{\omega_{#1}}}
-    \newcommand{\gI}[1]{g\rBrace{\omega_{#1}}}
-    \newcommand{\gIHat}[1]{\hat{g}\rBrace{\omega_{#1}}}
-    \newcommand{\phiI}[1]{\phi\rBrace{\omega_{#1}}}
-    \newcommand{\phiIHat}[1]{\hat{\phi}\rBrace{\omega_{#1}}}
-    \newcommand{\vAlphaTI}[1]{\vecnot{\alpha}^{T}\rBrace{\omega_{#1}}}
-    \newcommand{\vBetaTI}[1]{\vecnot{\beta}^{T}\rBrace{\omega_{#1}}}
-    \newcommand{\vAlphaI}[1]{\vecnot{\alpha}\rBrace{\omega_{#1}}}
-    \newcommand{\vBetaI}[1]{\vecnot{\beta}\rBrace{\omega_{#1}}}
-    
-\else
-    \newcommand{\vdI}[1]{\vecnot{d}_{#1}}
-    \newcommand{\vdHatI}[1]{\hat{\vecnot{d}}_{#1}}
-    \newcommand{\vdHatIC}[1]{\hat{\vecnot{d}}^{\ast}_{#1}}
-    \newcommand{\vdTI}[1]{\vecnot{d}^{T}_{#1}}
-    \newcommand{\gI}[1]{g_{#1}}
-    \newcommand{\gIHat}[1]{\hat{g}_{#1}}
-    \newcommand{\phiI}[1]{\phi_{#1}}
-    \newcommand{\phiIHat}[1]{\hat{\phi}_{#1}}
-    \newcommand{\vAlphaTI}[1]{\vecnot{\alpha}^{T}_{#1}}
-    \newcommand{\vAlphaHI}[1]{\vecnot{\alpha}^{H}_{#1}}
-    \newcommand{\vBetaTI}[1]{\vecnot{\beta}^{T}_{#1}}
-    \newcommand{\vBetaHI}[1]{\vecnot{\beta}^{H}_{#1}}
-    \newcommand{\vAlphaI}[1]{\vecnot{\alpha}_{#1}}
-    \newcommand{\vAlphaCI}[1]{\vecnot{\alpha}^{*}_{#1}}
-    \newcommand{\vBetaI}[1]{\vecnot{\beta}_{#1}}
-    \newcommand{\vBetaCI}[1]{\vecnot{\beta}^{*}_{#1}}
-\fi
-
-\newcommand{\vAlphaIW}[1]{\vecnot{\alpha}_{#1}\omegaB}
-\newcommand{\vBetaIW}[1]{\vecnot{\beta}_{#1}\omegaB}
-\newcommand{\vAlphaC}{\vecnot{\alpha}^{\ast}\omegaB}
-\newcommand{\vBetaC}{\vecnot{\beta}^{\ast}\omegaB}
-\newcommand{\vBetaFB}{\vecnot{\beta}_{\coefSetName}\omegaB}
-\newcommand{\vBetaCFB}{\vecnot{\beta}^{*}_{\coefSetName}\omegaB}
-\newcommand{\vAlphaFB}{\vecnot{\alpha}_{\coefSetName}\omegaB}
-\newcommand{\vAlphaCFB}{\vecnot{\alpha}^{*}_{\coefSetName}\omegaB}
-\newcommand{\vdT}{\vecnot{d}^{T}\omegaB}
+\newcommand{\vAlpha}{\vecnot{\alpha}}
+\newcommand{\vBeta}{\vecnot{\beta}}
+\newcommand{\vdI}[1]{\vecnot{d}_{#1}}
+\newcommand{\vdHatI}[1]{\hat{\vecnot{d}}_{#1}}
+\newcommand{\vdHatIC}[1]{\hat{\vecnot{d}}^{\ast}_{#1}}
+\newcommand{\vdTI}[1]{\vecnot{d}^{T}_{#1}}
+\newcommand{\gI}[1]{g_{#1}}
+\newcommand{\gIHat}[1]{\hat{g}_{#1}}
+\newcommand{\phiI}[1]{\phi_{#1}}
+\newcommand{\phiIHat}[1]{\hat{\phi}_{#1}}
+\newcommand{\vAlphaTI}[1]{\vecnot{\alpha}^{T}_{#1}}
+\newcommand{\vAlphaHI}[1]{\vecnot{\alpha}^{H}_{#1}}
+\newcommand{\vBetaTI}[1]{\vecnot{\beta}^{T}_{#1}}
+\newcommand{\vBetaHI}[1]{\vecnot{\beta}^{H}_{#1}}
+\newcommand{\vAlphaI}[1]{\vecnot{\alpha}_{#1}}
+\newcommand{\vAlphaCI}[1]{\vecnot{\alpha}^{*}_{#1}}
+\newcommand{\vBetaI}[1]{\vecnot{\beta}_{#1}}
+\newcommand{\vBetaCI}[1]{\vecnot{\beta}^{*}_{#1}}
+\newcommand{\vAlphaIW}[1]{\vecnot{\alpha}_{#1}}
+\newcommand{\vBetaIW}[1]{\vecnot{\beta}_{#1}}
+\newcommand{\vAlphaC}{\vecnot{\alpha}^{\ast}}
+\newcommand{\vBetaC}{\vecnot{\beta}^{\ast}}
+\newcommand{\vBetaFB}{\vecnot{\beta}_{\coefSetName}}
+\newcommand{\vBetaCFB}{\vecnot{\beta}^{*}_{\coefSetName}}
+\newcommand{\vAlphaFB}{\vecnot{\alpha}_{\coefSetName}}
+\newcommand{\vAlphaCFB}{\vecnot{\alpha}^{*}_{\coefSetName}}
+\newcommand{\vdT}{\vecnot{d}^{T}}
 \newcommand{\vxT}{\vecnot{x}^{T}}
-\newcommand{\vAlphaT}{\vecnot{\alpha}^{T}\omegaB}
-\newcommand{\vBetaT}{\vecnot{\beta}^{T}\omegaB}
-\newcommand{\vdH}{\vecnot{d}^{H}\omegaB}
-\newcommand{\vdHat}{\hat{\vecnot{d}}\omegaB}
-\newcommand{\vdHatC}{\hat{\vecnot{d}}^{\ast}\omegaB}
+\newcommand{\vAlphaT}{\vecnot{\alpha}^{T}}
+\newcommand{\vBetaT}{\vecnot{\beta}^{T}}
+\newcommand{\vdH}{\vecnot{d}^{H}}
+\newcommand{\vdHat}{\hat{\vecnot{d}}}
+\newcommand{\vdHatC}{\hat{\vecnot{d}}^{\ast}}
 \newcommand{\vxH}{\vecnot{x}^{H}}
-\newcommand{\vAlphaH}{\vecnot{\alpha}^{H}\omegaB}
-\newcommand{\vBetaH}{\vecnot{\beta}^{H}\omegaB}
+\newcommand{\vAlphaH}{\vecnot{\alpha}^{H}}
+\newcommand{\vBetaH}{\vecnot{\beta}^{H}}
 \newcommand{\vEta}{\vecnot{\eta}}
 \newcommand{\vEtaT}{\vEta^{T}}
 \newcommand{\vEtaH}{\vEta^{H}}
@@ -92,8 +69,8 @@
 \newcommand{\F}[1]{\text{\MakeUppercase{#1}}}
 \newcommand{\ePhi}[1]{\exp{\rBrace{#1j\phi}}}
 \newcommand{\thetaD}{\theta_{\text{d}}}
-\newcommand{\Hba}{H_{\vBeta,\vAlpha}\omegaB}
-\newcommand{\HbaFB}{H_{\vecnot{\beta}_{\coefSetName},\vecnot{\alpha}_{\coefSetName}}\omegaB}
+\newcommand{\Hba}{H_{\vBeta,\vAlpha}}
+\newcommand{\HbaFB}{H_{\vecnot{\beta}_{\coefSetName},\vecnot{\alpha}_{\coefSetName}}}
 \newcommand{\vp}{\vecnot{p}}
 \newcommand{\vpi}[1]{\vp_{#1}}
 \newcommand{\vpt}{\vp_{\text{t}}}

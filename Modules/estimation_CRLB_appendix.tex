@@ -1,6 +1,6 @@
 A possible evaluation for the contribution of the presented feedback mechanism is to measure the additional information in the system.
 To this end, the FIM, denoted by $\vecnot{J}$, will now be calculated with respect to the DOA $\rBrace{\thetaD}$ and range $\rBrace{\phi}$ parameters. 
-As the feedback-based transfer function (\ref{eqn:GeneralFeedbackTransferFunction}) is expressed in frequency domain, we rely on \cite{zeira1990frequency} to express the frequency domain FIM as well. 
+As the feedback-based transfer function (\ref{eqn:GeneralFeedbackTransferFunction}) is expressed in the frequency domain, we rely on \cite{zeira1990frequency} to express the frequency domain FIM as well. 
 \par The $\vBrace{k,l}$'th FIM element, may be expressed as
 \begin{equation}\label{eq_FIM_kl_full}
     \resizebox{.9\linewidth}{!}{
@@ -31,7 +31,7 @@ As the feedback-based transfer function (\ref{eqn:GeneralFeedbackTransferFunctio
     }
 \end{equation}
 where $ \vEta = [\thetaD,\phi]^{T} $ is the parameters vector, $\Re$ stands for the real-part extraction operator, $k,l \in\cBrace{1,2}$, $\Phi\rBrace{\omega}$ is the noise spectrum, $\mathfrak{F}$ is the Fourier transform operator, $T$ is the measurement observation interval and $\omega_{s}$ is the signal bandwidth. 
-For simplicity, $\text{n}\rBrace{t}$ is assumed to be a white Gaussian with some constant power spectral density $\Phi(\omega)=\sigma^2$ and independent of the estimated parameters $\vEta$. Hence, the second term in the right-hand-side of \eqref{eq_FIM_kl_full} vanishes. 
+For simplicity, $\text{n}\rBrace{t}$ is assumed to be white Gaussian with some constant power spectral density $\Phi(\omega)=\sigma^2$ and independent of the estimated parameters $\vEta$. Hence, the second term in the RHS of \eqref{eq_FIM_kl_full} vanishes. 
 Assuming continuously differentiable functions, where order alteration of the Fourier transform and the differentiation operations is allowed, \eqref{eq_FIM_kl_full} simplifies to
 \begin{equation}
     \label{eq_beamPatternFreqDomain_FIM}
@@ -51,11 +51,11 @@ Assuming continuously differentiable functions, where order alteration of the Fo
 \end{equation}
 Expressing the steering vector derivative with respect to $\thetaD$, results in
 \begin{equation}\label{eq_vdDiff}
-\frac{\partial\vd}{\partial\thetaD}=\vecnot{A}\omegaB\vd
+\frac{\partial\vd}{\partial\thetaD}=\vecnot{A}\vd
 \end{equation}
-where $\vecnot{A}\omegaB$ is an $N\times{}N$ diagonal matrix with
+where $\vecnot{A}$ is an $N\times{}N$ diagonal matrix with
 \[
-A_{ii}\omegaB=-j\omega\frac{\partial \tau_{i}}{\partial{\thetaD}}\ \  \forall{i\in\cBrace{0\hdots{}N-1}}.
+A_{ii}=-j\omega\frac{\partial \tau_{i}}{\partial{\thetaD}}\ \  \forall{i\in\cBrace{0\hdots{}N-1}}.
 \]
 It is worth mentioning that \eqref{eq_vdDiff} is relevant even for arbitrary arrays (not necessarily ULA) when smooth and slowly changing radiation patterns are assumed.
 In App.~\ref{apdx_clacFim} we compute the FIM terms, concluding that
@@ -66,7 +66,7 @@ In App.~\ref{apdx_clacFim} we compute the FIM terms, concluding that
             &J_{11}=J_{\thetaD\thetaD}
             =
             \frac{1}{2\pi\sigma^{2}}\int_{-\omega_{s}/2}^{\omega_{s}/2}{\frac{
-            \lBrace{g\vBetaH{}\vecnot{A}\omegaB\vd-g^{2}\vBetaH{}B\omegaB\vAlphaC\ePhi{-}}^{2}
+            \lBrace{g\vBetaH{}\vecnot{A}\vd-g^{2}\vBetaH{}B\vAlphaC\ePhi{-}}^{2}
             }{
             \lBrace{1-g\aHd\ePhi{-}}^{4}
             }\lBrace{\F{s}\rBrace{\omega}}^{2}d\omega}
@@ -81,7 +81,7 @@ In App.~\ref{apdx_clacFim} we compute the FIM terms, concluding that
         \end{split}
     }
 \end{equation}
-where $\vecnot{B}\omegaB\triangleq\vd\vdT{}\vecnot{A}\omegaB-\vecnot{A}\omegaB\vd\vdT.$ 
+where $\vecnot{B}\triangleq\vd\vdT{}\vecnot{A}-\vecnot{A}\vd\vdT.$ 
 % Generalizing the conventional beamformer (CB) \cite{van2004optimum}, such that the feedback weights are
 % \begin{equation}\label{eq:alpha_beta_opt}
 % \vAlpha_{\text{CB,opt}}=\frac{\vdC\exp\rBrace{j\phi}}{\hat{g}\norm{\vd}^2}
