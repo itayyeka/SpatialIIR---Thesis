@@ -1,12 +1,12 @@
 As demonstrated in the previous section, the beampattern \eqref{eq_generalH} is sensitive to range errors.
 We now propose an architecture which obtains the desired beampattern $\Hr_{\Delta\theta,\Delta\phi\to0,r}$ even for relatively large range errors $\Delta R_{\text{rt}}$. Also, we show that the suggested architecture achieves high performance at moderately low signal-to-noise ratio (SNR) scenarios.
 
-\subsection{Intuition}
+\subsection*{Intuition}
 Bearing in mind that the system's phase alignment sensitivity resides in \eqref{eq_generalH} via the  term $\exp\Brack{j\dPhi}=\exp\Brack{j\omega\Delta\tau_{pd}}$ and that the round-trip delay ($\tau_{pd}$) cannot be controlled, one may suggest to use lower frequencies. 
 Unfortunately, aiming for practical range estimation errors, the transmission of such low frequencies is physically unfeasible. 
 Instead, we suggest simultaneous transmission of several frequencies in order to resolve the range error sensitivity. In the following, we suggest a dual frequency (DF) waveform, utilizing two harmonics, $\omega_1$ and $\omega_2$.
 
-\subsection{Suggested processing scheme}
+\subsection*{Suggested processing scheme}
 \begin{figure}[t!]
     \begin{center}
         \begin{overpic}[width=0.99\linewidth, 
@@ -78,7 +78,7 @@ See App.~\ref{apdx_thrm_DF}.
 Hence, one may significantly mitigate the range mismatch distortion of the beampattern by selecting close stimuli frequencies.
 % Also, $\tau_n$ is arbitrary, hence the discussion is not restricted to a specific array geometry.
 We also note that throughout the development of \eqref{eqn_H_DF_general}, we did not assume any specific array geometry, hence this result is valid for arbitrary arrays and not just ULA.
-\subsection{Numerical example}
+\subsection*{Numerical example}
 Consider a radio frequency carrier of $10$~GHz and typical range error of $\Delta{}R_{\text{rt}}=10$~m, which is $333\frac{1}{3}\lambda$ (assuming  speed of light, $c=3\cdot 10^{8}$~m/s). The single frequency beampattern distortion, being periodic in $\lambda$, will closely resemble the $0.3\lambda$ error plot presented in Fig.~\ref{fig_rangError}. Assume that we aim to achieve a maximal phase error of $\Delta \phi=0.01\pi$. Hence, when using the DF architecture, the dictated frequency separation must satisfy
 \begin{equation}\label{eq_DF_phErr}
 \abs{(\omega_1-\omega_2)\frac{\Delta{}R_{\text{rt}}}{c}}<0.01\pi.
@@ -89,7 +89,7 @@ or equivalently, for a maximal range error of $10$~m, a frequency separation of
 \]
 is required. 
 
-\subsection{Dual frequency simulation}
+\subsection*{Dual frequency simulation}
 We now simulate \eqref{eqn_H_DF_general} for the DF structured FB,
 generalizing the $\coefSetName$ approach and setting
 \begin{equation*}

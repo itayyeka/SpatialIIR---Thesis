@@ -1,8 +1,3 @@
-In this chapter, we revisit the most basic DOA estimation approach - i.e. beamforming, integrating active feedback transmitter to the classic ULA.
-In Sec.~\ref{sec:setup} we overview beamforming theoretical basis which is expanded to the newly introduced feedback integrated beamforming concept in Sec.~\ref{sec_introduceFeedback}.
-An information theory related reasoning for the array setting is suggested in Sec.~\ref{sec_FIM}, using the Fisher Information matrix and the resultant beamformer's performance are analysed in Sec.~\ref{sec_Performance} assuming ideal noiseless scenario.
-In Sec.\ref{sec_sim} the beamformer's noise sensitivity is exemplified, followed by a practical and robust dual-frequency beamformer which is presented in Sec.~\ref{sec_app}.
-
 \section{Beamforming}\label{sec:setup}
 In this section, a brief overview on ULA beamforming and its resemblance to FIR filter design are presented.
 Consider an $N$-element ULA with inter-element spacing $\delta$, where its $n$'th sensor is positioned at $\vpi{n},\;\text{for}\; n=0,\ldots,N-1$. We set $\vpi{0}$ as the axis reference point and assume that the target of interest is positioned at $\vpt$.
@@ -105,15 +100,15 @@ Note that setting $\vAlpha=\vecnot{0}$ (i.e., cancelling the feedback) degenerat
     }
     \label{fig:Proposed_spatialIIR_ARCH}
 \end{figure}
-\subsection{Obtained spatial response}
+\subsection*{Obtained spatial response}
 \input{./Modules/Spatial_IIR-MathDerivations.tex}
 \section{Fisher Information Matrix}
 \label{sec_FIM}
-\input{./Modules/sec_FIM_and_CRLB.tex}
+\input{./Modules/estimation_CRLB_appendix.tex}
 \section{Performance Analysis}
 \label{sec_Performance}
 In this section we analyze the suggested FB (see Fig.~\ref{fig:Proposed_spatialIIR_ARCH}), considering some fundamental properties which are commonly used to asses array performance: Beamwidth, peak-to-sidelobe level, and directivity. Each property is then compared to traditional passive ULAs, showing that significantly improved performances are obtainable with spatial feedback integration.  
-\subsection{Error terms}
+\subsection*{Error terms}
 In the absence of accurately known parameters, we denote $\hat{\phi},\hat{\theta}$ to be the range and DOA related phase estimates respectively.
 Then, using the same weights as in \eqref{eq:alpha_beta_opt} for both the feedback and output synthesis gives rise to
 \begin{equation}\label{eq:alpha_beta_hat}
@@ -149,7 +144,7 @@ In the following, four fundamental scenarios are considered:
 \end{itemize}
 \ifdefined\showTodo
 {
-    \subsection{Small estimation error analysis - \textbf{TO BE REMOVED - kept only for the todos}}
+    \subsection*{Small estimation error analysis - \textbf{TO BE REMOVED - kept only for the todos}}
     \label{subsection_ArrayPerformance_TayolrAnalysis}
     \myTodo{inline}{\textbf{DONE:}\\ maybe to call this subsection 'small error analysis'}
     Plugging (\ref{eqn_CB_coefSet}) into (\ref{eqn:GeneralFeedbackTransferFunction}) and denoting $\D{N}{x} \triangleq \frac{\sin{\rBrace{Nx}}}{\sin{\rBrace{x}}}$ results in the general \coefSetName{} beampattern \myTodo{inline}{\textbf{DONE}\\you need to define the delta expressions (the errors)}
@@ -185,7 +180,7 @@ In the following, four fundamental scenarios are considered:
 }
 \else
 \fi
-\subsection{The normalized beampattern}
+\subsection*{The normalized beampattern}
 \label{subsection_spatialIIR_normBP}
 As commonly done for ULA performance analysis \cite{van2004optimum}, we analyze the normalized response (i.e., where the peak main lobe gain is set to $0_{dB}$). Henceforth, setting $\vecnot{\beta}_{\coefSetName,\text{opt}}=\vecnot{\alpha}_{\coefSetName,\text{opt}},$ we define the normalized response
 \begin{equation}
@@ -232,9 +227,9 @@ Considering the steering error scenario (i.e., $\dTheta\neq0,\ \dPhi=0$) first, 
 \end{equation}
 we evaluate the FB's beamwidth, sidelobe level and directivity and compare them to those of the standard ULA.
 \vfill
-\subsection{Half power beamwidth}
+\subsection*{Half power beamwidth}
 \input{./Modules/arrayPerformance_beamwidth.tex}
-\subsection{Sidelobes attenuation}
+\subsection*{Sidelobes attenuation}
 \ifdefined\showDev
     \fbox{
     \begin{minipage}{0.9\linewidth}
@@ -307,7 +302,7 @@ and for large $N$ values
 \fi
 \par For standard ULA, the gain of the first sidelobe is known to be $2/3\pi$ \cite{van2004optimum}, which implies that the first sidelobe is smaller by a factor of $1-r$ compared to standard ULA.
 Specifically, in perfect gain match scenario (i.e., $r\to{}1$) , the sidelobes vanish. 
-\subsection{Array directivity}
+\subsection*{Array directivity}
 The array directivity $\mathcal{D}$ \cite{van2004optimum}, defined as
 \begin{equation}\label{eq_D}
     \mathcal{D}\rBrace{N,r} = \frac{\Hr_{\Delta\theta=0,\Delta\phi=0,r}}{\frac{1}{2\pi}\int_{0}^{2\pi}\Hr_{\Delta\theta,\Delta\phi=0,r}\ d\Delta\theta} = \frac{2\pi}{\int_{0}^{2\pi}\Hr_{\Delta\theta,\Delta\phi=0,r}\ d\Delta\theta},
@@ -340,7 +335,7 @@ Also, for $N\geq2$, $\lim_{r\rightarrow 1}\mathcal{D}\rBrace{N,r}=\infty$, imply
      \caption{Plot of $\mathcal{D}\rBrace{N,r}$, computed using numerical integration (surface), shown to perfectly match the analytic expression (black diamonds) presented in \eqref{eq_D_result}. Difference between the numerical integration result and the suggested analytic expression is around $\sim{1e^{-9}}$.}
     \label{fig_directivity}
 \end{figure}
-\subsection{Summary}
+\subsection*{Summary}
 To conclude this section, we summarize the feedback integration related performance improvements in Table.~\ref{table_arrayPerformance} 
 \begin{table}[h!]
     \caption{Performances of Classical ULA and the Proposed Feedback-Beamforming Architecture, with a Gain Mismatch $r$.}

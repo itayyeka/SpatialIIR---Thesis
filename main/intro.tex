@@ -25,14 +25,14 @@ The former approach heavily relies on the accuracy of the delay estimation which
 Close inspection of the latter approach reveals that even though the sub-arrays are each weighted separately, each sensor's output is eventually linearly weighted when taking into account all related sub-arrays.
 Clearly, this is just another possible implementation of basic FIR like ULA spatial processor, so in both cases, there is no true spatial feedback between the array and the source of interest.
 Also, ultra-wideband (UWB) filters, which sample spatial snapshots of the signal and recursively process it in temporal domain were designed in \cite{Hum2009BeamformingFilters}, using the $2D$ spatio-temporal plane wave representation as a straight line angled according to the DOA.
-\par
-TODO: Elaborate on the 2/3D planar from (by order)
-\begin{itemize}
-    \item Highly Selective Three-Dimensional Recursive Beam Filters Using Intersecting Resonant Planes 
-    \item Three-Dimensional Cone Filter Banks
-    \item A Speed-Optimized Systolic Array ProcessorArchitecture for Spatio-Temporal 2-D IIRBroadband Beam Filters
-    \item UWB Beamforming Using 2-D Beam Digital Filters
-\end{itemize}
+% \par
+% TODO: Elaborate on the 2/3D planar from (by order)
+% \begin{itemize}
+%     \item Highly Selective Three-Dimensional Recursive Beam Filters Using Intersecting Resonant Planes 
+%     \item Three-Dimensional Cone Filter Banks
+%     \item A Speed-Optimized Systolic Array ProcessorArchitecture for Spatio-Temporal 2-D IIRBroadband Beam Filters
+%     \item UWB Beamforming Using 2-D Beam Digital Filters
+% \end{itemize}
 \par In this contribution, we present a low-complexity sensor array processing approach which achieves the desired spatial domain exclusive IIR-like beampattern, while avoiding any temporal processing of the signal.
 To this end, we arbitrarily choose to formulate the problem in the context of a localization problem, hence our goal is to estimate the direction and the range of some target of interest. 
 \par The novelty, compared to traditional array processing, is the incorporation of spatial feedback, which we prove to be the spatial domain equivalent of temporal domain IIR filtering.

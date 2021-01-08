@@ -1,0 +1,41 @@
+In the wide and very active research field of parametric estimation, one subject of very high relevance to this thesis is the sensor-array based localization - i.e. positional parameters estimation of impinging signal which is measured by an array of sensors.
+In this work, we focus on localization of signal sources in the far-field case, where free space signal propagation is assumed.
+Following the classical methods overview in \cite{krim1996two},most localization estimators may be divided to two main groups - i.e. \textit{spectral-based} and \textit{parametric}.
+The basic difference between the two groups is the assumption of impinging signal's statistical model when using parametric approach, which leads to higher accuracy in the expense of computation effort.
+In both approaches, the estimations are based on calculation of several hypothesis and choosing the peaks in the generated graph.
+Considering the search for a single parameter (e.g. DOA in a 2D plane), the two approaches are pretty similar in the sense that in both, the processor computes the confidence in a predetermined set of hypothesis which is followed by a single dimension scan.
+The difference is more evident when considering multiple parameter, such as spherical direction (i.e. azimuth and elevation) or even actual location adding also the distance to the target of interest.
+In the spectral based, each parameter is estimated independently of the other parameters, resulting in several 1D scans (as the number of estimated parameters), where the parametric approach will result in a multi-dimensional search for the best fitted parameters set.
+In the following, a basic overview of some classical algorithms is presented.
+The earliest localization algorithms, which date back to world war II, are the beamforming based, e.g. the conventional Bartlet beamformer.
+These methods, although appealing in terms of complexity and computation effort, suffer from fundamental limitation, e.g. its spatial performance depend solely on the array aperture and no improvement is achieved when more data is collected.
+Another class of estimators, where a statistical model is assumed (which is also the drawback of those methods), is the parametric estimators such as Maximum-Likelihood \cite{TWODECADES-81/106} and Maximum-Entropy \cite{TWODECADES-23}.
+Until the mid- 1970's, direction finding techniques required knowledge of the array directional sensitivity pattern in analytical form, and the task of the antenna designer was to build an array of antennas with a prespecified sensitivity pattern.
+Trying to relax the need for such accuracy, also serving as the origin of the sub-space based approach, was the Multiple SIgnal Classification (MUSIC) \cite{MUSIC_} algorithm.
+In general, the MUSIC algorithm consists of several stages:
+\begin{itemize}
+    \item Estimation of the covariance matrix
+    \item Eigen decomposition - extracting the eigen values and its related eigen-vectors
+    \item Estimating the number of sources
+    \item Projecting the samples over the array manifold
+    \item Finding the largest peaks according to the estimated number of sources
+\end{itemize}
+MUSIC essentially relieved the designer from the need of accurate radiation patterns by exploiting the reduction in analytical complexity that could be achieved by calibrating the array.
+Thus, the array response calculation task was reduced to that of measuring and storing the response. 
+Although MUSIC did not mitigate the computational complexity of solution to the DOA estimation problem, it did extend the applicability of high-resolution DOA estimation to arbitrary arrays of sensors.
+Another, probably even more important breakthrough, was the introduction of the array manifold and noise space (hence its name - sub-space) which proved to be orthogonal, thus allowing the use of orthogonal projection.
+In the very thorough review of classical algorithms \cite{TWODECADES}, two approaches - i.e. the parametric approach and ULA-specific algorithms are also discussed.
+the parametric approach, where stochastic model is assumed and Maximum Likelihood (ML) and Stochastic Maximum Likelihood (SML) are employed, is less relevant to this work therefore not discussed.
+In the set of ULA-specific algorithms, including ROOT-MUSIC \cite{ROOT_MUSIC}, ESPRIT (Estimation of Signal Parameters via Rotational Invariance Techniques) \cite{ESPRIT} and some iterative methods.
+We choose to emphasize on the ESPRIT method, being an important milestone in the path to state-of-the-art algorithms.
+In addition to using the rotational invariance of the signal sub-space eigenvectors, it also reduced computation and storage costs (especially in the multi-dimensional estimation case) by replacing the covariance matrix calculation and eigendecomposition by a relaxed partial singular value decomposition (SVD) which is employed on the data itself without squaring it - mitigating numerical problems associated with ill-conditioned matrices.
+Following state-of-the-art developments \cite{BOOK-classicalAndModernDOA}, the sub-space based algorithms are still modified and adjusted to specific scenarios as in \cite{LpNorm MUSIC} but also new and interesting approaches emerged
+\begin{itemize}
+    \item High Order Statistics (HOS, also refereed as comulants), which extracts more information from the samples' higher order moments, is a very active field of research due to some fundamental issues which are inherently resolved - i.e. the Gaussian noise vanishes in the 4th order statistics and the ability to resolve more DOAs than array elements.
+    This approach, being costly in computation effort, became popular probably due to the recently available low-cost powerful computation.
+    \item Sparsity based estimation, using non-Frobenius norm used in the algorithms development, has proved to improve estimation resolution in some cases \cite{LocalizationOfMultipleSpeaker}, namely high reverbrant acoustic scenarios, but is less relevant to this work therefore not elaborated.
+    \item A very wide and active research field is the concept of cooperative localization related to mobile networks is growing at a very high rate due to the never-ending need for high-bandwidth and low-power communication of the mobile networks.
+    It is also less relevant to this work.
+    \item Naturally, also many trials of harnessing the promising concept of neural networks are being done, for example \cite{NNDOA}
+\end{itemize}
+In this work, we actually revisit the most basic approach - i.e. beamforming.

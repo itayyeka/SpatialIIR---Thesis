@@ -249,9 +249,9 @@
 \iitthesis@thesisdatafield{authorHebrew}{
 איתי יחזקאל קארו 
 }
-\iitthesis@thesisdatafield{titleEnglish}{Spatial IIR - Source Localization With Feedback Based Beamforming}
+\iitthesis@thesisdatafield{titleEnglish}{Source Localization With Feedback Based Beamforming}
 \iitthesis@thesisdatafield{titleHebrew}{
-איכון מטרות בעזרת  מסנן מרחבי בעל תגובה אינסופית להלם
+    איכון מקור על ידי עיצוב אלומה עם משוב
 }
 \iitthesis@thesisdatafield{disciplineEnglish}{Electrical Engineering}
 \iitthesis@thesisdatafield{disciplineHebrew}{

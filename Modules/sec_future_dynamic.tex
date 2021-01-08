@@ -1,0 +1,21 @@
+Revisiting \eqref{eqn:SingleSensorTemporalEquality}, a natural initial generalization would be to allow the target of interest to be dynamic, i.e. introducing a general 2D arbitrary target location $\vecnot{p}_{t}\rBrace{t}$.
+The location dynamics may be translated into a dynamic propagation delay, $\tau_{pd}\rBrace{t}$.
+It follows that an auxiliary temporal quantity should be defined, $t_{i}\rBrace{t}$, which links between the received signal's impinging moment $t$, and its corresponding reflecting moment in the target of interest.
+Hence one may describe it as
+\begin{equation}
+    t_{i}\rBrace{t}=\underset{\tau}{\mathrm{arg}}\cBrace{\tau-t=\frac{R\rBrace{\tau}}{c}}.
+\end{equation}
+With $t_{i}$, we rewrite \eqref{eqn:SingleSensorTemporalEquality} as
+\begin{equation}
+    \label{eqn:ftr_dyn_temp}
+    x_{n}(t) = g\rBrace{s\rBrace{t_{i}\rBrace{t}}
+    +\sum_{m=0}^{N-1}{\alpha^{*}_{m}x_{m}\rBrace{t_{i}\rBrace{t}}}}.
+\end{equation}
+One may consider the following research approaches for further investigation
+\begin{itemize}
+    \item \textbf{Modeling of target's location}
+    \\Considering a constant velocity $\vecnot{v}_{\theta,\phi}$, of the target, where $v_{\theta}$ and $v_{\phi}$ are the radial and the tangent velocity components respectively, will result in a closed form expression for $t_{i}$, $$t_{i}=\frac{R_{0}+\rBrace{c+v_{\theta}}t}{c}$$, where $R_{0}$ and further development may lead to a closed form response like in the stationary case.
+    In this manner, other component may be added to the positional equation.
+    \item \textbf{Frame based processing}
+    \\Considering low velocity of the target with respect to the wave's propagation's speed, one may consider treating the processor as pseudo-stationary and explore its implications for increasing velocities/processing duration. 
+\end{itemize}

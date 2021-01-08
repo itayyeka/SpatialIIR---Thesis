@@ -1,0 +1,22 @@
+A basic design entity in every signal processing scheme is the digital filter, which is the modern evolution of analog filters.
+The design of the digital filter is a very established and thoroughly studied research area.
+As stated in \cite{oppenheim1975digital} (and numerous other literature), two key filter types are used - i.e. Finite Impulse Response (FIR) and Infinite Impulse Response (IIR) filters.
+This section will briefly overview the design methods and main flavours of each filter type and discuss in general of the pros and cons of them in order to provide proper motivation for the quest of finding the IIR analogy of the spatial FIR, as implied in Ch.~\ref{chap:intro}.
+\subsection{FIR design}
+The FIR filter is a merely a delay-and-sum mechanism, therefore its memory is finite and equal to the number of taps in the final filter's configuration.
+Determining it coefficients is generally done using windowing (weighted element-wise multiplication and truncation) of desired impulse response which is derived by the inverse Fourier transform of the desired frequency response.
+Many window types have been suggested in literature, where Bartlet, Hanning, Humming and Blackman are among the most basic ones, each with its pros and cons.
+I a nutshell, using a rectangular window, achieves the narrowest main lobe but also the highest side-lobes.
+The other window types, achieve lower side-lobes at the expense of wider main-lobe.
+The user may also increase the filter's order if side-lobe attenuation is of high importance, thus achieving narrower main-lobe. 
+\subsection{IIR design}
+The infinite response of the IIR filters originates in the inherent feedback which reuses output in the computing part, generating a loop which theoretically takes all input past samples into account for each output sample.
+As there are many flavours of the IIR filters, we choose to elaborate on the elliptic filter, being the more common candidate for comparison to the FIR in the literature.
+The basic concept behind the elliptic filter design is the allowing of equi-ripple around both pass and stop band which both relaxes the filter's constrains comparing to Chebyshev and Butterworth methods and allows the narowest transition band between the three filters.
+The designer sets the allowed ripple magnitudes in both pass and stop bands and positions the transition band according to his needs.
+A closed for transformation, described in \cite{oppenheim1975digital} is then used to convert the prototype low-pass filter to band-pass, band-stop or high-pass filters.
+\subsection{Comparison}
+The main advantage of FIR filters, commonly required in signal processing systems is the obtainable linear phase feature. A well known \cite{oppenheim1975digital} fact in digital signal processing is that the filter latency may be frequency dependant, namely linearly dependent in the phase response derivative of the specific frequency.
+Therefore, linear phase implies that the phase response's derivative (i.e. signal latency) is frequency independents, which prevent signal distortion.
+The main advantage of IIR filters is that for a given set of frequency response specifications, the IIR filter will (in most cases) require substantially less coefficients, which may even reach few order of magnitude \cite{rabiner1974some}.
+In this work, the signals are assumed to be narrow-band, which reduces the necessity of linear phase response, while when considering sensor arrays, the costs and the physical aperture are of very high importance, motivating the designers to try and reduce the number of elements in the array while still meeting the specifications.
