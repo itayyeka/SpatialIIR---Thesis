@@ -1,28 +1,25 @@
 \chapter{Preliminaries}
 \label{chap:prelims}
-
-As a preliminary discussion to the presentation of out contribution, we overview some the key theoretical basis of the thesis.
-In Sec.~\ref{sec:prlm_propWaveField}, the wave propagation, being the most basic concept for array processing, is discussed.
-It is then followed by a short overview of array-processing in Sec.~\ref{sec:prlm_sensorArrays}.
+As a preliminary discussion to the presentation of our contribution, we overview some the key theoretical basis of the thesis.
+First, a short overview of array-processing is presented in Sec.~\ref{sec:prlm_sensorArrays}, accompanied by a complementary wave propagation discussion in Sec.~\ref{sec:prlm_propWaveField}.
 To accommodate the discussion for spatial filtering, we also mention the time-space relation of spatially sampled signals in Sec.~\ref{sec:prlm_timeSpaceSig}.
-As an additional theoretical concept, arriving from the information theory, which will be used in the main chapter (Ch.~\ref{chap:firstchap}), is the Fisher Information Matrix, covered in Sec.~\ref{sec:prlm_FIM}.
-\par 
-For an easier reading treat each section as independent, where notations and symbols are each defined in the specific section and are not mutual, nor used in the main chapter. 
-
+In Sec.~\ref{sec:prlm_localization}, we further focus the spatial filtering discussion to localization and overview some of its fundamentals.
+Following the FIR/IIR filters related discussion in Chapter.~\ref{chap:intro}, we further elaborate and compare the two architectures in Sec.~\ref{sec:prlm_FIR_IIR}.
+To complete the basics overview, we also discuss array performance measuring in Sec.~\ref{sec:prlm_array_perf} following the classical localization related literature.
 % \begin{definition}
 % The \emph{von Neumann model} of a computer, also known as the \emph{Princeton architecture} is an architecture for digital computers, which consists of a processing units, containing an ALU and processing registers; a control unit consisting of an instruction register and a program counter; a memory unit which stores both data and instructions; and input-and-output mechanisms.
 % \end{definition}
 
-% \section{Propagating Wave Fields}
-% \label{sec:prlm_propWaveField}
-% \input{Modules/sec_prlm_propWaveField}
 % \section{Digital Filter Design - Finite/Infinite Response Filters}
 % \label{sec:prlm_FILTERS}
 % \input{Modules/sec_prlm_FILTERS}
 \section{Sensor arrays}
 \label{sec:prlm_sensorArrays}
 \input{Modules/sec_prlm_sensorArrays}
-\section{Time-Space Signals}
+\section{Propagating Wave Fields}
+\label{sec:prlm_propWaveField}
+\input{Modules/sec_prlm_propWaveField}
+\section{Spatio-temporal processing}
 \label{sec:prlm_timeSpaceSig}
 \input{Modules/sec_prlm_timeSpaceSig}
 \section{Localization}
@@ -31,6 +28,9 @@ For an easier reading treat each section as independent, where notations and sym
 % \section{Sensor array performance measure}
 % \label{sec:prlm_sensorArrayPerf}
 % \input{Modules/sec_prlm_arrPerf}
-\section{FIR vs. IIR}
+\section{The analogy between array processing and temporal digital filtering}
 \label{sec:prlm_FIR_IIR}
 \input{Modules/sec_prlm_FIR_IIR}
+\section{Array spatial performance}
+\label{sec:prlm_array_perf}
+\input{Modules/sec_prlm_array_perf}

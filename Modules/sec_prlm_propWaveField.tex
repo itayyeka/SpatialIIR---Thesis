@@ -28,7 +28,7 @@ A possible solution to \eqref{eq_prlm_waveEq}, $f_p\rBrace{t,x,y,z}$, may be of 
 \label{eq_prlm_waveEq_pSol}
 f_p\rBrace{t,x,y,z} = A\exp{j\rBrace{\omega{t}-k_{x}x-k_{y}y-k_{z}z}}
 \end{equation}
-Where $A$ is a complex constant, $\omega$ denotes a constant temporal frequency and $k_{x}x,k_{y},k_{z}$ are real constants. 
+Where $A$ is a complex constant, $\omega$ denotes temporal radial frequency and $k_{x}x,k_{y},k_{z}$ are real constants. 
 Plugging \eqref{eq_prlm_waveEq_pSol} into \eqref{eq_prlm_waveEq} results in the \emph{monochromatic plane wave}:
 \begin{equation}
 \label{eq_prlm_waveEq_subs}
@@ -59,3 +59,28 @@ Using \eqref{eq_prlm_waveEq_stepsEq} with $\delta{t} = \frac{2\pi}{\omega}$, we 
 \lambda=\delta{\vecnot{x}}=\frac{2\pi}{\abs{\vecnot{k}}}.
 \end{equation}
 Therefore, the wavenumber vector can be considered to represent spatial frequency, similarly to the manner $\omega$ represents temporal frequency.
+\par For example, in the context of ULA, assuming far field scenario, the impinging waves are treated as constant phase planes as in \eqref{eq_prlm_waveEq_finSol}.
+The spatial diversity of the ULA elements is expressed as a TOA difference of the impinging signal in each sensor which is will be shown to provide clues for the signal's DOA as can be seen in Fig.~\ref{fig_ULA_sketch}.
+\begin{figure}[h!]
+    \begin{center}
+        \begin{overpic}[width=0.6\linewidth, 
+        %grid, 
+        tics=10,trim=0 0 0 0]{./Media/arraySketch.png}
+        \put(20,45){\rotatebox{-50}{\tiny{Impinging wavefront}}}
+        \put(33.25,2.25){\rotatebox{0}{\tiny{$d$}}}
+        \put(52.25,26){\rotatebox{38}{\tiny{$c\tau=d\cos{\theta}$}}}
+        \put(49,15.75){\rotatebox{0}{$\theta$}}
+        \put(15,7){\rotatebox{0}{\tiny{0}}}
+        \put(28,7){\rotatebox{0}{\tiny{1}}}
+        \put(41,7){\rotatebox{0}{\tiny{2}}}
+        \put(80,7){\rotatebox{0}{\tiny{$N-1$}}}
+        \put(44,36){\rotatebox{38}{\tiny{$t=\rBrace{N-1}\tau$}}}
+        \put(57,36){\rotatebox{38}{\tiny{$t=\rBrace{N-2}\tau$}}}
+        \put(70,36){\rotatebox{38}{\tiny{$t=\rBrace{N-3}\tau$}}}
+        \put(92,25){\rotatebox{38}{\tiny{$t=0$}}}
+        \end{overpic}
+    \end{center}
+     \caption{An illustration of an $N$ element ULA, impinged with a plane wave arriving from a DOA of $\theta$.}
+    \label{fig_ULA_sketch}
+\end{figure}
+When also considering the narrowband scenario, where TOA difference is merely phase shift, it seems obvious that by phase measuring, one should be able to extract the DOA from the spatially sampled data.

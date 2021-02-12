@@ -1,0 +1,18 @@
+State-of-the-art array processing methods, ranging from high-order statistics to adaptive configuration, require costly computing efforts in pursuit for spatial performance improvement.
+\par 
+Considering localization related applications, several processing approaches are to be found. The most approach is \emph{beamforming}, i.e scanning the area of interest and marking peaks in output energy as targets of interest.
+Another approach, which is probably the most commonly used, is the subspace-based processing which tries to identify input signals that fit into the array's manifold using the orthogonal projection concept.
+Statistical processing, although costly in terms of computation effort, is also in use, ranging from maximum-likelihood related schemes to higher-order-statistics using cumulants.
+Newer approaches which are still in research stage use neural networking and sparsity algorithms.
+\par
+Although mush researched, in this work we revisit the \emph{beamforming} approach and suggest
+a feedback based approach, featuring low complexity and high spatial performance in the mere excess of integrating a transmitter to the array, which in RADAR-like arrays is already in place.
+In the proposed scheme, a signal is continuously re-transmitted between the array and the target of interest, thus creating a spatial loop which is shown to be equivalent of enlarging the array's aperture in terms of spatial resolution.
+\par 
+Using a traditional beamforming performance analysis, the beamwidth, peak to side-lobe ratio, array directivity and white noise sensitivity are evaluated for the feedback based array.
+A significant improvement in all aspects is shown, while thoroughly discussing the conditions for enhanced performance.
+Considering ideal scenarios, the feedback beamformer virtually achieves an infinite aperture, increasing the available spatial information about the target and significantly improves the array's spatial performance.
+\par
+Taking into account the unavoidable estimation errors and uncertainties, we find that the basic feedback integrated beamformer is very sensitive to even mild errors due to the high frequencies of practical carrier signals.
+Seeking for a solution, bearing in mind that summing multiple harmonics produce also other lower / higher frequencies, we propose a practical and robust implementation of the feedback-based localization concept.
+We then thoroughly analyse this \emph{dual-frequency} method and find that it features low and controllable estimation errors sensitivity in the mere expense of doubling the computation effort.

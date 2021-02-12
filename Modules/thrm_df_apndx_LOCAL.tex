@@ -1,0 +1,45 @@
+\begin{proof}
+    Elaborating \eqref{eqn_HDF_def} gives rise to
+    \fi
+    \begin{equation*}
+        \centering
+        \begin{split}
+            Z_{\text{DF}}^{-1}
+            =&                    \abs{\frac{1-\gI{1}\vAlphaHI{1}\vdI{1}e^{{-j\phiI{1}}}}{\gI{1}\vBetaHI{1}\vdI{1}e^{{-j\phiI{1}}}} + \frac{1-\gI{2}\vAlphaHI{2}\vdI{2}e^{{-j\phiI{2}}}}{\gI{2}\vBetaTI{2}\vdI{2}e^{{-j\phiI{2}}}}}
+            \\
+            =&
+            %\resizebox{.9\linewidth}{!}{
+            \abs{\frac{\gI{2}\vBetaHI{2}\vdI{2}e^{{-j\phiI{2}}}-\gI{1}\gI{2}\rBrace{\vAlphaHI{1}\vdI{1}\vBetaHI{2}\vdI{2}+\vAlphaHI{2}\vdI{2}\vBetaHI{1}\vdI{1}}e^{-j\rBrace{\phiI{1}+\phiI{2}}}+\gI{1}\vBetaHI{1}\vdI{1}e^{{-j\phiI{1}}}}
+            {
+            \gI{1}\vBetaHI{1}\vdI{1}\gI{2}\vBetaHI{2}\vdI{2}
+            }}
+            %}
+            \\
+            =&
+            %\resizebox{.9\linewidth}{!}{
+            \abs{
+            \frac
+            {                    \gI{2}\vBetaHI{2}\vdI{2}e^{{j\rBrace{\phiI{1}-\phiI{2}}}}+\gI{1}\vBetaHI{1}\vdI{1}
+            }{
+            \gI{1}\vBetaHI{1}\vdI{1}\gI{2}\vBetaHI{2}\vdI{2}
+            }
+            -\frac
+            {                    \rBrace{\vBetaHI{1}\vdI{1}\vAlphaHI{2}\vdI{2}+\vBetaHI{2}\vdI{2}\vAlphaH_{1}\vdI{1}}e^{{-j\phiI{2}}}
+            }{
+            \vBetaHI{1}\vdI{1}\vBetaHI{2}\vdI{2}
+            }
+            }
+            %}
+            .
+        \end{split}
+    \end{equation*}
+    \ifdefined\useOmega
+    \fi
+    Note that in the special case of choosing $\vAlphaI{1}~=~\vBetaI{1},\ \vAlphaI{2}~=~-~\vBetaI{2}$, the resultant beampattern simplifies to
+    \begin{equation*}
+        Z_{\text{DF}} = \lBrace{\frac{\gI{1}\vBetaHI{1}\vdI{1}}{1+\frac{\gI{1}\vBetaHI{1}\vdI{1}}{\gI{2}\vBetaHI{2}\vdI{2}}\exp{\rBrace{-j\rBrace{\phiI{1}-\phiI{2}}}}}}.
+    \end{equation*}
+    Also setting
+    $\vBetaI{2}=\vBrace{-1/\gIHat{2},0,\hdots,0}$
+    results in \eqref{eqn_H_DF_general}.
+\end{proof}

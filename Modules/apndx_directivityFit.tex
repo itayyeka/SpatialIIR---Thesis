@@ -1,0 +1,33 @@
+In the process of simplifying \eqref{eq_D} in order to find the expression for the directivity $\mathcal{D}$, we noticed the numerical evaluation reaches rational fractions when rational values of $r$ were used.
+Following that hint, we numerically swept various values of $N,r$ doublets, trying find a common expression that fits all results which will enable the formulation of the directivity improvement when using the feedback beamformer.
+In the following, we elaborate on the sweeping process it's technicalities.
+\par The first step was to formulate the symbolic expression for $H$.
+To this end, we used MATLAB\textsuperscript{\textregistered}'s symbolic toolbox, generating the symbolic response $H$.
+Afterwards, the 2D sweep range was set, where as mentioned before, $r$ was set to be of rational values.
+In each sweep step, an numerical integration was executed with specific values for $N$ and $r$.
+Each result was fitted with it's next closest rational number with the help of MATLAB\textsuperscript{\textregistered}'s \emph{rats} auxiliary command.
+After observing the results, we found that all of then obey the same expression as in \eqref{eq_D_result} for any tolerance, which increased the confidence in the suggested expression.
+\par The printout of the code is presented as Table.~\ref{table_D}
+\begin{table}[h!]
+    \caption{Performances of Classical ULA and the Proposed Feedback-Beamforming Architecture, with a Gain Mismatch $r$.}
+    \centering
+    %\resizebox{1\linewidth}{!}
+    {
+        \begin{tabular}{||c c c c c c c c c c||}
+            \hline
+            $r \textbackslash N$ & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\ [0.5ex] 
+            \hline\hline
+            1/10     & 19/9  & 29/9  & 13/3  & 49/9  & 59/9  & 23/3  & 79/9  & 89/9  & 11   \\ [1ex] 
+            1/5      & 9/4   & 7/2   & 19/4  & 6     & 29/4  & 17/2  & 39/4  & 11    & 49/4 \\ [1ex] 
+            1/3      & 5/2   & 4     & 11/2  & 7     & 17/2  & 10    & 23/2  & 13    & 29/2 \\ [1ex] 
+            1/2      & 3     & 5     & 7     & 9     & 11    & 13    & 15    & 17    & 19   \\ [1ex] 
+            5/8      & 11/3  & 19/3  & 9     & 35/3  & 43/3  & 17    & 59/3  & 67/3  & 25   \\ [1ex] 
+            3/4      & 5     & 9     & 13    & 17    & 21    & 25    & 29    & 33    & 37   \\ [1ex] 
+            4/5      & 6     & 11    & 16    & 21    & 26    & 31    & 36    & 41    & 46   \\ [1ex] 
+            \hline
+         \end{tabular}
+     }
+    \label{table_D}
+\end{table}
+\section*{MATLAB\textsuperscript{\textregistered} Code}
+\lstinputlisting[style=mcode]{Modules/directivityAnalysis.m}

@@ -1,40 +1,46 @@
-% The incoming signals are spatially sampled by the array microphones, then the samples are processed to attenuate signals from undesired directions and extract the signal from a desired direction. 
-% A spatial response of the microphone array is obtained via a beam (main-lobe) directed to the desired signal while nulls are directed to the undesired signals.
-As mentioned before, the measurements of the sensor array's elements are fused together, where spatial information resides in the relations between samples taken in the same time $t$.
-A basic sensor array based entity is the beamformer, which is designed to enhance signals from certain directions while suppressing other signals from unwanted directions, heuristically forming a beam directed to the enhanced direction.  
+As mentioned before, the measurements of the sensor array's elements are fused together, where spatial information resides in the relations between samples taken the same time $t$.
+A basic application of the sensor array is the beamformer, designed to enhance signals from certain directions while suppressing other signals from unwanted directions, forming a beam directed to the enhanced direction.  
 \begin{figure}[ht!]
     \begin{center}
-        \begin{overpic}[width=0.5\linewidth, 
+        \begin{overpic}[width=0.6\linewidth, 
         %grid, 
-        tics=10,trim=0 0 0 0]{./Media/fig_ULA_imping.png}
-            % \put (50, 62.5) {\footnotesize{$r=0$}}
+        tics=10,trim=0 0 0 0]{./Media/arrayProc.png}
+        \put(20,65){\rotatebox{-50}{\tiny{Impinging wavefront}}}
+        \put(49,33.25){\rotatebox{0}{$\theta$}}
+        \put(15,25){\rotatebox{0}{\tiny{0}}}
+        \put(28,25){\rotatebox{0}{\tiny{1}}}
+        \put(41,25){\rotatebox{0}{\tiny{2}}}
+        \put(80,25){\rotatebox{0}{\tiny{$N-1$}}}
+        \put(16,20){\rotatebox{0}{\tiny{$\omega_{0}$}}}
+        \put(29.5,20){\rotatebox{0}{\tiny{$\omega_{1}$}}}
+        \put(42,20){\rotatebox{0}{\tiny{$\omega_{2}$}}}
+        \put(81,20){\rotatebox{0}{\tiny{$\omega_{N-1}$}}}
+        \put(50.5,3.5){\rotatebox{0}{\tiny{$z\rBrace{t}$}}}
         \end{overpic}
     \end{center}
-     \caption{A simple beamformer design.}
+     \caption{ULA based coherent processing of simultaneous spatially sampled signal, measuring a wavefront impinging from DOA $\theta$}
     \label{fig_ULA_imping}
 \end{figure}
-Fig.~\ref{fig_ULA_imping} illustrates a beamformer design based on a ULA of Fig.~\ref{fig_ULA}.
-% Let $\vecnot{f}\rBrace{t,\vecnot{x}}$ denote the set of signals sampled by the microphone array at time $t$, expressed by
-A temporal snapshot measured by the array at time $t$ is
+In complimentary to Fig.~\ref{fig_ULA_sketch}, Fig.~\ref{fig_ULA_imping} adds the processor layer of the beamformer.
+\par A temporal snapshot measured by the array at time $t$ is
 \begin{equation}
-\vecnot{f}\rBrace{t,\vecnot{x}} = \vBrace{f\rBrace{t,x_{0}},\dots,f\rBrace{t,x_{M-1}}}^{T},
+\vecnot{f}\rBrace{t,\vecnot{p}} = \vBrace{f\rBrace{t,p_{0}},\dots,f\rBrace{t,p_{N-1}}}^{T},
 \end{equation}
-where $x_{m}$ denotes the microphone position, $t$ denotes the continuous-time variable and $^{T}$ denotes the transpose operation. 
-Assuming simple, weight-and-sum beamformer, the output ($y\rBrace{t}$) is expressed by:
+where $p_{n}$ denotes the $n$-th sensor position, $t$ denotes the continuous-time variable and $^{T}$ denotes the transpose operation. 
+Considering the \emph{conventional beamformer} \cite{van2004optimum}, the output ($y\rBrace{t}$) is expressed by:
 \begin{equation}
-y\rBrace{t} = \sum_{m=0}^{M-1}{f\rBrace{t,x_{m}}w_{m}^{*}},
+z\rBrace{t} = \sum_{n=0}^{N-1}{f\rBrace{t,p_{n}}\omega_{n}^{*}},
 \end{equation}
-where $w_{m}$ is a complex weight used for the $m$'th sensor's output, as shown in Fig.~\ref{fig_ULA_imping} and $^{*}$ denotes complex conjugation. 
+where $\omega_{n}$ is a complex weight used for the $n$'th sensor's output, as shown in Fig.~\ref{fig_ULA_imping} and $^{*}$ denotes complex conjugation. 
 Consider $s\rBrace{t} = e^{j\omega{t}}$ as a plane wave propagating at angular frequency $w$, and $\theta \in \vBrace{-\frac{\pi}{2},\frac{\pi}{2}}$ as the direction of arrival (DOA) angle measured with respect to the broadside of the linear array, as shown in Fig.~\ref{fig_ULA_imping}.
 The wave signals spatially sampled by the sensor array inputs are
 \begin{equation}
 \label{eq_prlm_timeSpace_outputVec}
-\vecnot{f}\rBrace{t,x} = \vBrace{s\rBrace{t-\tau_{0}}, \dots, s\rBrace{t-\tau_{M-1}}}^{T}, \tau_{m} = \frac{\sin{\theta}\cdot{}x_{m}}{c},
+\vecnot{f}\rBrace{t,x} = \vBrace{s\rBrace{t},s\rBrace{t-\tau}\dots, s\rBrace{t-\rBrace{N-1}\tau}}^{T},
 \end{equation}
-where $\tau_{m}$ is the propagation delay for the incoming signal and $c$ is the wave's velocity in the medium.
-% A value of $\tau_{m}=0, \forall{m}$ implies a DOA of $\theta = 0$, i.e. a plane wave parallel to the array, propagating perpendicularly to the array.
-Let $\kappa=\frac{\omega}{c}\sin{\theta}=\frac{2\pi}{\lambda}\sin{\theta}$ denote the wavenumber for plane waves in a locally homogeneous medium, where $\lambda$ denotes the wavelength corresponding to the angular frequency $\vecnot{d}\rBrace{\kappa}$ denote the \emph{steering vector}, featuring all of the array's spatial characteristics.
-Based on \eqref{eq_prlm_timeSpace_outputVec}, and the definition of $\kappa$ above, the steering vector can be expressed as
+where $\tau = \frac{d\cdot{}\cos{\theta}}{c}$ is the propagation delay between consecutive sensors and $c$ is the wave's velocity in the medium.
+Considering narrowband signals (i.e. $s\rBrace{t}=\exp^{-j\omega{}t}$), the time delay $\tau$ translates to a mere phase shift and an auxiliary dephased \emph{steering vector} takes the form of
 \begin{equation}
-\vecnot{d}\rBrace{\kappa}=\vBrace{e^{-j\kappa{}x_{0}},\dots,e^{-j\kappa{}x_{M-1}}}^{T}.
+\vecnot{d}\rBrace{\theta}=\vBrace{1,e^{-j\omega\tau},\dots,e^{-j\rBrace{N-1}\omega\tau}}^{T}.
 \end{equation}
+As every impinging signal will cause the excitation of the array elements in the form of a specific steering vector (up to a common additive phase), we define the \emph{array manifold} to be the set of all steering vectors of $\theta\in\left[0,2\pi\right)$, hence it also spans the received signal sub space in the noiseless scenario.

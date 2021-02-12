@@ -520,7 +520,9 @@
 \newcommand{\makeacknowledgementsEnglish}{%
 
   \noindent \iitthesis@supervisionEnglish
-
+  \begin{center}
+    \textbf{\Large \textsc{List of publications}}
+    \end{center}
   \ifx\iitthesis@publicationInfoEnglish\@empty
   \else
     \medskip

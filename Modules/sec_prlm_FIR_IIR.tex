@@ -1,22 +1,91 @@
 A basic design entity in every signal processing scheme is the digital filter, which is the modern evolution of analog filters.
-The design of the digital filter is a very established and thoroughly studied research area.
+The design of the digital filter is very well established and thoroughly studied research field.
 As stated in \cite{oppenheim1975digital} (and numerous other literature), two key filter types are used - i.e. Finite Impulse Response (FIR) and Infinite Impulse Response (IIR) filters.
-This section will briefly overview the design methods and main flavours of each filter type and discuss in general of the pros and cons of them in order to provide proper motivation for the quest of finding the IIR analogy of the spatial FIR, as implied in Ch.~\ref{chap:intro}.
-\subsection{FIR design}
-The FIR filter is a merely a delay-and-sum mechanism, therefore its memory is finite and equal to the number of taps in the final filter's configuration.
-Determining it coefficients is generally done using windowing (weighted element-wise multiplication and truncation) of desired impulse response which is derived by the inverse Fourier transform of the desired frequency response.
-Many window types have been suggested in literature, where Bartlet, Hanning, Humming and Blackman are among the most basic ones, each with its pros and cons.
-I a nutshell, using a rectangular window, achieves the narrowest main lobe but also the highest side-lobes.
-The other window types, achieve lower side-lobes at the expense of wider main-lobe.
-The user may also increase the filter's order if side-lobe attenuation is of high importance, thus achieving narrower main-lobe. 
-\subsection{IIR design}
-The infinite response of the IIR filters originates in the inherent feedback which reuses output in the computing part, generating a loop which theoretically takes all input past samples into account for each output sample.
-As there are many flavours of the IIR filters, we choose to elaborate on the elliptic filter, being the more common candidate for comparison to the FIR in the literature.
-The basic concept behind the elliptic filter design is the allowing of equi-ripple around both pass and stop band which both relaxes the filter's constrains comparing to Chebyshev and Butterworth methods and allows the narowest transition band between the three filters.
-The designer sets the allowed ripple magnitudes in both pass and stop bands and positions the transition band according to his needs.
-A closed for transformation, described in \cite{oppenheim1975digital} is then used to convert the prototype low-pass filter to band-pass, band-stop or high-pass filters.
-\subsection{Comparison}
-The main advantage of FIR filters, commonly required in signal processing systems is the obtainable linear phase feature. A well known \cite{oppenheim1975digital} fact in digital signal processing is that the filter latency may be frequency dependant, namely linearly dependent in the phase response derivative of the specific frequency.
-Therefore, linear phase implies that the phase response's derivative (i.e. signal latency) is frequency independents, which prevent signal distortion.
-The main advantage of IIR filters is that for a given set of frequency response specifications, the IIR filter will (in most cases) require substantially less coefficients, which may even reach few order of magnitude \cite{rabiner1974some}.
-In this work, the signals are assumed to be narrow-band, which reduces the necessity of linear phase response, while when considering sensor arrays, the costs and the physical aperture are of very high importance, motivating the designers to try and reduce the number of elements in the array while still meeting the specifications.
+This section will briefly overview the design methods and the analogy of ULA based beamforming to the temporal FIR filtering, as implied in Ch.~\ref{chap:intro}.
+\par Each digital filters belong in one of two architectures
+\begin{itemize}
+    \item \textbf{FIR design}\\
+    The FIR filter is a merely a delay-and-sum mechanism, therefore its memory is finite and equal to the number of taps in the final filter's configuration as in Fig.~\ref{fig_FIR_arch}.
+    \item \textbf{IIR design}\\
+    IIR filters may be viewed as a generalization of the FIR delay-and-sum architecture, where delayed instances of the array's output are fed back to the summation as in Fig.~\ref{fig_IIR_arch}, theoretically generating an infinite loop where each output sample is affected by all past input samples. 
+\end{itemize}
+\begin{figure}[h!]
+    \begin{center}
+        \begin{overpic}[width=0.7\linewidth, 
+        %grid, 
+        tics=10,trim=0 0 0 0]{./Media/BASIC_FIR_FILTER_ARCH.png}
+            \put (13, 36){\footnotesize{$s$}}
+            \put (22, 22){\footnotesize{$\beta_{0}$}}
+            \put (38.75, 22){\footnotesize{$\beta_{1}$}}
+            \put (55.5, 22){\footnotesize{$\beta_{2}$}}
+            \put (80.75, 22){\footnotesize{$\beta_{N-1}$}}
+            \put (85, 10){\footnotesize{$z$}}
+        \end{overpic}
+    \end{center}
+    \caption{An FIR based filtering of signal $s$ with the $\vecnot{\beta}$ as the coefficients, generating a filtered signal $z$.}
+    \label{fig_FIR_arch}
+\end{figure}
+\begin{figure}[h!]
+    \begin{center}
+        \begin{overpic}[width=0.7\linewidth, 
+        % grid, 
+        tics=10,trim=0 0 0 0]{./Media/BASIC_IIR_FILTER_ARCH.png}
+            \put (60, 50){\footnotesize{$\beta_{0}$}}
+            \put (60, 30){\footnotesize{$\beta_{1}$}}
+            \put (60, 10){\footnotesize{$\beta_{2}$}}
+            \put (36, 30){\footnotesize{$\alpha_{1}$}}
+            \put (36, 10){\footnotesize{$\alpha_{2}$}}
+            \put (10, 50){\footnotesize{$s$}}
+            \put (85, 50){\footnotesize{$z$}}
+            \put (47.5, 34.5){\footnotesize{$z^{-1}$}}
+            \put (47.5, 14.5){\footnotesize{$z^{-1}$}}
+        \end{overpic}
+    \end{center}
+    \caption{Direct form II $2^{nd}$ order IIR architecture, where the FIR part is the $\vecnot{\beta}$ coefficients and the recursive part is implemented via the $\vecnot{\alpha}$ set.}
+    \label{fig_IIR_arch}
+\end{figure}
+\par In the following, we revisit the basic interpretation of the ULA as the spatial equivalent to the temporal FIR filter \cite{van1988beamforming} where DOA is shown to be the matching spatial entity to the temporal frequency, hence the \emph{conventional beamformer} \cite{van2004optimum} is merely the spatial version of temporal domain FIR filtering. To this end, a brief overview on ULA beamforming and its resemblance to FIR filter design are presented next.
+\par Consider an $N$-element ULA with inter-element spacing $d$, where its $n$'th sensor is positioned at $\vpi{n},\;\text{for}\; n=0,\ldots,N-1$. We set $\vpi{0}$ as the axis reference point and assume that the target of interest is positioned at $\vpt$.
+Focusing on a far field localization problem, DOA and target range are to be estimated. Without loss of generality, aiming to simplify the exposition, we assume $2\text{D}$ planar problem, where DOA is described by a single angle $\thetaD$, measured from the array's broadside.
+For simplicity, we assume an anechoic environment, an array of identical omni-directional sensors and a stationary target of interest.
+Inspired by radar based applications, we also place a transmitter at $\vpi{0}$, assuming the transmitted signal $s$, is reflected back from the target and re-impinges the array, with a total time delay of $\tau_{\text{pd}}=2R/c$ seconds, where $R = \norm{\vpt-\vpi{0}}$ is the target's range and $c$ represents the propagation velocity of the signal in the medium.
+\par Let $x_{n}(t)$ be the measured signal at the $n$'th sensor
+\begin{equation}
+x_{n}(t) = gs\Brack{t-\tau_{pd}-\tau_{n}},
+\label{eqn:noFeedbackULA_singleSensor_temporal}
+\end{equation}
+where $\tau_{n}=nd\cos\Brack{\thetaD}/c$ represents the time difference of arrival between the $n$'th sensor and the reference sensor and $g$, being a scalar in an anechoic environment, is the channel's gain, related to both propagation and the target's radar cross section (RCS).
+Defining $\vecnot{x}\rBrace{t}\triangleq\vBrace{x_{0}\rBrace{t}\hdots{}x_{N-1}\rBrace{t}}^{T}$ and its Fourier transform, $\vecnot{\F{x}}\rBrace{\omega}\triangleq\vBrace{X_{0}\rBrace{\omega},\hdots,X_{N-1}\rBrace{\omega}}^{T}$, one may write 
+\[
+\vecnot{\F{x}}\rBrace{\omega,\theta_{d}}=g\vecnot{d}\rBrace{\omega}\F{s}\rBrace{\omega}\exp{\rBrace{-j\omega\tau_{pd}\rBrace{\theta}}}
+\]
+where $S\rBrace{\omega}$ is the Fourier transform of $s\rBrace{t}$ and $\vdO$ denotes the steering vector whose $n$'th element is
+\begin{equation}
+    \label{eq:d}
+    d_{n}\rBrace{\omega,\theta_{d}} = \exp{\rBrace{-j\omega\tau_{n}\rBrace{\theta}}}.
+\end{equation}
+Denoting the beamformer's weights as $\vBeta\rBrace{\omega}$ and the beamformer's output as $z$, we express the latter in the frequency domain
+\begin{equation}
+    \label{eq_Z}
+    Z\rBrace{\omega,\theta_{d}} = g\vecnot{\beta}^{H}\rBrace{\omega}\vecnot{d}\rBrace{\omega}\F{s}\rBrace{\omega}\exp{\rBrace{-j\omega\tau_{pd}}}.
+\end{equation}
+Defining the electric phase to be
+\begin{equation}\label{eq:thetaULA}
+\theta=\omega{d\cos\Brack{\thetaD}}/{c},
+\end{equation}
+we rewrite \eqref{eq_Z} as 
+\[
+Z\rBrace{\omega,\theta} = g\F{s}\rBrace{\omega}\exp{\rBrace{-j\omega\tau_{pd}}}\sum_{n=0}^{N-1}\beta^{*}_{n}\rBrace{\omega}\exp\Brack{-jn\theta},
+\]
+hence in the ULA case, aiming for a desired spatial response, the weights vector $\vecnot{\beta}\rBrace{\omega}$ configuration is mathematically equivalent to an FIR filter design~\cite{van1988beamforming,benesty2018}. 
+Assuming narrowband stimuli signals, we suppress $\omega$ dependency in the notation throughout the rest of this paper, where possible.
+\par It is well known \cite{rabiner1974some} that IIR filters have several appealing advantages over their matching (in number of elements) FIR versions.
+A well known \cite{oppenheim1975digital} fact in digital signal processing is that the filter latency may be frequency dependant, namely linearly dependent in the phase response derivative of the specific frequency.
+Therefore, linear phase implies that the phase response's derivative (i.e. signal latency) is constant which implies all input frequencies will reside in the processor for the exact same time, preventing dispersion which practically causes pulse widening.
+Due to this important property, many applications which are sensitive to signal distortions, especially communication based systems, chose the FIR architecture.
+Acquainted with the analogy between frequency and DOA, it seems that when localization applications are considered, where the DOA resolution criteria is more important than the consistency of detection latency between separate DOAs, the linear phase property is less relevant.
+\par The main advantage of IIR filters is that for a given set of frequency response specifications, the IIR filter will (in most cases) require substantially less coefficients, which may even reach few order of magnitude \cite{rabiner1974some}.
+Concluding that spatial linear phase response in DOA domain is not a necessity, combined with the known efficiency of the IIR architecture and the need for smaller and cheaper arrays, the motivation for finding the spatial version of the temporal IIR is complete.
+\par In standard radar signal processing schemes, a waveform is transmitted to, and reflected from the target of interest. Then, the reflected signal is processed by the radar reception array in order to estimate the target's dynamics (e.g., DOA, range, velocity etc.).
+As opposed to the standard scheme, we suggest a continuous re-transmission of the signal and its echoes back to the platform, generating a spatial feedback loop between the array and the target.
+Another deviation from traditional radar processing, used to simplify the exposition, is using continuous-wave (CW) stimuli, rather than using pulse based signals. 

@@ -2,9 +2,14 @@ In practical RADAR related systems, the waveform of choice is pulse (chirp) base
 It holds some obvious advantages over the CW transmission such as
 \begin{itemize}
     \item Lower power consumption
-    \item Inherent nulling in the radial axis (localization)
     \item Possible match filters should allow the decision of weather to re-transmit or not
     \item In multi target scenario, there is a smaller chance of interference.
     \item The most interesting research option is the use of several (possibly many) independent harmonics as super positioned multiple dual frequency beamformers, which simultaneously scan a wide area with multiple resolutions, by merely selecting harmonic couples and filter coefficients, where each harmonic/coefficient set it pointed to a specific area.
-    In the expense of computational effort (without adding elements to the array), it seems possible that one may have simultaneous scan of the entire arena in any wanted direction/range/resolution.
+    In the expense of computational effort (without adding elements to the array), it seems possible that one may have simultaneous scan of the entire arena in any wanted direction/range/resolution by mere choosing multiple frequency couples which are simultaneously processed independently.
+    \par 
+    As a simple example, consider that the arena consists of $M$ zones of interest, where each zone may be described as a angular bounded radial slice (similar to the visualization of Fig.~\ref{fig_rangeAzimuthSelectivity}) which may be described as $$a_{m}=\cBrace{\vecnot{p}\ \middle\vert\  \theta_{d,m,\text{min}}<\text{DOA}\rBrace{\vecnot{p}}<\theta_{d,m,\text{max}}\ ,\ R_{m,\text{min}}<\norm{\vecnot{p}}<R_{m,\text{max}}}\ \forall\ m=0\dots{}M-1.$$
+    \par
+    Each zone will be assigned with matching couple of carrier frequencies ($\omega_{1,2}$) to cover its radial width (where the radial width is equivalent to $R_{\text{rt}}$ of \eqref{eq_DF_phErr}) and coefficient sets ($\vecnot{\alpha}_{m,i},\vecnot{\beta}_{m,i} \ \forall\ m=0\dots{}M-1, i=1,2$), which cover the zone's angular diameter which is equivalent to determining the desired beamwidth via setting the proper $\kappa$ of \eqref{eqn_H_DF_CB}.
+    \par
+    Leaving aside the needed computational effort and physical limitations of transmitting multiple narrowband signals, assuming large $M$ values, we have a super-positioned feedback beamformer which simultaneously scans the entire arena.
 \end{itemize}

@@ -1,39 +1,27 @@
-% Microphone arrays consist of sets of microphones positioned in a way to function as a directional acoustic antenna. 
-% Microphone arrays are utilized for filtering signals in a space-time field. 
-% Filtering is enabled by exploitation of the incoming signals spatial characteristics. 
-% A desirable spatial filtering, i.e., beamforming, should result in enhancement of signals of interest, originated in a specific direction, while forcing suppression of undesired signals originated in other directions.
-% Microphone arrays are utilized for solving many signal processing problems: dereverberation, localization of a single source, noise reduction and source separation \cite{cohen2004multichannel,habets2006dual,pavlidi2013real}.
-Sensor arrays are sets of specifically positioned sensors, where every sensor's output is fused together with the rest, enabling the exploitation of spatial sampling.
-Instead of mere temporal sampling, the user also receives spatial information from the relations between samples which arrived at the same temporal snapshot from all sensors. 
-As in the temporal domain, where filters are specified with respect to the frequency domain, spatial filters are specified in the spatial frequency domain, i.e. DOA, where the equivalent of pass band are the DOAs of interest and the attenuated DOAs (nulls) are equivalent to the stop-band.
+Sensor arrays are sets of independently positioned sensors, where each sensor is sampling temporal snapshots of impinging signals.
+The samples from the entire array are then fused together in order to extract the underlying data.
+The spatial diversity of the sampled data allows the extraction of spatial features which are not accessible by mere temporal analysis of the data.
 Sensor arrays are used in numerous applications, ranging from source localization, through communication, medical applications, astronomy etc.
 \par 
-% Numerous factors must be taken into consideration when designing a microphone array configuration.
-% Initially, the geometry of the microphone array plays an important role in the formulation of the processing algorithms, as it forces fundamental constraints on the array’s operation. 
-% In most cases, the array geometry is the first consideration in array design due to practical and physical constraints of the design. 
-% Therefore, the degree of freedom in choosing the array geometry is limited. 
-% Nevertheless, in some other crucial problems such as noise reduction or source separation, the geometry of the array may have little importance. 
-% For instance, Uniform Linear Arrays (ULA) can only handle one source direction at a time resulting in uncertainties and possibly direction ambiguities.
-% Therefore, ULA configurations must be ruled out when handling several signal sources.
-% Other array geometries such as non-uniform linear arrays and circular arrays, have been studied in the field \cite{liu2008design,van2004optimum}.
-
-When designing a sensor array, multiple consideration are to be taken into account, ranging from physical characteristics e.g. area, weight and carrying platform, through performance related considerations such as accuracy, spatial selectivity, signal to noise ratio and even the financial aspect - i.e. costs should be considered.
-Obviously, the most fundamental array specification is its geometry, for it dictates the spatial (and mathematical) relations between simultaneous samples measured by the array's sensors, which also greatly influences the processing methods of the raw-data. 
-This work is based on ULA and therefore we elaborate on this geometry.
-A conventional beamformer \cite{van2004optimum} is considered to be ULA, i.e. uniformly spaced sensors, where the convention is that the ULA is place on the horizontal axis.
-The sensors are positioned according to:
+When designing a sensor array, multiple consideration are to be taken into account, ranging from physical characteristics e.g. area, weight and carrying platform, through performance related considerations such as accuracy, spatial selectivity, signal to noise ratio and even the financial aspect.
+Obviously, the most fundamental array specification is its geometry, for it dictates the spatial relations between simultaneous samples measured by the array's sensors, which also greatly influences the processing methods of the raw-data.
+A basic example of sensor array is the ULA (see Fig.~\ref{fig_ULA}), where its elements are uniformly spaced on a straight line with distance $d$ between a sensor to its nearest neighbour.
+Considering an array of $N$ elements, the sensors are positioned at
 \begin{equation}
-x_{m}=m\cdot{d}, m=0, 1, \dots, M-1
+p_{n}=nd,\ n=0,\dots,N-1
 \end{equation}
-where $m$ is the sensors index; $x_{m}$ denotes the position of the $m$'th sensor,$p_{0} = 0$ corresponds to the left-hand side of the array, $d$ denotes the spacing between sensors, and $M$ is the array size, as demonstrated in Fig.~\ref{fig_ULA}.
+where $n$ is the sensors index; $p_{n}$ denotes the position of the $n$'th sensor,$p_{0} = 0$ corresponds to the left-hand side of the array.
 \begin{figure}[h!]
     \begin{center}
         \begin{overpic}[width=0.5\linewidth, 
         %grid, 
-        tics=10,trim=0 0 0 0]{./Media/fig_ULA.png}
-            % \put (50, 62.5) {\footnotesize{$r=0$}}
+        tics=10,trim=0 0 0 0]{./Media/arrayBasic.png}
+        \put (4, 4.5) {\tiny{$N$}}
+        \put (86, 4.5) {\tiny{$N-1$}}
+        \put (83.25, 28.5) {\tiny{$\rBrace{N-1}\cdot{}d$}}
         \end{overpic}
     \end{center}
-     \caption{A uniform linear array of size M and spacing d.}
+     \caption{A uniform linear array of size $N$ and spacing $d$.}
     \label{fig_ULA}
 \end{figure}
+\par To proper formulate the discussed additional spatial information when using sensor array based processors, a quick overview on wave propagation is due and presented in the following section (Sec.~\ref{sec:prlm_propWaveField}).

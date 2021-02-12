@@ -3,13 +3,24 @@ We now propose an architecture which obtains the desired beampattern $\Hr_{\Delt
 
 \subsection{Intuition}
 Bearing in mind that the system's phase alignment sensitivity resides in \eqref{eq_generalH} via the  term $\exp\Brack{j\dPhi}=\exp\Brack{j\omega\Delta\tau_{pd}}$ and that the round-trip delay ($\tau_{pd}$) cannot be controlled, one may suggest to use lower frequencies. 
-Unfortunately, aiming for practical range estimation errors, the transmission of such low frequencies is physically unfeasible. 
-Instead, we suggest simultaneous transmission of several frequencies in order to resolve the range error sensitivity. In the following, we suggest a dual frequency (DF) waveform, utilizing two harmonics, $\omega_1$ and $\omega_2$.
+Unfortunately, aiming for practical range estimation errors, the transmission of such low frequencies is physically unfeasible.
+As the medium for the wave's propagation in the context of localization is not free space, physical considerations are to be taken when choosing the frequency band of use.
+Following the thorough spectrum use overview in \cite{barclay2003propagation}, among the notable considerations for choosing frequency in localization related schemes are
+\begin{itemize}
+    \item \textbf{Propagation efficiency}\\
+    Due to the chemical structure of the atmosphere, some frequencies are propagated efficiently while other are absorbed \cite{wen2015foundations} by the atmosphere layers, being unsuitable for localization applications such as RADAR.
+    \item \textbf{Antenna length}\\
+    As described in \cite{barclay2003propagation}, although low ($<30_{\text{Khz}}$) frequencies propagate efficiently in the earth-atmosphere wave guide \cite{wen2015foundations}, the wavelength ($\sim10_{\text{Km}}$), hence the needed antenna length is too large for any practical use.
+    \item \textbf{Signal bandwidth}\\
+    As the carrier signal's frequency decreases, so does the available bandwidth due to aliasing.
+\end{itemize}
+Henceforth, inspired by known trigonometrical identities where mathematical of two harmonics produces new frequencies which are the sum (or subtraction) of the original signals, we suggest simultaneous transmission of several frequencies instead of the unfeasible option of transmitting low frequencies. 
+In the following we suggest a dual frequency (DF) waveform, utilizing two harmonics, $\omega_1$ and $\omega_2$, and show that range error sensitivity may be resolved.
 
 \subsection{Suggested processing scheme}
 \begin{figure}[t!]
     \begin{center}
-        \begin{overpic}[width=0.99\linewidth, 
+        \begin{overpic}[width=0.65\linewidth, 
         % grid, 
         tics=10,trim={0 0 0 0}]{./Media/SpatialIIR_APP.png}
             \put (12.5, 64){$\text{FB}_{\vAlphaI{1},\vBetaI{1}}$}
@@ -22,8 +33,8 @@ Instead, we suggest simultaneous transmission of several frequencies in order to
             \put (55, 51.5){+}
             \put (16, 51.5){\footnotesize{$\text{n}_{1}\rBrace{t}$}}
             \put (64.75, 51.5){\footnotesize{$\text{n}_{2}\rBrace{t}$}}
-            \put (24.5, 59){\footnotesize{$\Tx_{1}\rBrace{t}$}}
-            \put (73.5, 59){\footnotesize{$\Tx_{2}\rBrace{t}$}}
+            \put (24.5, 59){\footnotesize{$\Tx{}_{1}\rBrace{t}$}}
+            \put (73.5, 59){\footnotesize{$\Tx{}_{2}\rBrace{t}$}}
             \put (36.25, 64){\scriptsize{$s_{1}\rBrace{t}$}}
             \put (43, 64){\scriptsize{$s_{2}\rBrace{t}$}}
             \put (18.75, 13){\footnotesize{Harmonic mean}}
@@ -99,7 +110,8 @@ generalizing the $\coefSetName$ approach and setting
 With this choice, and similarly to \eqref{eq:SF_CB}, \eqref{eqn_H_DF_general} becomes
 \begin{equation}
     \label{eqn_H_DF_CB}
-    \resizebox{.89\linewidth}{!}{
+    %\resizebox{.89\linewidth}{!}
+    {
         \begin{split}
             H_{\text{DF,\coefSetName}}\rBrace{\omega} =
             \lBrace{\frac{r_{1}\D{\dTheta/2}{N}}{1-

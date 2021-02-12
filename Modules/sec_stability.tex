@@ -1,0 +1,133 @@
+As a preliminary to the following performance discussion in Sec.~\ref{sec_Performance}, we start with simple temporal simulations of the feedback beamformer.
+In this section, we start by identifying the unknown parameters in the experimental scenario and formulate their related error terms which are then used to define some basic simulation scenarios that will be thoroughly investigated throughout this chapter.  
+After the error terms have been defined, we first address the temporal stability of the system and discuss its correspondence with the system's response which was found in \eqref{eqn:GeneralFeedbackTransferFunction}.
+\subsection{Error terms}
+In the absence of accurately known parameters, we denote $\hat{\phi},\hat{\theta}$ to be the range and DOA related phase estimates respectively.
+Then, using the same weights as in \eqref{eq:alpha_beta_opt} for both the feedback and output synthesis gives rise to
+\begin{equation}\label{eq:alpha_beta_hat}
+\vBetaCFB=\vAlphaCFB=\frac{\vdHatC\exp\rBrace{j\hat{\phi}}}{\hat{g}\norm{\vdHat}^2},
+\end{equation}
+introducing the estimated steering vector 
+\begin{equation}\label{eq:d_hat}
+\vdHat=\vBrace{1,\exp(-\hat\theta),\ldots,\exp(-(N-1)\hat\theta)}^T.
+\end{equation}
+Plugging \eqref{eq:alpha_beta_hat} into \eqref{eqn:GeneralFeedbackTransferFunction}, results in
+\begin{equation}\label{eq:SF_CB}
+    %\resizebox{.894\linewidth}{!}
+    {
+        \begin{split}
+            \HbaFB=\frac{r\D{\dTheta/2}{N}\exp\rBrace{-j\rBrace{\dPhi+(N-1)\dTheta/2}}}{1-r\D{\dTheta/2}{N}\exp\rBrace{-j\rBrace{\dPhi+(N-1)\dTheta/2}}}
+        \end{split}
+    }
+\end{equation}
+where \[
+\D{x}{N}\triangleq\frac{1}{N}\frac{\sin\rBrace{Nx}}{\sin\rBrace{x}}
+\]
+is the normalized Dirichlet kernel and
+\[
+\dTheta\triangleq\theta-\hat{\theta},\ \dPhi\triangleq\phi-\hat{\phi},\ 
+r\triangleq g/\hat{g},
+\]
+are defined as the DOA, range and gain error terms respectively.
+In the following, four fundamental scenarios are considered:
+\begin{itemize}
+    \item{\makebox[.35\linewidth]{Perfect alignment \hfill} $\rBrace{\dTheta=0\ , \dPhi=0},$}
+    \item{\makebox[.35\linewidth]{Steering error \hfill} $\rBrace{\abs{\dTheta}>0\ , \dPhi=0},$}
+    \item{\makebox[.35\linewidth]{Range error \hfill} $\rBrace{\dTheta=0\ , \abs{\dPhi}>0},$}
+    \item{\makebox[.35\linewidth]{General \hfill} $\rBrace{\abs{\dTheta}>0\ , \abs{\dPhi}>0}.$}
+\end{itemize}
+\subsection{Temporal Simulations}
+The analogy of the feedback beamformer to the temporal IIR architecture raises some fundamental questions that should be addressed.
+In the following, supported by simulations, we answer those questions.
+\par The first question, related to the feedback beamformer's analogy to the temporal IIR architecture, is stability related.
+To begin with, we should first ask what does ``stability`` means.
+Interestingly, the system's response of \eqref{eqn:GeneralFeedbackTransferFunction} is not frequency dependent, for it is exclusively governed by spatial parameters.
+Therefore, in the absence of any previous related work on spatial feedback, we find that the commonly used Bounded-Input-Bounded-Output (BIBO) stability is appropriate. 
+As such, assuming the \emph{Perfect alignment} scenario, we identify $r$ in \eqref{eq:SF_CB} to be the most influential for determining the system's stability for it controls the response's denominator - e.g. for $r<1$ the denominator will never be nullified.
+As anticipated from \eqref{eq:SF_CB} and confirmed with the simulations presented in Fig.\ref{fig_stability}, for $r>1$ the system is not stable, for the received amplitude does not converge to a finite value.
+Also noticeable is the increase in the final amplitude value as $r$ increases.
+In Fig.~\ref{fig_stabilityVal}, we plot the final amplitude value with respect to $r$ and find that the increase is substantial as $r$ increases towards 1.
+This issue will have to be taken into consideration when one designs such an array for practical applications but is outside the scope of this work.
+\begin{figure}[t!]
+    \begin{center}
+        \begin{overpic}[width=0.55\linewidth, 
+        %grid, 
+        tics=10,trim=0 0 0 0]{./Media/fig_stabilization.png}
+            \put (46, -5){\rotatebox{0}{$t/2\tau_{pd}$}}
+            \put (-6, 38){\rotatebox{90}{$\abs{z\rBrace{t}}$}}
+            \put (46, 18.5){\rotatebox{0}{$r=0.6$}}
+            \put (46, 35){\rotatebox{0}{$r=0.9$}}
+            \put (46, 54){\rotatebox{0}{$r=1$}}
+            \put (18, 60){\rotatebox{0}{$r=1.1$}}
+            \put (0.75, 80){\rotatebox{0}{dB}}
+        \end{overpic}
+    \end{center}
+    \caption{
+    Simulating a 3 element ULA based feedback beamformer, steered to a target which resides in the direction $\theta_{s} = \pi/2$ and plotting temporal response (dB) for multiple $r$ values.
+    The horizontal axis ($t/2\tau_{pd}$) is the time, normalized to the signal's round-trip duration to the target and back.
+    }
+    \label{fig_stability}
+\end{figure}
+As a final observation, we address the ``discrete`` behaviour of $z$, i.e. the value (most noticeable in the $r=1.1$ plot) seems to be piecewise constant.
+This phenomenon corresponds with the propagation latency of the signal's round trip to the target and back.
+In each iteration the spatial focusing is increased, together with the received amplitude, as can be seen in Fig.~\ref{fig_beamThinning}.
+The reader may notice that the $t=1\cdot{}\tau_{pd}$ plot is actually the conventional beampattern, for the feedback signal has not yet reimpinged the array.
+\begin{figure}[t!]
+    \begin{center}
+        \begin{overpic}[width=0.55\linewidth, 
+        %grid, 
+        tics=10,trim=0 0 0 0]{./Media/fig_beamThinning.png}
+            \put (50, -5){\rotatebox{0}{$\theta_{d}/\pi$}}
+            \put (-6, 38){\rotatebox{90}{$H_{r=0.9}$}}
+            \put (100, 49){\rotatebox{0}{$t=1\cdot\tau_{pd}$}}
+            \put (100, 39){\rotatebox{0}{$t=2\cdot\tau_{pd}$}}
+            \put (100, 26.5){\rotatebox{0}{$t=5\cdot\tau_{pd}$}}
+            \put (100, 14){\rotatebox{0}{$t=10\cdot\tau_{pd}$}}
+            \put (53.5, 27.5){\rotatebox{-75}{$t=50\cdot\tau_{pd}$}}
+            \put (4.5, 80){\rotatebox{0}{dB}}
+        \end{overpic}
+    \end{center}
+    \caption{
+    Simulation of same setup as in Fig.\ref{fig_stability}.
+    We set $r=0.9$ and plot the beampattern for various simulation times.
+    }
+    \label{fig_beamThinning}
+\end{figure}
+\begin{figure}[t!]
+    \begin{center}
+        \begin{overpic}[width=0.55\linewidth, 
+        %grid, 
+        tics=10,trim=0 0 0 0]{./Media/fig_stabilizationVal.png}
+            \put (0, 82){\rotatebox{0}{dB}}
+            \put (-6, 30){\rotatebox{90}{$\lim_{t\to\infty}\abs{z\rBrace{t}}$}}
+            \put (51, -5){\rotatebox{0}{$r$}}
+        \end{overpic}
+    \end{center}
+    \caption{
+    Simulation of same setup as in Fig.\ref{fig_stability}.
+    For each $r$ (the horizontal axis), we plot the final received amplitude in dB.
+    }
+    \label{fig_stabilityVal}
+\end{figure}
+\par The Second question to be asked regards the settling time of the system, for in Fig.~\ref{fig_stability} we easily observe that the settling time of $r=0.6$ (i.e. $\sim{}10$ signal round trips) is substantially shorter than its matching value ($\sim{}50$) when $r=0.9$.
+To better understand the phenomenon, we plot the settling time's $r$ dependency in Fig.~\ref{fig_stabilityDur}.
+Although outside of this work's scope, this issue will obviously be of great importance when considering dynamic targets, as will be discussed in the ``future research`` part of the concluding Chapter.~\ref{chap:futureResearch}.
+\begin{figure}[t!]
+    \begin{center}
+        \begin{overpic}[width=0.55\linewidth, 
+        %grid, 
+        tics=10,trim=0 0 0 0]{./Media/fig_stabilizationDur.png}
+            \put (-3, 35){\rotatebox{90}{$t/2\tau_{pd}$}}
+            \put (51, -5){\rotatebox{0}{$r$}}
+        \end{overpic}
+    \end{center}
+    \caption{
+    Simulation of same setup as in Fig.\ref{fig_stability}.
+    For each $r$ (the horizontal axis), we plot the time (the vertical axis) where the received amplitude entered the $1\%$ sleeve around its final value.
+    The plotted time is also normalized as in Fig.\ref{fig_stability}.
+    }
+    \label{fig_stabilityDur}
+\end{figure}
+\par Although many interesting questions rise from the initial simulations, most of them are outside the scope of this work.
+We choose to add one more note, regarding the influence of the array's number of elements.
+Although in spatial processing literature, enlarging the number of elements in the array commonly increases the spatial performance, both examining \eqref{eq:SF_CB} and simulating the experimental scenarios show that it (increase of elements) does not affect the temporal performance of the system - i.e. the settling time remains the same as $N$ increases.

@@ -13,16 +13,14 @@ Expressing the Fourier transform of \eqref{eqn:SingleSensorTemporalEquality},
 \begin{equation}
     \label{eqn_singleSensorFourier}
     % \resizebox{.91\linewidth}{!}{
-        \begin{split}
             X_{n} =
-            g\Bigg( & \F{s}
+            g\rBrace{\F{s}
             \exp\rBrace{-j\omega\rBrace{\tau_{pd}+\tau_{n}}}
-            \\&+\sum_{m=0}^{N-1}
+            +\sum_{m=0}^{N-1}
             {
             \alpha^{*}_{m}\F{x}_{m}
             \exp\rBrace{-j\omega\rBrace{\tau_{pd}+\tau_{n}}}
-            }\Bigg),
-        \end{split}
+            }},
     % }
 \end{equation}
 and its vector from,
@@ -37,7 +35,26 @@ Then, denoting
 \[
 \phi\triangleq\omega\tau_{pd}
 \]
-as the round-trip signal propagation related electrical phase and using the Woodbury matrix identity \cite{woodbury1950inverting}, we find that
+as the round-trip signal propagation related electrical phase.
+We use the Sherman-Morrison formula \cite{sherman1950adjustment}, considered to be a result of the Woodbury matrix identity \cite{woodbury1950inverting}, stating that
+\begin{equation*}
+    \rBrace{I+\vecnot{u}\vecnot{v}^{T}}^{-1}=I-\frac{\vecnot{u}\vecnot{v}^{T}}{1+\vecnot{v}^{T}\vecnot{u}},
+\end{equation*}
+where $\vecnot{u},\vecnot{v}$ are two $N\times1$ vectors and $I$ is the identity matrix.   
+Setting $\vecnot{u}=-g\vecnot{d}\exp{\rBrace{-j\omega\tau}}$ and $\vecnot{v}=\vecnot{\alpha}^{*}$ gives rise to
+\begin{equation*}
+    \rBrace{I+-g\vecnot{d}\vecnot{\alpha}^{H}\exp{\rBrace{-j\omega\tau}}}^{-1} 
+    = I+\frac{g\vecnot{d}\vecnot{\alpha}^{H}\exp{\rBrace{-j\omega\tau}}}{1-g\vecnot{\alpha}^{H}\vecnot{d}\exp{\rBrace{-j\omega\tau}}}
+\end{equation*}
+which results in
+\begin{equation*}
+    \frac{\rBrace{I-g\vecnot{\alpha}^{H}\vecnot{d}\exp{\rBrace{-j\omega\tau}}+g\vecnot{d}\vecnot{\alpha}^{H}\exp{\rBrace{-j\omega\tau}}}\vecnot{d}}{1-g\vecnot{\alpha}^{H}\vecnot{d}\exp{\rBrace{-j\omega\tau}}}.
+\end{equation*}
+Obviously the numerator's 2nd and 3rd terms vanish using the commutativity concept stating that
+\begin{equation*}
+    \vecnot{\alpha}^{H}\vecnot{d}\vecnot{d} = \vecnot{d}\vecnot{\alpha}^{H}\vecnot{d}
+\end{equation*}
+which finally results in
 $$
 \F{\vx}
 =
@@ -66,7 +83,7 @@ One may observe that opposed to traditional beamformers, the array response, $\H
 As demonstrated in Fig.~\ref{fig_rangeAzimuthSelectivity}, the combination of both angular and range selectivity enables the designer to enhance signals arriving from specific locations (grey area) rather than only specific directions.
 \begin{figure}[t!]
     \begin{center}
-        \begin{overpic}[width=0.75\linewidth, 
+        \begin{overpic}[width=0.55\linewidth, 
         % grid, 
         tics=10,trim=0 0 0 0]{./Media/azimuthRangSelectivity.png}
             \put (20, 23){\rotatebox{0}{\footnotesize{Angular response}}}
