@@ -14,8 +14,8 @@ Having the limiting factors for various values of the gain mismatch $r$, we inve
 \dThetaHPBW/2\approx \frac{1.4}{f(r)N}.
 \]
 Note that $f(r)$ represents the array aperture improvement factor, compared to the standard ULA.
-To find a suitable expression for $f\rBrace{r}$, we computed $\Hr_{\Delta\theta,\Delta\phi=0,r}$ using $N=100$ on a fine grid of $r$ values (actually slicing a vertical column of Fig.~\ref{fig_feedbackULA_HPBW_Nx_vs_N_variousR} at $N=100$) and looked for proper polynomial approximation using MATLAB\textsuperscript{\textregistered}.
-It turns out that the 2-nd order polynomial best suits the computation and that the best fitted expression is 
+To find a suitable expression for $f\rBrace{r}$, we computed $\Hr_{\Delta\theta,\Delta\phi=0,r}$ using $N=100$ on a fine grid of $r$ values (actually slicing a vertical column of Fig.~\ref{fig_feedbackULA_HPBW_Nx_vs_N_variousR} at $N=100$) and looked for proper polynomial approximation (using MATLAB\textsuperscript{\textregistered}) for the HPBW.
+It turns out that the 2-nd order polynomial fit satisfies
 \begin{equation}
     \label{eq_Bapprox}
     f\rBrace{r}\approx\frac{1.4}{\rBrace{1-r}\rBrace{-0.4r+1.4}}.

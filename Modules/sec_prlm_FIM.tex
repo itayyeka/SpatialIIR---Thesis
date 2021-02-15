@@ -1,93 +1,18 @@
 In the parameter estimation problems, we obtain information about the parameter from a sample of data coming from the underlying probability distribution. 
 A natural question is: how much information can a sample of data provide about the unknown parameter? 
-% This section introduces such a measure for information, and we can also see that this information measure can be used to find bounds on the variance of estimators, and it can be used to approximate the sampling distribution of an estimator obtained from a large sample, and further be used to obtain an approximate confidence interval in case of large sample.
 To this end, the FIM, which is the common tools for assessing the amount of available information in the sampled data is overviewed in the following.
 \par
 Consider a random variable $x$ for which the pdf is $f\rBrace{x|\theta}$, where $\theta$ is an unknown parameter and $\theta\in\Theta$, with $\Theta$ is the parameter space.
 Intuitively, if an event has small probability, then the occurrence of this event brings us much information.
 For a random variable $X \sim f\rBrace{x|\theta}$, if $\theta$ were the true value of the parameter, the likelihood function should take a big value, or equivalently, the derivative log-likelihood function should be close to zero, and this is the basic principle of maximum likelihood estimation.
 We define $l\rBrace{x|\theta} = \log{f\rBrace{x|\theta}}$ as the log-likelihood function which follows that the Fisher information may be expressed \cite{van2004detection} as 
-% We define $l\rBrace{x|\theta} = \log{f\rBrace{x|\theta}}$ as the log-likelihood function, and
-% \begin{equation*}
-%     l^{\prime}\rBrace{x|\theta} = \frac{\partial}{\partial\theta}\log{f\rBrace{x|\theta}}=\frac{f^{\prime}\rBrace{x|\theta}}{f\rBrace{x|\theta}}
-% \end{equation*}
-% where $f^{\prime}\rBrace{x|\theta}$ is the derivative of $f\rBrace{x|\theta}$ with respect to $\theta$.
-% Similarly, we denote the second order derivative of $f\rBrace{x|\theta}$ with respect to $\theta$ as $f^{\prime\prime}\rBrace{x|\theta}$.
-% According to the above analysis, if $l^{\prime}\rBrace{X|\theta}$ is close to zero, then it is expected, thus the random variable does not provide much information about $\theta$;
-% on the other hand, if $\abs{l^{\prime}\rBrace{X|\theta}}$ or $\abs{l^{\prime}\rBrace{X|\theta}}^{2}$ is large, the random variable provides much information about $\theta$.
-% Thus, we can use $\abs{l^{\prime}\rBrace{X|\theta}}^{2}$ to measure the amount of information provided by $X$.
-% however, since $X$ is a random variable, we should consider the average case. Thus, we introduce the following definition:
-% \begin{definition}
-% \emph{Fisher information} (for $\theta$) contained in the random variable $X$ is defined as:
-% \begin{equation}
-% \label{eq_prlm_FI_def}
-%     I\rBrace{\theta}=E_{\theta}\cBrace{\abs{l^{\prime}\rBrace{X|\theta}}^{2}}=\int{}\abs{l^{\prime}\rBrace{X|\theta}}^{2}f\rBrace{x|\theta}dx.
-% \end{equation}
-% \end{definition}
-% We assume that we can exchange the order of differentiation and integration, then
-% \begin{equation*}
-%     \int{}f^{\prime}\rBrace{x|\theta}dx=\frac{\partial}{\partial\theta}\int{}f\rBrace{x|\theta}dx=0.
-% \end{equation*}
-% Similarly,
-% \begin{equation*}
-%     \int{}f^{\prime\prime}\rBrace{x|\theta}dx=\frac{\partial^{2}}{\partial\theta^{2}}\int{}f\rBrace{x|\theta}dx=0.
-% \end{equation*}
-% It is easy to see that
-% \begin{equation*}
-%     E_{\theta}\cBrace{l^{\prime}\rBrace{X|\theta}}=\int{}l^{\prime}\rBrace{x|\theta}f\rBrace{x|\theta}dx=\int{}\frac{f^{\prime}\rBrace{x|\theta}}{f\rBrace{x|\theta}}f\rBrace{x|\theta}dx=\int{}f^{\prime}\rBrace{x|\theta}=0
-% \end{equation*}
-% Therefore, the definition of Fisher information \eqref{eq_prlm_FI_def} can be rewritten as
-% \begin{equation}
-% \label{eq_prlm_IeqVar}
-%     I\rBrace{\theta}=\text{Var}_{\theta}\cBrace{l^{\prime}\rBrace{X|\theta}}
-% \end{equation}.
-% Also, notice that
-% \begin{equation*}
-%     l^{\prime\prime}\rBrace{x|\theta}=\frac{\partial}{\partial\theta}\vBrace{\frac{f^{\prime}\rBrace{x|\theta}}{f\rBrace{x|\theta}}}=\frac{f^{\prime\prime}\rBrace{x|\theta}f\rBrace{x|\theta}-\abs{f^{\prime}\rBrace{x|\theta}}^{2}}{\abs{f\rBrace{x|\theta}}^{2}}=\frac{\abs{f^{\prime\prime}\rBrace{x|\theta}}^{2}}{\abs{f\rBrace{x|\theta}}^{2}}-\abs{l^{\prime}\rBrace{x|\theta}}^{2}.
-% \end{equation*}
-% Therefore,
-% \begin{equation*}
-%     E_{\theta}\cBrace{l^{\prime\prime}\rBrace{x|\theta}}=\int{\vBrace{\frac{\abs{f^{\prime\prime}\rBrace{x|\theta}}^{2}}{\abs{f\rBrace{x|\theta}}^{2}}-\abs{l^{\prime}\rBrace{x|\theta}}^{2}}f\rBrace{x|\theta}}=\int{f^{\prime\prime}\rBrace{x|\theta}dx}-E_{\theta}\cBrace{l^{\prime}\rBrace{X|\theta}}=-I\rBrace{\theta}.
-% \end{equation*}
-% Finally, we have another formula to calculate Fisher information:
 \begin{equation}
 \label{eq_prlm_Ifin}
     I\rBrace{\theta} = -E_{\theta}\cBrace{l^{\prime\prime}\rBrace{x|\theta}}=-\int{\vBrace{\frac{\partial^{2}}{\partial\theta^{2}}\log{f\rBrace{x|\theta}}f\rBrace{x|\theta}}dx}
 \end{equation}.
-% To summarize, we have three methods to calculate Fisher information: equations \eqref{eq_prlm_FI_def}, \eqref{eq_prlm_IeqVar} and \eqref{eq_prlm_Ifin}.
-% In any problems, using \eqref{eq_prlm_Ifin} is the most convenient choice.
 \subsection{Cram\'er-Rao Lower Bound and Asymptotic Distribution of Maximum Likelihood Estimators}
-% Suppose that we have a random sample $X_{1},\dots,X_{n}$ coming from a distribution for which the pdf or pmf is $f\rBrace{x|\theta},$ where the value of the parameter $\theta$ is unknown. 
-% We will show how to use Fisher information to determine the lower bound for the variance of an estimator of the parameter $\theta$.
-% \par
-% Let $\hat{\theta}=r\rBrace{X_{1},\dots,X_{n}}=r\rBrace{\vecnot{X}}$ be an arbitrary estimator of $\theta$.
-% Assume $E_{\theta}\rBrace{\hat{\theta}}=m\rBrace{\theta}$ and the variance of $\hat{\theta}$ is finite.
-% Let us consider the random variable $l^{\prime}\rBrace{\vecnot{X}|\theta}$, it can be shown that $E_{\theta}\cBrace{l^{\prime}\rBrace{\vecnot{X}|\theta}}=0$ and that
-% \begin{equation}
-% \label{eq_prlm_covThetaLTag}
-%     \text{Cov}_{\theta}\cBrace{\hat{\theta},l^{\prime}\rBrace{\vecnot{X}|\theta}}=m^{\prime}\rBrace{\theta}.
-% \end{equation}.
-% By Cauchy-Schwartz inequality and the definition of $I_{n}\rBrace{\theta},$
-% \begin{equation*}
-%     \vBrace{\text{Cov}_{\theta}\cBrace{\hat{\theta},l^{\prime}\rBrace{\vecnot{X}|\theta}}}^{2}\leq{}\text{Var}_{\theta}\cBrace{\hat{\theta}}\text{Var}_{\theta}\cBrace{l^{\prime}\rBrace{\vecnot{X}|\theta}}=\text{Var}_{\theta}\cBrace{\hat{\theta}}I_{n}\rBrace{\theta}
-% \end{equation*}
-% i.e.
 In practical applications, where signal is noised and parameters cannot be accurately estimated, having a closed form expression for the FIM naturally leads to seek for a performance bound that will help the user to know when available information is fully utilized.
-% \begin{equation*}
-%     \vBrace{m^{\prime}\rBrace{\theta}}^{2}\leq{}\text{Var}_{\theta}\cBrace{\hat{\theta}}I_{n}\rBrace{\theta}=nI\rBrace{\theta}=\text{Var}_{\theta}{\cBrace{\hat{\theta}}}
-% \end{equation*}
-% Finally, we get the lower bound of variance of an arbitrary estimator $\hat{\theta}$ as
 Such a bound for unbiased estimators is \cite{van2004detection}
-% \begin{equation}
-% \label{eq_prlm_CramerRao_lim}
-%     \text{Var}_{\theta}{\cBrace{\hat{\theta}}}\geq{}\frac{\vBrace{m^{\prime}\rBrace{\theta}}^{2}}{nI\rBrace{\theta}}
-% \end{equation}
-% where 
-% The inequality \eqref{eq_prlm_CramerRao_lim} is called the \emph{information inequality}, and also known as the \emph{Cram\'er-Rao inequality} in honor of the Sweden statistician H. Cram\'er Indian statistician C. R. Rao who independently developed this inequality during the 1940s. 
-% The information inequality shows that as $I_{\theta}$ increases, the variance of the estimator decreases, therefore, the quality of the estimator increases, that is why the quantity is called “information”.
-% \par
-% If $\hat{\theta}$ is an unbiased estimator, then $m\rBrace{\theta}=E_{\theta}\rBrace{\hat{\theta}}=\theta$, $m^{\prime}\rBrace{\theta}=1$.
-% Hence, by the information inequality, for unbiased estimator $\hat{\theta}$,
 \begin{equation*}
     \text{Var}_{\theta}\cBrace{\hat{\theta}}\geq\frac{1}{nI\rBrace{\theta}}.
 \end{equation*}

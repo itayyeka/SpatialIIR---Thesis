@@ -254,9 +254,7 @@
     איכון מקור על ידי עיצוב אלומה עם משוב
 }
 \iitthesis@thesisdatafield{disciplineEnglish}{Electrical Engineering}
-\iitthesis@thesisdatafield{disciplineHebrew}{
-הנדסת חשמל
-}
+\iitthesis@thesisdatafield{disciplineHebrew}{הנדסת חשמל}
 \iitthesis@thesisdatafield{supervisionEnglish}{Information regarding the supervision and supervisors}
 \iitthesis@thesisdatafield{supervisionHebrew}{מידע על המנחים וההנחיה}
 \iitthesis@thesisdatafield{publicationInfoHebrew}{ציון אם העבודה פורסמה בכתבי עת או  הוצגה בכנסים. הרשימה תכתב בהתאם לכללי הציטוט (כולל הכותר ושמות השותפים). במקרה של שיתוף פעולה, פירוט תרומת המגיש.}

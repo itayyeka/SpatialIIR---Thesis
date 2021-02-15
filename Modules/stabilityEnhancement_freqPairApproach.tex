@@ -1,8 +1,8 @@
-As demonstrated in the previous section, the beampattern \eqref{eq_generalH} is sensitive to range errors.
+As demonstrated in the previous section, the beampattern \eqref{eq_narmalized_pattern} is sensitive to range errors.
 We now propose an architecture which obtains the desired beampattern $\Hr_{\Delta\theta,\Delta\phi\to0,r}$ even for relatively large range errors $\Delta R_{\text{rt}}$. Also, we show that the suggested architecture achieves high performance at moderately low signal-to-noise ratio (SNR) scenarios.
 
 \subsection{Intuition}
-Bearing in mind that the system's phase alignment sensitivity resides in \eqref{eq_generalH} via the  term $\exp\Brack{j\dPhi}=\exp\Brack{j\omega\Delta\tau_{pd}}$ and that the round-trip delay ($\tau_{pd}$) cannot be controlled, one may suggest to use lower frequencies. 
+Bearing in mind that the system's phase alignment sensitivity resides in \eqref{eq_narmalized_pattern} via the  term $\exp\Brack{j\dPhi}=\exp\Brack{j\omega\Delta\tau_{pd}}$ and that the round-trip delay ($\tau_{pd}$) cannot be controlled, one may suggest to use lower frequencies. 
 Unfortunately, aiming for practical range estimation errors, the transmission of such low frequencies is physically unfeasible.
 As the medium for the wave's propagation in the context of localization is not free space, physical considerations are to be taken when choosing the frequency band of use.
 Following the thorough spectrum use overview in \cite{barclay2003propagation}, among the notable considerations for choosing frequency in localization related schemes are
@@ -10,12 +10,12 @@ Following the thorough spectrum use overview in \cite{barclay2003propagation}, a
     \item \textbf{Propagation efficiency}\\
     Due to the chemical structure of the atmosphere, some frequencies are propagated efficiently while other are absorbed \cite{wen2015foundations} by the atmosphere layers, being unsuitable for localization applications such as RADAR.
     \item \textbf{Antenna length}\\
-    As described in \cite{barclay2003propagation}, although low ($<30_{\text{Khz}}$) frequencies propagate efficiently in the earth-atmosphere wave guide \cite{wen2015foundations}, the wavelength ($\sim10_{\text{Km}}$), hence the needed antenna length is too large for any practical use.
+    As described in \cite{barclay2003propagation}, although low ($<30_{\text{KHz}}$) frequencies propagate efficiently in the earth-atmosphere wave guide \cite{wen2015foundations}, the wavelength is large ($\sim10_{\text{Km}}$), hence the needed antenna length is too large for any practical use.
     \item \textbf{Signal bandwidth}\\
     As the carrier signal's frequency decreases, so does the available bandwidth due to aliasing.
 \end{itemize}
-Henceforth, inspired by known trigonometrical identities where mathematical of two harmonics produces new frequencies which are the sum (or subtraction) of the original signals, we suggest simultaneous transmission of several frequencies instead of the unfeasible option of transmitting low frequencies. 
-In the following we suggest a dual frequency (DF) waveform, utilizing two harmonics, $\omega_1$ and $\omega_2$, and show that range error sensitivity may be resolved.
+Henceforth, we suggest simultaneous transmission of several frequencies instead of the unfeasible option of transmitting low frequencies. 
+In the following we suggest a dual frequency (DF) waveform, utilizing two harmonics, $\omega_1$ and $\omega_2$, and show that range error sensitivity may be resolved  as it will depend on the frequency difference $\omega_{1}-\omega_{2}$.
 
 \subsection{Suggested processing scheme}
 \begin{figure}[t!]
@@ -57,7 +57,7 @@ Note that in the suggested architecture we do not add array elements, but merely
 z_{i}(t)=H_{\vBetaI{i},\vAlphaI{i}}\rBrace{\omega_{i}}\exp{\rBrace{j\omega_{i}t}}\ \ {i\in\cBrace{1,2}},
 \]
 where $\vBetaI{i},\vAlphaI{i}$ are the coefficients of the $i$'th beamformer.
-Motivated by the desire to mitigate the $\Delta\phi$ dependency of the system, which appears in the denominator of \eqref{eq_generalH}'s RHS, we compute the reciprocal of each frequency response, average, and compute the reciprocal again. This leads to the harmonic mean of both beamformers' outputs (see Fig.~\ref{fig_app}), which formally, up to a constant term, takes the form
+Motivated by the desire to mitigate the $\Delta\phi$ dependency of the system, which appears in the denominator of \eqref{eq_narmalized_pattern}'s RHS, we compute the reciprocal of each frequency response, average, and compute the reciprocal again. This leads to the harmonic mean of both beamformers' outputs (see Fig.~\ref{fig_app}), which formally, up to a constant term, takes the form
 \begin{equation}
     \label{eqn_HDF_def}
     Z_{\text{DF}} = \abs{H^{-1}_{\vBetaI{1}\vAlphaI{1}}\rBrace{\omega_{1}}+H^{-1}_{\vBetaI{2},\vAlphaI{2}}\rBrace{\omega_{2}}}^{-1}.
@@ -107,7 +107,7 @@ generalizing the $\coefSetName$ approach and setting
     \vBetaCI{1}=\frac{-\vdHatIC{1}\exp\rBrace{j\rBrace{\phiIHat{1}-\phiIHat{2}}}}{\hat{\gI{1}}\norm{\vdHatI{1}}^2}.
 \end{equation*}
 % where $\vdHatI{1}$ is the estimated steering vector, as in \eqref{eq:d_hat}.
-With this choice, and similarly to \eqref{eq:SF_CB}, \eqref{eqn_H_DF_general} becomes
+With this choice, and similarly to \eqref{eq_narmalized_pattern}, \eqref{eqn_H_DF_general} becomes
 \begin{equation}
     \label{eqn_H_DF_CB}
     %\resizebox{.89\linewidth}{!}

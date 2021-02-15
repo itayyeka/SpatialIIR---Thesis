@@ -95,7 +95,21 @@ Aiming to maximize the FIM diagonal elements via denominator (i.e., $\lBrace{1-g
 \vAlphaC_{\text{CB,opt}}=\frac{\vdC\exp\rBrace{j\phi}}{\hat{g}\norm{\vd}^2},
 \end{equation}
 where $\hat{g}$ is the channel gain estimate.
-This choice of weights may be interpreted as a generalized version of the \emph{conventional beamformer} (CB) \cite{van2004optimum}. 
+Considering narrowband signals, this choice of weights may be interpreted as a generalized version of the \emph{conventional beamformer} (CB) \cite{van2004optimum} which is a mere time shift (phase shift in narrowband signals) of the input signals as if the impinging wave is coming from the array's boresight direction (i.e. $\theta_{d}=\pi/2$) as illustrated in Fig.\ref{fig_CB_vanTrees}.
+\begin{figure}[t!]
+    \begin{center}
+        \begin{overpic}[width=0.55\linewidth, 
+        % grid, 
+        tics=10,trim=0 0 0 0]{./Media/fig_CB_vanTrees.PNG}
+            % \put (20, 23){\rotatebox{0}{\footnotesize{Angular response}}}
+        \end{overpic}
+    \end{center}
+    \caption{
+    % A visualization of the spatial area selectivity concept.
+    The \emph{conventional beamformer} - time shifting the input signals as if the impinging wave from a certain DOA arrives from the array's boresight.
+    }
+    \label{fig_CB_vanTrees}
+\end{figure}
 Furthermore, setting $\vBeta=\vBeta_{\text{CB,opt}}=\vAlpha_{\text{CB,opt}}$, is shown (see App.~\ref{apdx_clacFim}) to nullify the FIM cross terms, such that $J_{12}=J_{\thetaD,\phi}=J_{21}=J_{\phi\thetaD}=0.$
 \par Note that setting the feedback weights as in \eqref{eq:alpha_beta_opt} requires perfect knowledge of the target's range, since $\phi$ is range dependant.
 Also, the reader may notice that   assuming $\hat{g}=g$, this choice of optimal weights nullifies the denominator of  \eqref{eqn:GeneralFeedbackTransferFunction}. Thus, theoretically, the FIM becomes infinite when the transfer function \eqref{eqn:GeneralFeedbackTransferFunction} is unstable due to positive and coherent feedback between the beamformer and the target. 

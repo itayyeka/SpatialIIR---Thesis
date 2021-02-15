@@ -1,16 +1,16 @@
 Sensor arrays are sets of independently positioned sensors, where each sensor is sampling temporal snapshots of impinging signals.
 The samples from the entire array are then fused together in order to extract the underlying data.
-The spatial diversity of the sampled data allows the extraction of spatial features which are not accessible by mere temporal analysis of the data.
-Sensor arrays are used in numerous applications, ranging from source localization, through communication, medical applications, astronomy etc.
+The spatial diversity of the sampled data allows the extraction of spatial features.
+Sensor arrays are used in numerous applications, ranging from source localization, communication, medical applications, astronomy etc.
 \par 
 When designing a sensor array, multiple consideration are to be taken into account, ranging from physical characteristics e.g. area, weight and carrying platform, through performance related considerations such as accuracy, spatial selectivity, signal to noise ratio and even the financial aspect.
-Obviously, the most fundamental array specification is its geometry, for it dictates the spatial relations between simultaneous samples measured by the array's sensors, which also greatly influences the processing methods of the raw-data.
-A basic example of sensor array is the ULA (see Fig.~\ref{fig_ULA}), where its elements are uniformly spaced on a straight line with distance $d$ between a sensor to its nearest neighbour.
+The most fundamental array specification is its geometry, for it dictates the spatial relations between simultaneous samples measured by the array's sensors, which also greatly influences the processing methods of the raw-data.
+A basic example of a sensor array is the ULA (see Fig.~\ref{fig_ULA}), where its elements are uniformly spaced on a straight line with distance $d$ between each pair of sensors.
 Considering an array of $N$ elements, the sensors are positioned at
 \begin{equation}
 p_{n}=nd,\ n=0,\dots,N-1
 \end{equation}
-where $n$ is the sensors index; $p_{n}$ denotes the position of the $n$'th sensor,$p_{0} = 0$ corresponds to the left-hand side of the array.
+where $n$ is the sensors index; $p_{n}$ denotes the position of the $n$'th sensor, $p_{0} = 0$ corresponds to the left-hand side of the array as illustrated in Fig.~\ref{fig_ULA}.
 \begin{figure}[h!]
     \begin{center}
         \begin{overpic}[width=0.5\linewidth, 
@@ -24,4 +24,4 @@ where $n$ is the sensors index; $p_{n}$ denotes the position of the $n$'th senso
      \caption{A uniform linear array of size $N$ and spacing $d$.}
     \label{fig_ULA}
 \end{figure}
-\par To proper formulate the discussed additional spatial information when using sensor array based processors, a quick overview on wave propagation is due and presented in the following section (Sec.~\ref{sec:prlm_propWaveField}).
+\par To properly formulate the discussed additional spatial information when using sensor arrays, a quick overview on wave propagation is due and presented in the following section (Sec.~\ref{sec:prlm_propWaveField}).

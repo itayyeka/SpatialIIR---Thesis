@@ -1,18 +1,29 @@
-State-of-the-art array processing methods, ranging from high-order statistics to adaptive configuration, require costly computing efforts in pursuit for spatial performance improvement.
+% State-of-the-art array processing methods, ranging from high-order statistics to adaptive configuration, require costly computing efforts in pursuit for spatial performance improvement.
+The general field of array processing has been thoroughly studied throughout several decades.
+The array sensors' spatial diversity enables the extraction of spatial information about impinging signals, thus laying the ground for wide range of applications.
+The array size and the number of its elements ($N$) has significant influence on the obtained array performance, such as SNR improvement, spatial separation capabilities and its spatial response's degrees of freedom (DOF).
 \par 
-Considering localization related applications, several processing approaches are to be found. The most approach is \emph{beamforming}, i.e scanning the area of interest and marking peaks in output energy as targets of interest.
+Considering localization related applications, several processing approaches are to be found. The most basic approach is \emph{beamforming}, i.e steering the array to different parts of the arena in search of objects.
 Another approach, which is probably the most commonly used, is the subspace-based processing which tries to identify input signals that fit into the array's manifold using the orthogonal projection concept.
-Statistical processing, although costly in terms of computation effort, is also in use, ranging from maximum-likelihood related schemes to higher-order-statistics using cumulants.
-Newer approaches which are still in research stage use neural networking and sparsity algorithms.
+Statistical processing, although costly in terms of computation effort, is also in use, ranging from maximum-likelihood (ML) related schemes to higher-order-statistics (HOS) using cumulants.
+Newer approaches which are still in research stage use neural networking and sparsity-based algorithms.
 \par
-Although mush researched, in this work we revisit the \emph{beamforming} approach and suggest
-a feedback based approach, featuring low complexity and high spatial performance in the mere excess of integrating a transmitter to the array, which in RADAR-like arrays is already in place.
-In the proposed scheme, a signal is continuously re-transmitted between the array and the target of interest, thus creating a spatial loop which is shown to be equivalent of enlarging the array's aperture in terms of spatial resolution.
+Although much researched, in this work we revisit the \emph{beamforming} approach.
+ULA based beamforming and temporal finite impulse response (FIR) filtering are mathematically analogous, where the DOA acts as the spatial version of temporal frequency.
+Inspired by this analogy, we search for the spatial counterpart of the temporal infinite impulse response (IIR) filter.
+To this end, we arbitrarily choose to use localization related problem formulation and suggest a feedback based approach, featuring low complexity and high spatial performance in the mere excess of integrating a transmitter to the array.
+Considering RADAR-like arrays, the transmitter is already in place, hence a mere processing modification suffices.
+Assuming the target of interest has a mirror-like behaviour (i.e., reflects its impinging signals), the spatial feedback between the array and the target is created by continuously re-transmitting a synthesized version of the impinging signal (and its reflections) to the target.
+Hence a spatial loop is created, which is shown to be equivalent of enlarging the array's aperture in terms of spatial resolution.
+Also notable is that the achievement of the exclusive IIR-like beampattern is purely done in the spatial domain while avoiding any temporal processing to the signal.
 \par 
 Using a traditional beamforming performance analysis, the beamwidth, peak to side-lobe ratio, array directivity and white noise sensitivity are evaluated for the feedback based array.
 A significant improvement in all aspects is shown, while thoroughly discussing the conditions for enhanced performance.
 Considering ideal scenarios, the feedback beamformer virtually achieves an infinite aperture, increasing the available spatial information about the target and significantly improves the array's spatial performance.
 \par
-Taking into account the unavoidable estimation errors and uncertainties, we find that the basic feedback integrated beamformer is very sensitive to even mild errors due to the high frequencies of practical carrier signals.
-Seeking for a solution, bearing in mind that summing multiple harmonics produce also other lower / higher frequencies, we propose a practical and robust implementation of the feedback-based localization concept.
-We then thoroughly analyse this \emph{dual-frequency} method and find that it features low and controllable estimation errors sensitivity in the mere expense of doubling the computation effort.
+Taking into account the unavoidable estimation errors and uncertainties, we find that the basic feedback integrated beamformer is very sensitive to even mild range errors.
+% Also, the system is more sensitive as the carrier frequency increments.
+% Considering practical carrier frequencies, the range sensitivity is of wavelength order. 
+% Seeking for a solution, bearing in mind that summing multiple harmonics produce also other lower / higher frequencies, we propose a practical and robust implementation of the feedback-based localization concept.
+As a solution, we propose a more complex architecture, using two harmonics, which we call \emph{dual-frequency feedback beamformer}.
+We also thoroughly analyse the proposed solution and find that it features low and controllable estimation errors sensitivity in the mere expense of doubling the computation effort.

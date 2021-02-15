@@ -1,13 +1,13 @@
-In the process of simplifying \eqref{eq_D} in order to find the expression for the directivity $\mathcal{D}$, we noticed the numerical evaluation reaches rational fractions when rational values of $r$ were used.
-Following that hint, we numerically swept various values of $N,r$ doublets, trying find a common expression that fits all results which will enable the formulation of the directivity improvement when using the feedback beamformer.
-In the following, we elaborate on the sweeping process it's technicalities.
+In the process of simplifying \eqref{eq_D} in order to find the expression for the directivity $\mathcal{D}$, we noticed the results were rational.
+Following this observation, we numerically swept various values of $N,r$ pairs, trying find a common expression that fits all results which will enable the formulation of the directivity improvement when using the feedback beamformer.
+In the following, we elaborate on the technicalities of this sweeping process.
 \par The first step was to formulate the symbolic expression for $H$.
 To this end, we used MATLAB\textsuperscript{\textregistered}'s symbolic toolbox, generating the symbolic response $H$.
 Afterwards, the 2D sweep range was set, where as mentioned before, $r$ was set to be of rational values.
-In each sweep step, an numerical integration was executed with specific values for $N$ and $r$.
+In each sweep step, a numerical integration was executed with specific values for $N$ and $r$.
 Each result was fitted with it's next closest rational number with the help of MATLAB\textsuperscript{\textregistered}'s \emph{rats} auxiliary command.
-After observing the results, we found that all of then obey the same expression as in \eqref{eq_D_result} for any tolerance, which increased the confidence in the suggested expression.
-\par The printout of the code is presented as Table.~\ref{table_D}
+After observing the results, we found that all of them obey the same expression as in \eqref{eq_D_result} for any tolerance, which increased the confidence in the suggested expression.
+\par The printout of the code is presented as Table.~\ref{table_D} and the text below.
 \begin{table}[h!]
     \caption{Performances of Classical ULA and the Proposed Feedback-Beamforming Architecture, with a Gain Mismatch $r$.}
     \centering

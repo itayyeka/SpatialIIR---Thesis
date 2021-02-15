@@ -1,3 +1,6 @@
+As in Sec.~\ref{sec:prlm_FIR_IIR}, an $N$-element ULA with inter-element spacing $d$ is considered.
+Its $n$'th sensor is positioned at $\vpi{n},\;\text{for}\; n=0,\ldots,N-1$ and we set $\vpi{0}$ as the axis reference point while the target of interest is positioned at $\vpt$.
+We also place a transmitter at $\vpi{0}$, where transmitted signal $s$, is reflected back from the target and re-impinges the array, with a total time delay of $\tau_{\text{pd}}=2R/c$ seconds and $R = \norm{\vpt-\vpi{0}}, c$ are the target's range propagation velocity of the signal in the medium respectively.
 Time domain analysis of the proposed feedback based architecture, considering both propagation delay and attenuation, gives rise to
 \begin{equation}
     \label{eqn:SingleSensorTemporalEquality}
@@ -43,18 +46,38 @@ We use the Sherman-Morrison formula \cite{sherman1950adjustment}, considered to 
 where $\vecnot{u},\vecnot{v}$ are two $N\times1$ vectors and $I$ is the identity matrix.   
 Setting $\vecnot{u}=-g\vecnot{d}\exp{\rBrace{-j\omega\tau}}$ and $\vecnot{v}=\vecnot{\alpha}^{*}$ gives rise to
 \begin{equation*}
-    \rBrace{I+-g\vecnot{d}\vecnot{\alpha}^{H}\exp{\rBrace{-j\omega\tau}}}^{-1} 
-    = I+\frac{g\vecnot{d}\vecnot{\alpha}^{H}\exp{\rBrace{-j\omega\tau}}}{1-g\vecnot{\alpha}^{H}\vecnot{d}\exp{\rBrace{-j\omega\tau}}}
+    \begin{split}
+        \rBrace{I-g\vecnot{d}\vecnot{\alpha}^{H}\exp{\rBrace{-j\omega\tau}}}^{-1} 
+        &= I+\frac{g\vecnot{d}\vecnot{\alpha}^{H}\exp{\rBrace{-j\omega\tau}}}{1-g\vecnot{\alpha}^{H}\vecnot{d}\exp{\rBrace{-j\omega\tau}}}
+        \\
+        &= \frac{\rBrace{I-g\vecnot{\alpha}^{H}\vecnot{d}\exp{\rBrace{-j\omega\tau}}+g\vecnot{d}\vecnot{\alpha}^{H}\exp{\rBrace{-j\omega\tau}}}\vecnot{d}}{1-g\vecnot{\alpha}^{H}\vecnot{d}\exp{\rBrace{-j\omega\tau}}}
+        \\
+        &= \frac{
+        \rBrace{I+\rBrace{\vecnot{d}\vecnot{\alpha}^{H}-\vecnot{\alpha}^{H}\vecnot{d}}g\exp{\rBrace{-j\omega\tau}}}\vecnot{d}
+        }{
+        1-g\vecnot{\alpha}^{H}\vecnot{d}\exp{\rBrace{-j\omega\tau}}
+        }
+        \\
+        &= \frac{
+        \vecnot{d}+\rBrace{\vecnot{d}\vecnot{\alpha}^{H}\vecnot{d}-\vecnot{\alpha}^{H}\vecnot{d}\vecnot{d}}g\exp{\rBrace{-j\omega\tau}}
+        }{
+        1-g\vecnot{\alpha}^{H}\vecnot{d}\exp{\rBrace{-j\omega\tau}}
+        }
+        \\
+        &= \frac{
+        \vecnot{d}+\vecnot{\alpha}^{H}\vecnot{d}\rBrace{\vecnot{d}-\vecnot{d}}g\exp{\rBrace{-j\omega\tau}}
+        }{
+        1-g\vecnot{\alpha}^{H}\vecnot{d}\exp{\rBrace{-j\omega\tau}}
+        }
+        \\
+        &= \frac{
+        \vecnot{d}
+        }{
+        1-g\vecnot{\alpha}^{H}\vecnot{d}\exp{\rBrace{-j\omega\tau}}
+        }
+    \end{split}
 \end{equation*}
-which results in
-\begin{equation*}
-    \frac{\rBrace{I-g\vecnot{\alpha}^{H}\vecnot{d}\exp{\rBrace{-j\omega\tau}}+g\vecnot{d}\vecnot{\alpha}^{H}\exp{\rBrace{-j\omega\tau}}}\vecnot{d}}{1-g\vecnot{\alpha}^{H}\vecnot{d}\exp{\rBrace{-j\omega\tau}}}.
-\end{equation*}
-Obviously the numerator's 2nd and 3rd terms vanish using the commutativity concept stating that
-\begin{equation*}
-    \vecnot{\alpha}^{H}\vecnot{d}\vecnot{d} = \vecnot{d}\vecnot{\alpha}^{H}\vecnot{d}
-\end{equation*}
-which finally results in
+leading to
 $$
 \F{\vx}
 =
@@ -92,7 +115,7 @@ As demonstrated in Fig.~\ref{fig_rangeAzimuthSelectivity}, the combination of bo
     \end{center}
     \caption{
     % A visualization of the spatial area selectivity concept.
-    Combining both radial selectivity and DOA-based selectivity allows to localize the transmitter.
+    Combining both radial selectivity and DOA-based selectivity allows to localize the target.
     }
     \label{fig_rangeAzimuthSelectivity}
 \end{figure}

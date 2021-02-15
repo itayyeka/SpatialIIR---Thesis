@@ -1,8 +1,7 @@
 A basic design entity in every signal processing scheme is the digital filter, which is the modern evolution of analog filters.
-The design of the digital filter is very well established and thoroughly studied research field.
-As stated in \cite{oppenheim1975digital} (and numerous other literature), two key filter types are used - i.e. Finite Impulse Response (FIR) and Infinite Impulse Response (IIR) filters.
+The design of the digital filters is very well established and thoroughly studied research field.
+As stated in \cite{oppenheim1975digital} (and numerous other literature), two key filter types are Finite Impulse Response (FIR) and Infinite Impulse Response (IIR) filters.
 This section will briefly overview the design methods and the analogy of ULA based beamforming to the temporal FIR filtering, as implied in Ch.~\ref{chap:intro}.
-\par Each digital filters belong in one of two architectures
 \begin{itemize}
     \item \textbf{FIR design}\\
     The FIR filter is a merely a delay-and-sum mechanism, therefore its memory is finite and equal to the number of taps in the final filter's configuration as in Fig.~\ref{fig_FIR_arch}.
@@ -79,13 +78,15 @@ Z\rBrace{\omega,\theta} = g\F{s}\rBrace{\omega}\exp{\rBrace{-j\omega\tau_{pd}}}\
 \]
 hence in the ULA case, aiming for a desired spatial response, the weights vector $\vecnot{\beta}\rBrace{\omega}$ configuration is mathematically equivalent to an FIR filter design~\cite{van1988beamforming,benesty2018}. 
 Assuming narrowband stimuli signals, we suppress $\omega$ dependency in the notation throughout the rest of this paper, where possible.
-\par It is well known \cite{rabiner1974some} that IIR filters have several appealing advantages over their matching (in number of elements) FIR versions.
-A well known \cite{oppenheim1975digital} fact in digital signal processing is that the filter latency may be frequency dependant, namely linearly dependent in the phase response derivative of the specific frequency.
+\par It is well known \cite{rabiner1974some} that IIR filters have several appealing advantages over their matching (in terms of number of taps) FIR counterparts.
+The main advantage of IIR filters is that for a given set of frequency response specifications, the IIR filter will (in most cases) require substantially less coefficients, which may even reach few order of magnitude \cite{rabiner1974some}.
+In the spatial processing context, this implies improved spatial performance, using the same or smaller number of sensors.
+However, a well known \cite{oppenheim1975digital} fact in digital signal processing is that the filter latency may be frequency dependant, namely linearly dependent in the phase response derivative of the specific frequency.
 Therefore, linear phase implies that the phase response's derivative (i.e. signal latency) is constant which implies all input frequencies will reside in the processor for the exact same time, preventing dispersion which practically causes pulse widening.
-Due to this important property, many applications which are sensitive to signal distortions, especially communication based systems, chose the FIR architecture.
+Due to this important property, many applications which are sensitive to signal distortions, especially communication based systems, chose the FIR architecture, for it is possible to design it as linear phase filter.
 Acquainted with the analogy between frequency and DOA, it seems that when localization applications are considered, where the DOA resolution criteria is more important than the consistency of detection latency between separate DOAs, the linear phase property is less relevant.
-\par The main advantage of IIR filters is that for a given set of frequency response specifications, the IIR filter will (in most cases) require substantially less coefficients, which may even reach few order of magnitude \cite{rabiner1974some}.
-Concluding that spatial linear phase response in DOA domain is not a necessity, combined with the known efficiency of the IIR architecture and the need for smaller and cheaper arrays, the motivation for finding the spatial version of the temporal IIR is complete.
+% \par
+% Concluding that spatial linear phase response in DOA domain is not a necessity, combined with the known efficiency of the IIR architecture and the need for smaller and cheaper arrays, the motivation for finding the spatial version of the temporal IIR is complete.
 \par In standard radar signal processing schemes, a waveform is transmitted to, and reflected from the target of interest. Then, the reflected signal is processed by the radar reception array in order to estimate the target's dynamics (e.g., DOA, range, velocity etc.).
-As opposed to the standard scheme, we suggest a continuous re-transmission of the signal and its echoes back to the platform, generating a spatial feedback loop between the array and the target.
-Another deviation from traditional radar processing, used to simplify the exposition, is using continuous-wave (CW) stimuli, rather than using pulse based signals. 
+As opposed to the standard scheme, we suggest in Chapter.~\ref{chap:firstchap} a continuous re-transmission of the signal and its echoes back to the platform, generating a spatial feedback loop between the array and the target.
+Another deviation from traditional radar processing, used to simplify the exposition, is using continuous-wave (CW) stimuli, rather than using pulse based signals.

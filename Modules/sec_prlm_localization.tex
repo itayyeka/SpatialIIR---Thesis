@@ -1,30 +1,29 @@
 In the wide and very active research field of parametric estimation, one subject of very high relevance to this thesis is the sensor-array based localization - i.e. positional parameters estimation of impinging signal which is measured by an array of sensors.
 In this work, we focus on localization of signal sources in the far-field case, where free space signal propagation is assumed.
-Following the classical methods overview in \cite{krim1996two},localization estimators may be divided to two main groups - i.e. \textit{spectral-based} and \textit{parametric}.
+Following the classical methods overview in \cite{krim1996two}, localization estimators may be divided to two main groups - i.e. \textit{spectral-based} and \textit{parametric}.
 The spectral based estimators steer the array (mechanically or by beamforming) to a set of DOAs, searching for peaks in the received energy, where each peak is treated as a resolved emitter when greater than a certain threshold.
-This approach of spatial filtering, is considered to suffers from fundamental
+This approach of spatial filtering, is considered to suffer from fundamental
 limitations, namely ``its performance, is directly dependent upon the physical size of the array (the aperture), regardless of the available data collection time and signal-to-noise ratio (SNR)`` \cite{krim1996two}.
-Although trials were made to increase the resolution of an array given a certain aperture, this notion remains intact to these days.
-In this contribution we tackle this statement as will shown in Chapter\ref{chap:firstchap}.
-The later approach, of parameter estimation assumes a physical model of the experimental scenario, which serve a basis for the development of spatio-temporal estimators which takes advantage not only from the spatial diversity but also from the temporal information collected via sequential time separated snapshots in order to increase the overall SNR.
-Such methods, not only enabled the increase of spatial filtering resolution, but also allowed the implementation of data processing algorithms, more sophisticated than a mere search with a steered array.
+Although trials were made to increase the resolution of an array given a certain aperture, this limitation remained intact.
+In this contribution we tackle this issue as will shown in Chapter\ref{chap:firstchap} by introducing a spatial feedback.
+The later approach, of parameter estimation assumes a physical model of the experimental scenario, which serve a basis for the development of spatio-temporal estimators which take advantage not only from the spatial diversity but also from the temporal information collected via sequential time separated snapshots in order to increase the overall SNR.
+Such methods, not only enabled the increase of spatial filtering resolution, but also allowed the implementation of data processing algorithms, which are more sophisticated than a mere search with a steered array.
 In the following, a basic overview of some classical algorithms are presented.
-The earliest localization algorithms, which date back to world war II, are the beamforming based, e.g. the conventional Bartlet \cite{van2004optimum} and Capon's \cite{capon1969high} beamformers.
-Early examples of parametric estimators, are the Maximum-Likelihood \cite{macdonald1969optimum,schweppe1968sensor} and Maximum-Entropy \cite{ables1974maximum} which assume a known PDF to the received signal and estimate the desired parameters according to empirical results and fitting the closest matching PDF.
+The earliest localization algorithms, which date back to world war II, are beamforming based, e.g. the conventional Bartlet \cite{van2004optimum} and Capon's \cite{capon1969high} beamformers.
+Early examples of parametric estimators, are the Maximum-Likelihood \cite{macdonald1969optimum,schweppe1968sensor} and Maximum-Entropy \cite{ables1974maximum} which assume a known PDF to the received signal and estimate the desired parameters according to sampled data and fitting the closest matching PDF.
 Until the mid- 1970's, direction finding techniques required knowledge of the array directional sensitivity pattern in analytical form, and the task of the antenna designer was to build an array of antennas with a prespecified sensitivity pattern.
 Trying to relax the need for such accuracy, also serving as the origin of the sub-space based approach, was the Multiple SIgnal Classification (MUSIC) \cite{schmidt1986multiple} algorithm.
-MUSIC essentially relieved the designer from the need of accurate radiation patterns by exploiting the reduction in analytical complexity that could be achieved by calibrating the array.
-Thus, the array response calculation task was reduced to that of measuring and storing the response. 
+MUSIC essentially relieved the designer from designing accurate radiation patterns by introducing the concept of array calibration.
 Although MUSIC did not mitigate the computational complexity of solution to the DOA estimation problem, it did extend the applicability of high-resolution DOA estimation to arbitrary arrays of sensors.
 Another, probably even more important breakthrough, was the introduction of the orthogonal array manifold noise spaces, thus allowing the use of orthogonal projection in order to mitigate the noise effects.
 Another important parametric approach related algorithm, is the ESPRIT (Estimation of Signal Parameters via Rotational Invariance Techniques) \cite{ESPRIT}, serving as a milestone in the path to state-of-the-art algorithms.
 In addition to using the rotational invariance of the signal sub-space eigenvectors, it also reduced computation and storage costs (especially in the multi-dimensional estimation case) by replacing the covariance matrix calculation and eigendecomposition by a relaxed partial singular value decomposition (SVD) which is employed on the data itself without squaring it - thus mitigating numerical problems associated with ill-conditioned matrices.
-Following state-of-the-art developments \cite{BOOK-classicalAndModernDOA}, the sub-space based algorithms are still modified and adjusted to specific scenarios as in \cite{LpNorm MUSIC} but also new and interesting approaches emerged
+Following state-of-the-art developments \cite{tuncer2009classical}, the sub-space based algorithms are still modified and adjusted to specific scenarios as in \cite{LpNorm_MUSIC} but also new and interesting approaches emerged such as
 \begin{itemize}
-    \item High Order Statistics (HOS, also refereed as cumulants), which extracts more information from the samples' higher order moments, is a very active field of research due to some fundamental issues which are inherently resolved - i.e. the Gaussian noise vanishes in the 4th order statistics and the ability to resolve more DOAs than array elements \cite{chevalier2006high}.
-    This approach, being costly in computation effort, became popular probably due to the recently available low-cost powerful computation.
-    \item Inspired by the vast research field of sparse representations some algorithms \cite{nadiri2014localization} use non-Frobenius norm (i.e. $L^{p}$ norms where $p<2$), in order improve estimation resolution under high reverberation acoustic scenarios.
+    \item High Order Statistics (HOS), which extracts more information from the samples' higher order moments, is a very active field of research due to some fundamental issues which are inherently resolved - i.e. the Gaussian noise vanishes in the 4th order statistics and the ability to resolve more DOAs than array elements \cite{chevalier2006high}.
+    This approach, being costly in computation effort, became popular probably due to the recently available low-cost powerful computation platforms.
+    \item Inspired by the vast research field of sparse representations, some algorithms \cite{nadiri2014localization} use $L^{p}$ norms (where $p<2$), in order to improve estimation resolution under high reverberation acoustic scenarios.
     \item A very wide and active research field is the concept of cooperative localization related to mobile networks is growing at a very high rate due to the never-ending need for high-bandwidth and low-power communication of the mobile networks.
-    \item Naturally, also many trials of harnessing the promising concept of neural networks are being done, for example \cite{shareef2008localization}.
+    \item Naturally, also many trials of harnessing the promising concept of neural networks are being done, see for example \cite{shareef2008localization}.
 \end{itemize}
 In this work, we actually revisit the most basic approach - i.e. beamforming which resides under the spectral based algorithms.

@@ -4,19 +4,19 @@ The general field of array processing has been thoroughly studied throughout sev
 The array sensors' spatial diversity enables the extraction of spatial information about impinging signals, thus laying the ground for wide range of applications, such as localizing a transmitting source \cite{skolnik2008radar,long2019}, blindly separating mixtures of impinging signals \cite{comon1994independent}, improving signal to noise ratio (SNR) \cite{verdu1998multiuser}, and many more. 
 \par A uniform linear array (ULA) has always been a point of interest, due to its simplicity of analysis \cite{van2004optimum,benesty2018}. 
 The array size and the number of its elements ($N$) has significant influence on the obtained array performance, such as SNR improvement, spatial separation capabilities and its spatial response's degrees of freedom (DOF).
-\par Early algorithms for DOA estimation were based on the beamforming concept \cite{krim1996two}, where the array's reception beam is steered (mechanically or electronically) to multiple directions in search of received energy peaks which are interpreted as valid emitters.
-One notable improvement to the convectional beamformer \cite{van2004optimum} was Capon's beamformer  (aka MVDR in acoustics related literature) which attempts to minimize the power contributed by noise and any signals coming from other directions than the DOA of interest, while maintaining a fixed gain
-in the "look direction".
+\par Early algorithms for direction of arrival (DOA) estimation were based on the beamforming concept \cite{krim1996two}, where the array's reception beam is steered (mechanically or electronically) to multiple directions in search of received energy peaks which are interpreted as valid emitters.
+One notable improvement to the convectional beamformer \cite{van2004optimum} was Capon's beamformer  (aka minimum variance distortionless response (MVDR) in acoustics related literature) which attempts to minimize the power contributed by noise and any signals coming from other directions than the DOA of interest, while maintaining a fixed gain
+in the desired direction.
 \par The most practically used approach in DOA estimators, referred as the sub-space based estimation, involves invariant sub-spaces analysis of observed covariance matrices.
 Early research include PCA and errors-in-variables time series analysis \cite{krim1996two}.   
 However, the tremendous interest in the subspace approach is mainly due to the introduction of the
-MUSIC (Multiple SIgnal Classification) algorithm \cite{schmidt1986multiple} which decomposes the estimated covariance matrix to its signal and noise eigenvectors, using orthogonal projection assuming that the noise space is orthogonal to the array manifold.
-It is interesting to note that while earlier works were mostly derived in the context of time series analysis and later applied to the sensor array problem, MUSIC was indeed originally presented as a DOA estimator.
-\par A Less practical, but optimal in the sense of RMSE \cite{krim1996two}, is the statistical based ML approach which tries to find the most probable DOA assuming a known PDF.
+MUSIC (Multiple SIgnal Classification) algorithm \cite{schmidt1986multiple} which decomposes the estimated covariance matrix to its signal and noise eigenvectors, using orthogonal projection exploiting the fact that the noise space is orthogonal to the signal subspace.
+It is interesting to note that while earlier works were mostly derived in the context of time series analysis and only later applied to the sensor array problems, MUSIC was originally presented as a DOA estimator.
+\par A less practical, but optimal in the sense of RMSE \cite{krim1996two}, is the maximum likelihood (ML) approach which tries to find the most probable DOA assuming a known PDF.
 Though this approach served as a basis for extensive research, leading to more advanced concepts such as the ICA \cite{hyvarinen1999survey}, in the context of practical DOA estimation it's computational effort is high.
-Adding the fact that sub-optimal methods such as MUSIC were proven achieve the CRB under some practical assumptions (e.g. non-coherent signals) \cite{stoica1989music}, such methods (i.e. the sub optimal estimators) are substantially more common in practice. 
+Adding the fact that sub-optimal methods such as MUSIC were proven to achieve the CRB under some practical assumptions (e.g. non-coherent signals) \cite{stoica1989music}, these sub optimal estimators are substantially more common in practice. 
 \par In pursuit of spatial performance improvement, namely higher spatial separation and selectivity of arriving signals, many approaches were suggested.  
-One approach, commonly referenced as ``virtual arrays'' \cite{pal2010nested,chevalier2005virtual,dogan1995applications} deals with the extraction of samples originated in sensors that do not really exist by using high (higher than 2) order statistics and manipulating multiple statistical cross-terms in order to estimate statistical characteristics of signals impinging in missing sensors.
+One approach, commonly referenced as ``virtual arrays'' \cite{pal2010nested,chevalier2005virtual,dogan1995applications} deals with the extraction of samples originated in sensors that do not really exist, by using high (higher than 2) order statistics and manipulating multiple statistical cross-terms in order to estimate statistical characteristics of signals impinging in missing sensors.
 \par Using a similar approach, the $2q$-MUSIC algorithm \cite{chevalier2006high}, enables the use of $N^{2q}$ ``virtual elements'', by calculating the $q$'th order statistics.
 Another approach, involving different array geometries, examined minimum redundancy arrays \cite{moffet1968minimum,pillai1985new,pillai1987statistical,Kupershtein2013}, aiming to reduce the spatial ambiguity. The basic concept was minimization of the inter-element spacing redundancy in order to increase the overall resolution.
 % The main advantage of the first (i.e. virtual array) over the latter (i.e. minimum redundancy) is the obtainable analytical expression for the improvement in spatial selectivity when using virtual arrays.
@@ -26,9 +26,9 @@ Although the $q$-th order statistics based approach promises substantial improve
 \par Adaptive processing schemes \cite{frost1972algorithm,manolakis2000statistical}, being a wide and active research area, were also suggested trying to adaptively estimate and suppress the noise component in impinging signals by minimization of the receiver's output energy with some constraints.
 In \cite{manolakis2000statistical}, two main approaches to adaptive processing are discussed. The block adaptive scheme (which is also called \textit{sample matrix inversion}) and the sample-by-sample method.
 In both methods, after a certain amount of time, the system refreshes the spatial filter coefficients, trying to better suppress the received noise.
-As in many adaptive processing applications, the two methods rely on steepest descend optimization, which expose the adaptive processing approach to errors related to optimization parameters choices such step size etc.
+As in many adaptive processing applications, the two methods rely on steepest descend optimization, which exposes, the adaptive processing approach to errors related to optimization parameters choices such step size etc.
 \par In \cite{van1988beamforming}, ULA based beamforming and temporal FIR filtering are shown to be mathematically analogous, where the DOA acts as the spatial version of temporal frequency.
-Inspired by this analogy, which is thoroughly discussed in Sec.~\ref{sec:prlm_FIR_IIR}, we were motivated to find the spatial counterpart of the temporal IIR filter, both from academic curiousness and the known advantages of the IIR filter's frequency (DOA by analogy) response, hoping to gain spatial performance by finding the right architecture.
+Inspired by this analogy, which is thoroughly discussed in Sec.~\ref{sec:prlm_FIR_IIR}, we were motivated to find the spatial counterpart of the temporal IIR filter, both from academic curiousness and due to the known advantages of the IIR filter's performance.
 Therefore we formulated a question, ``what are the equivalent spatial domain processing methods which will be analogous to temporal IIR filtering?'' which served as a guide throughout our research.
 \par Achieving spatial IIR response has also motivated other works.
 In \cite{wen2013extending} two methods were considered.
@@ -53,15 +53,16 @@ The second approach suggested to consider overlapping subsets of one large ULA a
             % \put (50, 62.5) {\footnotesize{$r=0$}}
         \end{overpic}
     \end{center}
-     \caption{Referring to consecutive sub arrays' output as sequential output of the same ULA.}
+     \caption{In \cite{wen2013extending} subsections on a single large ULA are used to approximate an IIR response}
     \label{fig_intro_wen2}
 \end{figure}
-Obviously, the former approach is very sensitive to the synthetic delay accuracy and involves temporal domain processing which we try to avoid in this work to achieve purely spatial processing.  
+Obviously, the former approach is very sensitive to the synthetic delay accuracy and involves temporal domain processing (which we try to avoid in this work in order to achieve purely spatial processing).  
 Also, close inspection of the latter approach reveals that even though the sub-arrays are each weighted separately, each sensor's output is eventually linearly weighted when taking into account all related sub-arrays.
 Clearly, this is just another possible implementation of basic FIR like ULA spatial processor, so in both cases, there is no true spatial feedback between the array and the source of interest.
-\par Other interesting works \cite{Hum2009BeamformingFilters,madanayake2008speed} in the field of ultra-wideband (UWB) treat the spatial and temporal diversity, which reside in multiple consecutive snapshots of the array output, as if the signal is sampled in two independent temporal frequencies.
-Inspired by \cite{bruton1985three}, the authors show that impinging plane waves are represented as straight lines tilted according to their DOA and suggest methods to design line filters in the spatio-temporal plane.
-In \cite{Hum2009BeamformingFilters}, the authors also address the fact that ideal straight line filter may not be achieved due to the fact that the filter is periodic in both frequencies, causing the 2D frequency response the ``bend`` close to the sampling frequencies (see Fig.~\ref{fig_intro_UWB_bend}).
+\par Other interesting works \cite{Hum2009BeamformingFilters,madanayake2008speed} in the field of ultra-wideband (UWB) signals treat the spatial and temporal diversity, which reside in multiple consecutive snapshots of the array output, as if the signal is sampled in two independent temporal frequencies.
+Inspired by \cite{bruton1985three}, the authors show that impinging plane waves are represented as straight lines tilted according to their DOA and suggest methods to design line filters in that spatio-temporal plane.
+In \cite{Hum2009BeamformingFilters}, the authors also address the fact that ideal straight line filter is mathematically unachievable due to spatio-temporal frequencies periodicity.
+This issue manifests as a ``bend`` close to the sampling frequencies (see Fig.~\ref{fig_intro_UWB_bend}).
 \begin{figure}[ht!]
     \begin{center}
         \begin{overpic}[width=0.5\linewidth, 
@@ -75,12 +76,12 @@ In \cite{Hum2009BeamformingFilters}, the authors also address the fact that idea
 \end{figure}
 \par In this contribution, we present a low-complexity sensor array processing approach which achieves the desired spatial domain exclusive IIR-like beampattern, while avoiding any temporal processing of the signal.
 To this end, we arbitrarily choose to formulate the problem in the context of a localization problem, hence our goal is to estimate the direction and the range of some target of interest. 
-\par The novelty, compared to traditional array processing, is the incorporation of spatial feedback, which we prove to be the spatial domain equivalent of temporal domain IIR filtering.
+\par The novelty, compared to traditional array processing, is by incorporating spatial feedback, which we prove to be the spatial domain equivalent of temporal domain IIR filtering.
 Assuming the target of interest has a mirror-like behaviour (i.e., reflects its impinging signals), the spatial feedback between the array and the target is created by continuously re-transmitting a synthesized version of the impinging signal (and its reflections) to the target.
 Note that the initial stimulus can be generated by the target or the array itself. In the text to follow, we assume this is the latter. 
 Furthermore, as opposed to the passive target case (i.e., a target which merely reflects the impinging signal), one may consider a cooperative target, which receives, enhances and re-transmits the signal back to the array.
 \par In this work, we use the following conventions; vectors and matrices are denoted by lower and upper case bold italic letters respectively. 
 $v_{i}$ and $A_{ij}$ are the $i$-th element of the vector $\vecnot{v}$ and the $i,j$-th element of the matrix $\vecnot{A}$.
 Also, $\vecnot{A}^{T}$, $\vecnot{A}^{*}$ and $\vecnot{A}^{H}$ are the transpose, conjugate and Hermitian transpose of the matrix $\vecnot{A}$ respectively.
-\par In the followings, we elaborate in Chapter~\ref{chap:prelims} on some relevant theoretic concepts which serve as the foundation of this presentation.
-Then our novel architecture is presented and analysed in Chapter.~\ref{chap:firstchap} followed by a thorough concluding discussion on the findings and future research in Chapter.~\ref{chap:futureResearch}.
+\par In the followings, we elaborate in Chapter~\ref{chap:prelims} on some relevant theoretic concepts which serve as the foundation of this work.
+Then, our novel architecture is presented and analysed in Chapter.~\ref{chap:firstchap} followed by a thorough concluding discussion of the findings and future research directions in Chapter.~\ref{chap:conclusion}.

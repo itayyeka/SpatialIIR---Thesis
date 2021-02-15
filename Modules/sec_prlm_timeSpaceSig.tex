@@ -27,20 +27,20 @@ In complimentary to Fig.~\ref{fig_ULA_sketch}, Fig.~\ref{fig_ULA_imping} adds th
 \vecnot{f}\rBrace{t,\vecnot{p}} = \vBrace{f\rBrace{t,p_{0}},\dots,f\rBrace{t,p_{N-1}}}^{T},
 \end{equation}
 where $p_{n}$ denotes the $n$-th sensor position, $t$ denotes the continuous-time variable and $^{T}$ denotes the transpose operation. 
-Considering the \emph{conventional beamformer} \cite{van2004optimum}, the output ($y\rBrace{t}$) is expressed by:
+Considering the \emph{conventional beamformer} \cite{van2004optimum}, the output ($z\rBrace{t}$) is expressed by:
 \begin{equation}
 z\rBrace{t} = \sum_{n=0}^{N-1}{f\rBrace{t,p_{n}}\omega_{n}^{*}},
 \end{equation}
 where $\omega_{n}$ is a complex weight used for the $n$'th sensor's output, as shown in Fig.~\ref{fig_ULA_imping} and $^{*}$ denotes complex conjugation. 
-Consider $s\rBrace{t} = e^{j\omega{t}}$ as a plane wave propagating at angular frequency $w$, and $\theta \in \vBrace{-\frac{\pi}{2},\frac{\pi}{2}}$ as the direction of arrival (DOA) angle measured with respect to the broadside of the linear array, as shown in Fig.~\ref{fig_ULA_imping}.
-The wave signals spatially sampled by the sensor array inputs are
+Consider $s\rBrace{t} = e^{j\omega{t}}$ as a plane wave propagating at temporal frequency $\omega$, and $\theta \in \vBrace{-\frac{\pi}{2},\frac{\pi}{2}}$ as the direction of arrival (DOA) angle measured with respect to the broadside of the linear array, as shown in Fig.~\ref{fig_ULA_imping}.
+The wave signal, spatially sampled by the sensor array inputs is
 \begin{equation}
 \label{eq_prlm_timeSpace_outputVec}
 \vecnot{f}\rBrace{t,x} = \vBrace{s\rBrace{t},s\rBrace{t-\tau}\dots, s\rBrace{t-\rBrace{N-1}\tau}}^{T},
 \end{equation}
 where $\tau = \frac{d\cdot{}\cos{\theta}}{c}$ is the propagation delay between consecutive sensors and $c$ is the wave's velocity in the medium.
-Considering narrowband signals (i.e. $s\rBrace{t}=\exp^{-j\omega{}t}$), the time delay $\tau$ translates to a mere phase shift and an auxiliary dephased \emph{steering vector} takes the form of
+Considering narrowband signals, the time delay $\tau$ translates to a mere phase shift and the \emph{steering vector} takes the form of
 \begin{equation}
-\vecnot{d}\rBrace{\theta}=\vBrace{1,e^{-j\omega\tau},\dots,e^{-j\rBrace{N-1}\omega\tau}}^{T}.
+\vecnot{d}\rBrace{\theta}=\vBrace{1,e^{-j\omega\tau},\dots,e^{-j\omega\tau\rBrace{N-1}}}^{T}.
 \end{equation}
 As every impinging signal will cause the excitation of the array elements in the form of a specific steering vector (up to a common additive phase), we define the \emph{array manifold} to be the set of all steering vectors of $\theta\in\left[0,2\pi\right)$, hence it also spans the received signal sub space in the noiseless scenario.

@@ -1,8 +1,8 @@
 In this chapter, we revisit the most basic DOA estimation approach, i.e. beamforming, and present our novel feedback based architecture.
 The feedback based beamforming concept is introduced in Sec.~\ref{sec_introduceFeedback}.
-Then, we apply information theory related reasoning for the array setting in Sec.~\ref{sec_FIM}, namely we use the Fisher Information Matrix.
+Then, we apply information theory related reasoning for the array setting in Sec.~\ref{sec_FIM}, namely we use the Fisher Information Matrix (FIM).
 The resultant beamformer's temporal response and spatial performance are analysed in Sec.~\ref{sec_stability} and Sec.~\ref{sec_Performance} respectively, assuming ideal noiseless scenario.
-Considering practical scenarios, the beamformer's noise sensitivity is exemplified in Sec.\ref{sec_sim}, followed by a practical and robust dual-frequency beamformer which is presented in Sec.~\ref{sec_app}.
+Considering noisy setups, the beamformer's noise sensitivity is exemplified in Sec.\ref{sec_sim}, followed by a practical and robust dual-frequency beamformer which is presented in Sec.~\ref{sec_app}.
 
 \section{Notations and problem setup}
 \label{sec_introduceFeedback}
@@ -67,29 +67,16 @@ Applying the \emph{normalized beampattern} concept of Sec.~\ref{sec:prlm_array_p
         \HbaFB
         }{
         H_{\vecnot{\beta}_{\coefSetName,\text{opt}},\vecnot{\alpha}_{\coefSetName,\text{opt}}}
-        }
-         =
+        }\\
+        &=
         \frac{
         \HbaFB
         }{
         r/\rBrace{1-r}
-        },
-        % \\
-        % &=\frac{\rBrace{1-r}^{2}\Dp{\dTheta/2,N}{2}}{1+r^{2}\Dp{\dTheta/2,N}{2}-2r\D{\dTheta/2}{N}\cos{\rBrace{\dPhi+\frac{N-1}{2}\dTheta}}},
+        }\\
+        &=
+        \frac{\rBrace{1-r}\D{\dTheta/2}{N}}{\exp\rBrace{j\rBrace{\dPhi+(N-1)\dTheta/2}}-r\D{\dTheta/2}{N}}.
     \end{split}
-    %}
-\end{equation}
-where the $\Delta\theta,\Delta\phi,r$ subscripts express the DOA, range and gain errors dependency, respectively.
-%Also, $\abs{\HrTPr}$ is defined to be the beampattern.
-Plugging \eqref{eq:SF_CB} into \eqref{eq_narmalized_pattern} yields 
-\begin{equation}\label{eq_generalH}
-    %\resizebox{0.89\linewidth}{!}
-    {
-        \begin{split}
-             \HrTPr=
-             \frac{\rBrace{1-r}\D{\dTheta/2}{N}}{\exp\rBrace{j\rBrace{\dPhi+(N-1)\dTheta/2}}-r\D{\dTheta/2}{N}}.
-        \end{split}
-        }
 \end{equation}
 Note that the known \cite{van2004optimum} normalized response of standard ULA is obtained by setting $r=0$ and $\Delta\phi=0$
 $$
