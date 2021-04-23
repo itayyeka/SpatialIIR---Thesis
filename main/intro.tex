@@ -1,5 +1,6 @@
 \chapter{Introduction}
 \label{chap:intro}
+\section{Background and Motivation}
 The general field of array processing has been thoroughly studied throughout several decades.
 The array sensors' spatial diversity enables the extraction of spatial information about impinging signals, thus laying the ground for wide range of applications, such as localizing a transmitting source \cite{skolnik2008radar,long2019}, blindly separating mixtures of impinging signals \cite{comon1994independent}, improving signal to noise ratio (SNR) \cite{verdu1998multiuser}, and many more. 
 \par A uniform linear array (ULA) has always been a point of interest, due to its simplicity of analysis \cite{van2004optimum,benesty2018}. 
@@ -10,23 +11,20 @@ in the desired direction.
 \par The most practically used approach in DOA estimators, referred as the sub-space based estimation, involves invariant sub-spaces analysis of observed covariance matrices.
 Early research include PCA and errors-in-variables time series analysis \cite{krim1996two}.   
 However, the tremendous interest in the subspace approach is mainly due to the introduction of the
-MUSIC (Multiple SIgnal Classification) algorithm \cite{schmidt1986multiple} which decomposes the estimated covariance matrix to its signal and noise eigenvectors, using orthogonal projection exploiting the fact that the noise space is orthogonal to the signal subspace.
+MUSIC (Multiple SIgnal Classification) algorithm \cite{schmidt1986multiple} which decomposes the estimated covariance matrix to its signal and noise eigenvectors, using orthogonal projection exploiting the fact that the noise sub space is orthogonal to the signal subspace.
 It is interesting to note that while earlier works were mostly derived in the context of time series analysis and only later applied to the sensor array problems, MUSIC was originally presented as a DOA estimator.
 \par A less practical, but optimal in the sense of RMSE \cite{krim1996two}, is the maximum likelihood (ML) approach which tries to find the most probable DOA assuming a known PDF.
-Though this approach served as a basis for extensive research, leading to more advanced concepts such as the ICA \cite{hyvarinen1999survey}, in the context of practical DOA estimation it's computational effort is high.
+Though this approach served as a basis for extensive research, leading to more advanced concepts such as the independent component analysis (ICA) \cite{hyvarinen1999survey}, in the context of practical DOA estimation it's computational effort is high.
 Adding the fact that sub-optimal methods such as MUSIC were proven to achieve the CRB under some practical assumptions (e.g. non-coherent signals) \cite{stoica1989music}, these sub optimal estimators are substantially more common in practice. 
 \par In pursuit of spatial performance improvement, namely higher spatial separation and selectivity of arriving signals, many approaches were suggested.  
 One approach, commonly referenced as ``virtual arrays'' \cite{pal2010nested,chevalier2005virtual,dogan1995applications} deals with the extraction of samples originated in sensors that do not really exist, by using high (higher than 2) order statistics and manipulating multiple statistical cross-terms in order to estimate statistical characteristics of signals impinging in missing sensors.
 \par Using a similar approach, the $2q$-MUSIC algorithm \cite{chevalier2006high}, enables the use of $N^{2q}$ ``virtual elements'', by calculating the $q$'th order statistics.
 Another approach, involving different array geometries, examined minimum redundancy arrays \cite{moffet1968minimum,pillai1985new,pillai1987statistical,Kupershtein2013}, aiming to reduce the spatial ambiguity. The basic concept was minimization of the inter-element spacing redundancy in order to increase the overall resolution.
-% The main advantage of the first (i.e. virtual array) over the latter (i.e. minimum redundancy) is the obtainable analytical expression for the improvement in spatial selectivity when using virtual arrays.
-% In the minimum redundancy approach no such expression is available.
-% On the other side, the computation effort is considerably higher when the 2-nd order statistics are computed.
-Although the $q$-th order statistics based approach promises substantial improvement, both noise sensitivity and impractical computation amount are dominant drawbacks, limiting the usage of such methods in practical applications.   
+Although the $q$-th order statistics based approach promises substantial improvement, both noise sensitivity and impractical computation costs are dominant drawbacks, limiting the usage of such methods in practical applications.   
 \par Adaptive processing schemes \cite{frost1972algorithm,manolakis2000statistical}, being a wide and active research area, were also suggested trying to adaptively estimate and suppress the noise component in impinging signals by minimization of the receiver's output energy with some constraints.
 In \cite{manolakis2000statistical}, two main approaches to adaptive processing are discussed. The block adaptive scheme (which is also called \textit{sample matrix inversion}) and the sample-by-sample method.
 In both methods, after a certain amount of time, the system refreshes the spatial filter coefficients, trying to better suppress the received noise.
-As in many adaptive processing applications, the two methods rely on steepest descend optimization, which exposes, the adaptive processing approach to errors related to optimization parameters choices such step size etc.
+As in many adaptive processing applications, the two methods rely on steepest descend optimization, which exposes the adaptive processing approach to errors related to optimization parameters choices such step size etc.
 \par In \cite{van1988beamforming}, ULA based beamforming and temporal FIR filtering are shown to be mathematically analogous, where the DOA acts as the spatial version of temporal frequency.
 Inspired by this analogy, which is thoroughly discussed in Sec.~\ref{sec:prlm_FIR_IIR}, we were motivated to find the spatial counterpart of the temporal IIR filter, both from academic curiousness and due to the known advantages of the IIR filter's performance.
 Therefore we formulated a question, ``what are the equivalent spatial domain processing methods which will be analogous to temporal IIR filtering?'' which served as a guide throughout our research.
@@ -74,14 +72,28 @@ This issue manifests as a ``bend`` close to the sampling frequencies (see Fig.~\
      \caption{2D spatio-temporal frequency response (dB) of practical UWB filter. The black line is angled according to the desired DOA.}
     \label{fig_intro_UWB_bend}
 \end{figure}
+\section{Overview of the Thesis}
+In this thesis, we propose a new feedback based beamformer architecture which acts as an actual spatial IIR filter while avoiding any temporal processing to the signal.
+We aim to guide the reader thorough the key stages of the research where in each stage, a sufficient background is provided followed by the solution composition.
+\par As this research does not closely follows any former work, some of analysis must be rigorously justified, hence we turn to classic literature as guidance.
+As an example, for the configuration of the array, we use the Fisher Information Matrix (FIM) aiming to maximize the residing spatial information in the system.
+\par After presenting the basic approach with it's complementary adjusted classic spatial analysis, we find that it is inherently sensitive to range estimation errors.
+We then suggest a more robust solution which is based on our conclusions from previous analysis.
+With the robust solution in hand, we present simulations and compare it to the basic conventional beamformer and the initial more sensitive approach.
+As expected, we find that it outperforms them, proving to perform well also in low signal to noise ratios (SNR).
+\par In this work, we use the following conventions; vectors and matrices are denoted by lower and upper case bold italic letters respectively. 
+$v_{i}$ and $A_{ij}$ are the $i$-th element of the vector $\vecnot{v}$ and the $i,j$-th element of the matrix $\vecnot{A}$.
+Also, $\vecnot{A}^{T}$, $\vecnot{A}^{*}$ and $\vecnot{A}^{H}$ are the transpose, conjugate and Hermitian transpose of the matrix $\vecnot{A}$ respectively.
+\section{Main Contributions}
 \par In this contribution, we present a low-complexity sensor array processing approach which achieves the desired spatial domain exclusive IIR-like beampattern, while avoiding any temporal processing of the signal.
-To this end, we arbitrarily choose to formulate the problem in the context of a localization problem, hence our goal is to estimate the direction and the range of some target of interest. 
+To this end, we arbitrarily choose to formulate the problem in the context of localization, hence our goal is to estimate the direction and the range of some target of interest. 
 \par The novelty, compared to traditional array processing, is by incorporating spatial feedback, which we prove to be the spatial domain equivalent of temporal domain IIR filtering.
 Assuming the target of interest has a mirror-like behaviour (i.e., reflects its impinging signals), the spatial feedback between the array and the target is created by continuously re-transmitting a synthesized version of the impinging signal (and its reflections) to the target.
 Note that the initial stimulus can be generated by the target or the array itself. In the text to follow, we assume this is the latter. 
 Furthermore, as opposed to the passive target case (i.e., a target which merely reflects the impinging signal), one may consider a cooperative target, which receives, enhances and re-transmits the signal back to the array.
-\par In this work, we use the following conventions; vectors and matrices are denoted by lower and upper case bold italic letters respectively. 
-$v_{i}$ and $A_{ij}$ are the $i$-th element of the vector $\vecnot{v}$ and the $i,j$-th element of the matrix $\vecnot{A}$.
-Also, $\vecnot{A}^{T}$, $\vecnot{A}^{*}$ and $\vecnot{A}^{H}$ are the transpose, conjugate and Hermitian transpose of the matrix $\vecnot{A}$ respectively.
-\par In the followings, we elaborate in Chapter~\ref{chap:prelims} on some relevant theoretic concepts which serve as the foundation of this work.
-Then, our novel architecture is presented and analysed in Chapter.~\ref{chap:firstchap} followed by a thorough concluding discussion of the findings and future research directions in Chapter.~\ref{chap:conclusion}.
+\section{Thesis Organization}
+\par This thesis is organized as follows.
+In Chapter~\ref{chap:prelims}, we cover basic concepts of array processing, followed by some emphasize on the localization field of research and finalize with the basic concepts which drive the motivation for this research.
+\par In Chapter.~\ref{chap:firstchap} the basic feedback beamformer is presented and thoroughly analysed, followed by the presentation of the more robust architecture, which uses the former as a building block.
+Simulations are also provided, supporting the analytical analysis.
+\par In Chapter.~\ref{chap:conclusion} we discuss the results and conclude our findings. We finalize by also proposing some leads to future research.
