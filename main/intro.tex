@@ -8,7 +8,7 @@ The array size and the number of its elements ($N$) has significant influence on
 \par Early algorithms for direction of arrival (DOA) estimation were based on the beamforming concept \cite{krim1996two}, where the array's reception beam is steered (mechanically or electronically) to multiple directions in search of received energy peaks which are interpreted as valid emitters.
 One notable improvement to the convectional beamformer \cite{van2004optimum} was Capon's beamformer  (aka minimum variance distortionless response (MVDR) in acoustics related literature) which attempts to minimize the power contributed by noise and any signals coming from other directions than the DOA of interest, while maintaining a fixed gain
 in the desired direction.
-\par The most practically used approach in DOA estimators, referred as the sub-space based estimation, involves invariant sub-spaces analysis of observed covariance matrices.
+\par The most practically used approach in DOA estimators, referred as the subspace based estimation, involves invariant subspace analysis of observed covariance matrices.
 Early research include PCA and errors-in-variables time series analysis \cite{krim1996two}.   
 However, the tremendous interest in the subspace approach is mainly due to the introduction of the
 MUSIC (Multiple SIgnal Classification) algorithm \cite{schmidt1986multiple} which decomposes the estimated covariance matrix to its signal and noise eigenvectors, using orthogonal projection exploiting the fact that the noise sub space is orthogonal to the signal subspace.

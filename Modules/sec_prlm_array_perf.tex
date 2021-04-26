@@ -40,9 +40,9 @@ Considering DOA estimators, the main tool for assessing an array's localization 
 \end{figure}
 Although for sensors in 3D space the DOA may depend on two angles (azimuth and elevation), for the sake of simplicity, we consider a planar (i.e. azimuth without elevation) DOA-only dependant array response (i.e. the \emph{beampattern})
 \begin{equation}
-B\rBrace{\theta} = 20\log_{10}\abs{Z\rBrace{\theta}}.
+B\rBrace{\theta} = \abs{Z\rBrace{\theta}}.
 \end{equation}
-The beampttern is commonly presented in a graphical manner as exemplified in Fig.~\ref{fig_common_bps}.
+The beampttern is commonly presented in a graphical manner with log scale as exemplified in Fig.~\ref{fig_common_bps}.
 It's characteristics, such as main lobe width, position and attenuation of sidelobes are then analysed and compared between different schemes.
 The analysis can be done theoretically, when the beampattern's mathematical expression is known or it can be conducted numerically for empirical scenarios.
 % In this work, as we deal with 2D planar localization problems, we find the presentation of Fig.~\ref{fig_common_bps1} most suitable.
@@ -95,11 +95,11 @@ We define the power pattern, $P\rBrace{\theta_{d}}$, to be the squared magnitude
 where the frequency dependence is suppressed.
 Then the directivity $\mathcal{D}$ is defined as
 \begin{equation}\label{eq_D}
-    \mathcal{D}\rBrace{\theta_{T}} = \frac{
-    P\rBrace{\theta_{T}}
+    \mathcal{D}\rBrace{\theta_{d}} = \frac{
+    P\rBrace{\theta_{d}}
     }{
     \frac{1}{2\pi}\int_{0}^{2\pi}P\rBrace{\theta}d\theta
-    }
+    }.
 \end{equation}
-In the following, as we consider steered (to $\theta_{s}$) arrays, we suppress the DOA dependency such that $\mathcal{D} = \mathcal{D}\rBrace{{\theta_{s}}}$. 
-For uniformly weighted ULAs with no feedback, it is known \cite{van2004optimum} that $\mathcal{D} = N$.
+% In the following, as we consider steered (to $\theta_{s}$) arrays, we suppress the DOA dependency such that $\mathcal{D} = \mathcal{D}\rBrace{{\theta_{s}}}$. 
+and for uniformly weighted ULAs with no feedback, it is known \cite{van2004optimum} that $\mathcal{D} = N$.

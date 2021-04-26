@@ -249,11 +249,11 @@
 \iitthesis@thesisdatafield{authorHebrew}{
 איתי יחזקאל קארו 
 }
-\iitthesis@thesisdatafield{titleEnglish}{Source Localization With Feedback Based Beamforming}
+\iitthesis@thesisdatafield{titleEnglish}{Source Localization with Feedback Beamforming}
 \iitthesis@thesisdatafield{titleHebrew}{
     איכון מקור על ידי עיצוב אלומה עם משוב
 }
-\iitthesis@thesisdatafield{disciplineEnglish}{Electrical Engineering}
+\iitthesis@thesisdatafield{disciplineEnglish}{Electrical and Computer Engineering}
 \iitthesis@thesisdatafield{disciplineHebrew}{הנדסת חשמל}
 \iitthesis@thesisdatafield{supervisionEnglish}{Information regarding the supervision and supervisors}
 \iitthesis@thesisdatafield{supervisionHebrew}{מידע על המנחים וההנחיה}

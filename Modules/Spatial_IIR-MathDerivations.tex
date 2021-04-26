@@ -6,7 +6,7 @@ Time domain analysis of the proposed feedback based architecture, considering bo
     \label{eqn:SingleSensorTemporalEquality}
     % \resizebox{.91\linewidth}{!}{
         \begin{split}
-            x_{n}(t) = g\rBrace{s\rBrace{t-\tau_{pd}-\tau_{n}}
+            x_{n}(t) = g\vBrace{s\rBrace{t-\tau_{pd}-\tau_{n}}
             +\sum_{m=0}^{N-1}{\alpha^{*}_{m}x_{m}\rBrace{t-\tau_{pd}-\tau_{n}}}},
         \end{split}
     % }
@@ -17,12 +17,12 @@ Expressing the Fourier transform of \eqref{eqn:SingleSensorTemporalEquality},
     \label{eqn_singleSensorFourier}
     % \resizebox{.91\linewidth}{!}{
             X_{n} =
-            g\rBrace{\F{s}
-            \exp\rBrace{-j\omega\rBrace{\tau_{pd}+\tau_{n}}}
+            g\cBrace{\F{s}
+            \exp\vBrace{-j\omega\rBrace{\tau_{pd}+\tau_{n}}}
             +\sum_{m=0}^{N-1}
             {
             \alpha^{*}_{m}\F{x}_{m}
-            \exp\rBrace{-j\omega\rBrace{\tau_{pd}+\tau_{n}}}
+            \exp\vBrace{-j\omega\rBrace{\tau_{pd}+\tau_{n}}}
             }},
     % }
 \end{equation}
@@ -50,10 +50,10 @@ Setting $\vecnot{u}=-g\vecnot{d}\exp{\rBrace{-j\omega\tau}}$ and $\vecnot{v}=\ve
         \rBrace{I-g\vecnot{d}\vecnot{\alpha}^{H}\exp{\rBrace{-j\omega\tau}}}^{-1} 
         &= I+\frac{g\vecnot{d}\vecnot{\alpha}^{H}\exp{\rBrace{-j\omega\tau}}}{1-g\vecnot{\alpha}^{H}\vecnot{d}\exp{\rBrace{-j\omega\tau}}}
         \\
-        &= \frac{\rBrace{I-g\vecnot{\alpha}^{H}\vecnot{d}\exp{\rBrace{-j\omega\tau}}+g\vecnot{d}\vecnot{\alpha}^{H}\exp{\rBrace{-j\omega\tau}}}\vecnot{d}}{1-g\vecnot{\alpha}^{H}\vecnot{d}\exp{\rBrace{-j\omega\tau}}}
+        &= \frac{\rBrace{I-g\vecnot{\alpha}^{H}\vecnot{d}\exp{\vBrace{-j\omega\tau}}+g\vecnot{d}\vecnot{\alpha}^{H}\exp{\vBrace{-j\omega\tau}}}\vecnot{d}}{1-g\vecnot{\alpha}^{H}\vecnot{d}\exp{\rBrace{-j\omega\tau}}}
         \\
         &= \frac{
-        \rBrace{I+\rBrace{\vecnot{d}\vecnot{\alpha}^{H}-\vecnot{\alpha}^{H}\vecnot{d}}g\exp{\rBrace{-j\omega\tau}}}\vecnot{d}
+        \vBrace{I+\rBrace{\vecnot{d}\vecnot{\alpha}^{H}-\vecnot{\alpha}^{H}\vecnot{d}}g\exp{\rBrace{-j\omega\tau}}}\vecnot{d}
         }{
         1-g\vecnot{\alpha}^{H}\vecnot{d}\exp{\rBrace{-j\omega\tau}}
         }

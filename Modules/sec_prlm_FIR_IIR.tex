@@ -12,13 +12,19 @@ This section will briefly overview the design methods and the analogy of ULA bas
     \begin{center}
         \begin{overpic}[width=0.7\linewidth, 
         %grid, 
-        tics=10,trim=0 0 0 0]{./Media/BASIC_FIR_FILTER_ARCH.png}
-            \put (13, 36){\footnotesize{$s$}}
-            \put (22, 22){\footnotesize{$\beta_{0}$}}
-            \put (38.75, 22){\footnotesize{$\beta_{1}$}}
-            \put (55.5, 22){\footnotesize{$\beta_{2}$}}
-            \put (80.75, 22){\footnotesize{$\beta_{N-1}$}}
-            \put (85, 10){\footnotesize{$z$}}
+        tics=10,trim=0 0 0 0]{./Media/FIR_arch.png}
+            \put (13, 38){$s$}
+            \put (26, 33.5){$Z^{-1}$}
+            \put (47, 33.5){$Z^{-1}$}
+            \put (68, 33.5){$Z^{-1}$}
+            \put (37.5, 3){$+$}
+            \put (59, 3){$+$}
+            \put (80, 3){$+$}
+            \put (20.5, 18){$\beta_{0}$}
+            \put (42, 18){$\beta_{1}$}
+            \put (63, 18){$\beta_{2}$}
+            \put (84, 18){$\beta_{N-1}$}
+            \put (90, 7){$z$}
         \end{overpic}
     \end{center}
     \caption{An FIR based filtering of signal $s$ with the $\vecnot{\beta}$ as the coefficients, generating a filtered signal $z$.}
@@ -27,17 +33,21 @@ This section will briefly overview the design methods and the analogy of ULA bas
 \begin{figure}[h!]
     \begin{center}
         \begin{overpic}[width=0.7\linewidth, 
-        % grid, 
-        tics=10,trim=0 0 0 0]{./Media/BASIC_IIR_FILTER_ARCH.png}
-            \put (60, 50){\footnotesize{$\beta_{0}$}}
-            \put (60, 30){\footnotesize{$\beta_{1}$}}
-            \put (60, 10){\footnotesize{$\beta_{2}$}}
-            \put (36, 30){\footnotesize{$\alpha_{1}$}}
-            \put (36, 10){\footnotesize{$\alpha_{2}$}}
-            \put (10, 50){\footnotesize{$s$}}
-            \put (85, 50){\footnotesize{$z$}}
-            \put (47.5, 34.5){\footnotesize{$z^{-1}$}}
-            \put (47.5, 14.5){\footnotesize{$z^{-1}$}}
+        %grid, 
+        tics=10,trim=0 0 0 0]{./Media/IIR_arch.png}
+            \put (60, 55){$\beta_{0}$}
+            \put (60, 30){$\beta_{1}$}
+            \put (60, 6){$\beta_{2}$}
+            \put (39, 30){$\alpha_{1}$}
+            \put (39, 6){$\alpha_{2}$}
+            \put (10, 54){$s$}
+            \put (90, 54){$z$}
+            \put (48.5, 37.5){$z^{-1}$}
+            \put (48.5, 13){$z^{-1}$}
+            \put (21, 25){+}
+            \put (21, 50){+}
+            \put (78, 25){+}
+            \put (78, 50){+}
         \end{overpic}
     \end{center}
     \caption{Direct form II $2^{nd}$ order IIR architecture, where the FIR part is the $\vecnot{\beta}$ coefficients and the recursive part is implemented via the $\vecnot{\alpha}$ set.}
