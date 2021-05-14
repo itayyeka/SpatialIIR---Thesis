@@ -16,7 +16,8 @@
 % your thesis (MSc/PhD/MArch etc.)
 %
 % \documentclass[PhD,noabbrevs]{misc/iitthesis}
-\documentclass[MSc,fullpageDraft,beforeDefense,noabbrevs]{misc/iitthesis}
+% \documentclass[MSc,fullpageDraft,beforeDefense,noabbrevs]{misc/iitthesis}
+\documentclass[MSc,fullpageDraft,beforeDefense]{misc/iitthesis}
 
 
 % Definitions of info fields for the thesis - subject, advisor,
@@ -44,7 +45,7 @@
 %   with an overview of results).
 % - Be careful with links in Hebrew text (wrap them in \L{}).
 \include{front/abstract}
-\include{front/abbrevs}
+% \include{front/abbrevs}
 
 % Additional machinery relevant to any thesis
 % (it's not part of the document class because it's not absolutely
@@ -61,6 +62,16 @@
 % Definitions, settings and tweaks for this thesis specifically
 \include{misc/my-thesis-specific}
 
+\RequirePackage[acronym,savewrites,nonumberlist,seeautonumberlist]{glossaries}
+\setlength{\glsdescwidth}{0.95\linewidth}
+% \newglossarystyle{mystyle}{%
+%   \glossarystyle{long}%
+%   \renewenvironment{theglossary}%
+%     %  {\begin{longtable}{p{3cm}p{\glsdescwidth}}}%
+%      {\begin{longtable}{p{3cm}p{\glsdescwidth}}}%
+%      {\end{longtable}}%
+% }
+
 % If you are using WinEdt, and using a publication list on the the
 % acknowledgements page, and are having problems getting your document
 % to compile with the 'PDFLaTeXify' button, try uncommenting the
@@ -71,6 +82,7 @@
 \usepackage{multibib}
 \newcites{pubinfo}{Acknowledgement page references}
 \def\iitthesisextramultibibdefs{}
+\makeglossaries
 
 \begin{document}
 
@@ -81,7 +93,6 @@
 % inner title page, the acknowledgements page, etc. - everything
 % up to but not including the introduction
 \makefrontmatter
-
 % Main Matter
 % ------------
 %

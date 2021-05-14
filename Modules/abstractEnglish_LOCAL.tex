@@ -1,13 +1,13 @@
 The general field of array processing has been thoroughly studied throughout several decades.
 The array sensors' spatial diversity enables the extraction of spatial information about impinging signals, thus laying the ground for wide range of applications.
-The array size and the number of its elements have significant influence on the achievable array performance, such as signal to noise ratio (SNR) improvement, spatial separation capabilities, directivity, array gain, source localization, etc.
+The array size and the number of its elements have significant influence on the achievable array performance, such as \gls{SNR} improvement, spatial separation capabilities, directivity, array gain, source localization, etc.
 \par 
 Localization applications are divided to several groups, each featuring a different approach for estimating the spatial parameters of objects in the arena.
 The most basic approach is \emph{beamforming}, where the arena (or a part of it) is continuously scanned by steering (mechanically or electronically) the array to all possible directions in search for objects.
 Another approach, more commonly used, is the subspace-based processing which exploits the orthogonality between the array manifold (i.e. the array's excitations set of impinging planewaves from all directions) and the noise subspace.
 In this scheme the input signal is projected onto the array manifold - thus mitigating non directional noise interference. 
 Statistical processing, although costly in terms of computation effort, is also in use.
-One important example is the maximum-likelihood (ML) approach which assumes a known probability density function (PDF) for the input signal or the noise.
+One important example is the maximum-likelihood (ML) approach which assumes a known \gls{PDF} for the input signal or the noise.
 \par
 In this work we revisit the \emph{beamforming} approach.
 Inspired by the analogy between spatial processing with uniform linear array (ULA) and temporal finite impulse response (FIR) filtering, we search for the spatial counterpart of the temporal infinite impulse response (IIR) filter.
@@ -19,7 +19,7 @@ In this manner, a spatial loop is created, which is shown to be equivalent of en
 \par 
 Using a traditional beamforming performance analysis, the beamwidth, peak to side-lobe ratio, array directivity and white noise sensitivity are evaluated for the feedback based array.
 A significant improvement in all aspects is shown, while thoroughly discussing the conditions for enhanced performance.
-Considering ideal scenarios, the feedback beamformer virtually achieves an infinite aperture, increasing the available spatial information about the target and significantly improves the array's spatial performance.
+Considering ideal scenarios, the feedback beamformer (FB) virtually achieves an infinite aperture, increasing the available spatial information about the target and significantly improves the array's spatial performance.
 \par
 Taking into account the unavoidable estimation errors and uncertainties, we find that the basic feedback integrated beamformer is very sensitive to even mild range errors.
 % Also, the system is more sensitive as the carrier frequency increments.

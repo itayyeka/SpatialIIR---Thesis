@@ -1,21 +1,22 @@
-As a preliminary to the following performance discussion in Sec.~\ref{sec_Performance}, we start with simple temporal simulations of the feedback beamformer.
-In this section, we start by identifying the unknown parameters in the experimental scenario and formulate their related error terms.
-Using those error terms, some basic simulation scenarios are defined, raging from ideal to fully noised cases, which enable rigorous presentation of our findings.
-After the error terms have been defined, we first address the temporal stability of the system and discuss its correspondence with the system's response which was found in \eqref{eqn:GeneralFeedbackTransferFunction}.
+As a preliminary, we start with simple temporal simulations of the feedback beamformer.
+% In this section, we start by identifying the unknown parameters in the experimental scenario and formulate their related error terms.
+% Using those error terms, some basic simulation scenarios are defined, raging from ideal to fully noised cases, which enable rigorous presentation of our findings.
+% After the error terms have been defined, 
+We first address the temporal stability of the system and discuss its correspondence with the system's response which was found in \eqref{eqn:GeneralFeedbackTransferFunction}.
 \subsection{Gain mismatch}
-The analogy of the feedback beamformer to the temporal IIR architecture raises some fundamental questions that should be addressed.
+The analogy of the FB to the temporal IIR architecture raises some fundamental issues that should be addressed.
 In the following, supported by simulations, we answer those questions.
-\par The first question, related to the feedback beamformer's analogy to the temporal IIR architecture, is stability related.
+\par The first question, related to the FB's analogy to the temporal IIR architecture, is stability related.
 To begin with, we should first ask what does ``stability`` means.
 % Interestingly, the system's response of \eqref{eqn:GeneralFeedbackTransferFunction} is not frequency dependent, for it is exclusively governed by spatial parameters.
 % Therefore, 
 In the absence of any previous related work on spatial feedback, we find that the commonly used Bounded-Input-Bounded-Output (BIBO) stability is appropriate. 
 % As such, assuming the \emph{Perfect alignment} scenario, we identify $r$ in \eqref{eq:SF_CB} to be the most influential for determining the system's stability for it controls the response's denominator - e.g. for $r<1$ the denominator will never be nullified.
-To this end, the gain mismatch
+To this end, the gain mismatch is
 \begin{equation}
-    r=g/\hat{g}
+    r=g/\hat{g}.
 \end{equation}
-and plug \eqref{eq:alpha_beta_opt} into \eqref{eqn:GeneralFeedbackTransferFunction}, giving rise to
+And plugging \eqref{eq:alpha_beta_opt} into \eqref{eqn:GeneralFeedbackTransferFunction}, gives rise to
 \begin{equation}\label{eq:SF_CB_gainMismatch}
     %\resizebox{.894\linewidth}{!}
     {
@@ -26,18 +27,18 @@ and plug \eqref{eq:alpha_beta_opt} into \eqref{eqn:GeneralFeedbackTransferFuncti
             }{
             1 - g\vecnot{\alpha}_{\text{CB,opt}}^{H}\vecnot{d}\exp{\rBrace{-j\phi}}
             }\\
-            = &\frac{    
-            \frac{r}{N}\vecnot{d}^{H}\vecnot{d}
-            }{
-            1 - \frac{r}{N}\vecnot{d}^{H}\vecnot{d}
-            }\\
-            = & \frac{r}{1-r}.
+            % = &\frac{    
+            % \frac{r}{N}\vecnot{d}^{H}\vecnot{d}
+            % }{
+            % 1 - \frac{r}{N}\vecnot{d}^{H}\vecnot{d}
+            % }\\
+            = & \frac{r}{1-r} \triangleq H_{0}.
         \end{split}
     }
 \end{equation}
-As anticipated from \eqref{eq:SF_CB_gainMismatch} and confirmed with the simulations presented in Fig.\ref{fig_stability}, for $r>1$ the system is not stable, for the received amplitude may increase (in absolute value) to infinite values.
+As anticipated from \eqref{eq:SF_CB_gainMismatch} and confirmed with the simulations presented in Fig.\ref{fig_stability}, for $r\geq1$ the system is not stable, for the received amplitude may increase (in absolute value) to infinite values.
 In Fig.~\ref{fig_stabilityVal}, we plot the final amplitude value after 100 iterations of the signal being retransmitted between the array and the target of interest and find that the final values substantially increase as $r\to{1}$.
-This issue will have to be taken into consideration when one designs such an array for practical applications but is outside the scope of this work.
+This issue will have to be taken into consideration when one designs such an array for practical applications but currently this is outside the scope of this work.
 \begin{figure}[t!]
     \begin{center}
         \begin{overpic}[width=0.55\linewidth, 
@@ -53,7 +54,7 @@ This issue will have to be taken into consideration when one designs such an arr
         \end{overpic}
     \end{center}
     \caption{
-    Simulating a 3 element ULA based feedback beamformer, steered to a target which resides in the direction $\theta_{s} = \pi/2$ and plotting temporal response (dB) for multiple $r$ values.
+    Simulating a 3 element ULA based FB, steered to a target which resides in the direction $\theta_{s} = \pi/2$ and plotting temporal response (dB) for multiple $r$ values.
     The horizontal axis ($t/\tau_{pd}$) is the time, normalized to the signal's round-trip duration to the target and back.
     }
     \label{fig_stability}
@@ -71,16 +72,17 @@ The reader may notice in Fig.~\ref{fig_beamThinning} that the $t=1\cdot{}\tau_{p
             \put (-6, 38){\rotatebox{90}{$H_{r=0.9}$}}
             \put (100, 49){\rotatebox{0}{$t=1\cdot\tau_{pd}$}}
             \put (100, 39){\rotatebox{0}{$t=2\cdot\tau_{pd}$}}
-            \put (100, 26.5){\rotatebox{0}{$t=5\cdot\tau_{pd}$}}
-            \put (100, 14){\rotatebox{0}{$t=10\cdot\tau_{pd}$}}
+            \put (100, 22.5){\rotatebox{0}{$t=5\cdot\tau_{pd}$}}
+            \put (100, 12){\rotatebox{0}{$t=10\cdot\tau_{pd}$}}
             \put (53.5, 27.5){\rotatebox{-75}{$t=50\cdot\tau_{pd}$}}
             \put (4.5, 80){\rotatebox{0}{dB}}
         \end{overpic}
     \end{center}
     \caption{
-    Simulation of same setup as in Fig.\ref{fig_stability} with $r=9$.
+    Simulation of the same setup as in Fig.\ref{fig_stability} with $r=0.9$.
     Several simulations are conducted, where each is simulated with different duration.
-    It actually illustrates the forming of the final beampattern in time as our analysis assumes infinite duration. 
+    It actually illustrates the forming of the final beampattern in time as our analysis assumes infinite duration.
+    This convergence is analogous to the settling time of the IIR filters' temporal response, where at early stages, the response is not yet in its steady-state.  
     }
     \label{fig_beamThinning}
 \end{figure}
@@ -95,12 +97,12 @@ The reader may notice in Fig.~\ref{fig_beamThinning} that the $t=1\cdot{}\tau_{p
         \end{overpic}
     \end{center}
     \caption{
-    After simulating same setup of Fig.\ref{fig_stability} for a fined grid of $r$, we plot the final received amplitude in dB with respect to $r$.
+    After simulating the same setup as in Fig.\ref{fig_stability}, we plot the final received amplitude in dB with different choices of $r$.
     }
     \label{fig_stabilityVal}
 \end{figure}
-\par The Second question to be asked regards the settling time of the system, for in Fig.~\ref{fig_stability} we easily observe that the settling time of $r=0.6$ (i.e. $\sim{}10$ signal round trips) is substantially shorter than its matching value ($\sim{}50$) when $r=0.9$.
-To better understand the phenomenon, we plot the settling time's $r$ dependency in Fig.~\ref{fig_stabilityDur}.
+\par The second question to be asked regards the settling time of the system, for in Fig.~\ref{fig_stability} we easily observe that the settling time of $r=0.6$ (i.e. $\sim{}10$ signal round trips) is substantially shorter than its matching value ($\sim{}50$) when $r=0.9$.
+To better understand the phenomenon in Fig.~\ref{fig_stabilityDur}, we plot for each $r$ value, its corresponding settling time.
 Although outside of this work's scope, this issue will obviously be of great importance when considering dynamic targets, as will be discussed in the ``future research`` part of the concluding Chapter.~\ref{chap:conclusion}.
 \begin{figure}[t!]
     \begin{center}
@@ -118,11 +120,12 @@ Although outside of this work's scope, this issue will obviously be of great imp
     }
     \label{fig_stabilityDur}
 \end{figure}
-\par Although many interesting questions rise from the initial simulations, most of them are outside the scope of this work.
-We choose to add one more note, regarding the influence of the array's number of elements.
-Although in spatial processing literature, enlarging the number of elements in the array commonly increases the spatial performance, both examining \eqref{eq:SF_CB_gainMismatch} and simulating the experimental scenarios show that it (increase of elements) does not affect the temporal performance of the system - i.e. the settling time remains the same as $N$ increases.
+% \par To conclude this section, we choose to add one more note, regarding the influence of the array's number of elements.
+% Although in spatial processing literature, enlarging the number of elements in the array commonly increases the spatial performance, both examining \eqref{eq:SF_CB_gainMismatch} and simulating the experimental scenarios show that it (increase of elements) does not affect the temporal performance of the system - i.e. the settling time remains the same as $N$ increases.
 \subsection{Phase mismatch}
-Using the same weights $\vecnot{\beta}_{\text{CB,opt}},\vecnot{\alpha}_{\text{CB,opt}}$, we denote $\hat{\phi},\hat{\theta}$ to be the range and DOA related phase estimates respectively.
+\label{subsec_error_trms}
+% Using the same weights $\vecnot{\beta}_{\text{CB,opt}},\vecnot{\alpha}_{\text{CB,opt}}$, 
+We denote $\hat{\phi},\hat{\theta}$ to be the range and DOA related phase estimates respectively.
 As we intend to compare the results to \cite{van2004optimum}, we consider a ULA, introducing its estimated steering vector
 \begin{equation}\label{eq_est_d_ULA}
 \hat{\vecnot{d}} = \vBrace{1, \exp{\rBrace{-\hat{\theta}}}, \hdots, \exp{\rBrace{-\rBrace{N-1}\hat{\theta}}}}^{T}.
@@ -138,46 +141,44 @@ Observing that
         {\exp{\rBrace{j\Delta\theta/2}}-\exp{\rBrace{-j\Delta\theta/2}}}\\
         =&\ \exp{\rBrace{j\rBrace{N-1}\Delta\theta/2}}\cdot
         \frac{\sin{\rBrace{N\Delta\theta/2}}}
-        {\sin{\rBrace{\Delta\theta/2}}},
+        {\sin{\rBrace{\Delta\theta/2}}}
     \end{split}
 \end{equation*}
-we define Dirichlet kernel (illustrated in Fig.~\ref{fig_DirichletKernel}) as
+and using the definition of the normalized Dirichlet kernel (illustrated in Fig.~\ref{fig_DirichletKernelNorm})
 \[
-D_{\test{orig}}\rBrace{x,N}\triangleq\frac{\sin\rBrace{Nx}}{\sin\rBrace{x}}
+\D{x}{N}
+% =\frac{1}{N}D_{\test{orig}}\rBrace{x,N}
+=\frac{1}{N}\frac{\sin\rBrace{Nx}}{\sin\rBrace{x}},
 \]
-and the normalized Dirichlet kernel (illustrated in Fig.~\ref{fig_DirichletKernelNorm})
-\[
-\D{x}{N}=\frac{1}{N}D_{\test{orig}}\rBrace{x,N}=\frac{1}{N}\frac{\sin\rBrace{Nx}}{\sin\rBrace{x}}.
-\]
-Now, \eqref{eqn:GeneralFeedbackTransferFunction} takes the form of
+we find that for ULA, \eqref{eqn:GeneralFeedbackTransferFunction} may be expressed as
 \begin{equation}\label{eq:alpha_beta_hat}
     \begin{split}
-        H_{\vecnot{\beta}_{\text{CB,opt}},\vecnot{\alpha}_{\text{CB,opt}}}
+        H_{\vecnot{\beta}_{\text{CB}},\vecnot{\alpha}_{\text{CB}}}
         = &\frac{r\D{\dTheta/2}{N}\exp\cBrace{-j\vBrace{\dPhi+\rBrace{N-1}\dTheta/2}}}{1-r\D{\dTheta/2}{N}\exp\cBrace{-j\vBrace{\dPhi+\rBrace{N-1}\dTheta/2}}}.
     \end{split}
 \end{equation}
-\begin{figure}[t!]
-    \begin{center}
-        \begin{overpic}[width=0.65\linewidth, 
-        %grid, 
-        tics=10,trim=0 0 0 0]{./Media/DirichletKernels.png}
-            \put (3, 26){\rotatebox{90}{$D_{\test{orig}}\rBrace{x,N}$}}
-            \put (91, 32){\rotatebox{0}{\scriptsize{$D_{\test{orig}}\rBrace{x,2}$}}}
-            \put (91, 53){\rotatebox{0}{\scriptsize{$D_{\test{orig}}\rBrace{x,5}$}}}
-            \put (91, 59){\rotatebox{0}{\scriptsize{$D_{\test{orig}}\rBrace{x,7}$}}}
-            \put (91, 8){\rotatebox{0}{\scriptsize{$D_{\test{orig}}\rBrace{x,10}$}}}
-            \put (50, 2.5){\rotatebox{0}{$x$}}
-            \put (12, 5){\rotatebox{0}{$-\pi$}}
-            \put (29, 5){\rotatebox{0}{$-\frac{\pi}{2}$}}
-            \put (70, 5){\rotatebox{0}{$\frac{\pi}{2}$}}
-            \put (89, 5){\rotatebox{0}{$\pi$}}
-        \end{overpic}
-    \end{center}
-    \caption{
-    Few illustrations of the Dirichlet kernel, for $N$ values of 2,5,7 and 10.
-    }
-    \label{fig_DirichletKernel}
-\end{figure}
+% \begin{figure}[t!]
+%     \begin{center}
+%         \begin{overpic}[width=0.65\linewidth, 
+%         %grid, 
+%         tics=10,trim=0 0 0 0]{./Media/DirichletKernels.png}
+%             \put (3, 26){\rotatebox{90}{$D_{\test{orig}}\rBrace{x,N}$}}
+%             \put (91, 32){\rotatebox{0}{\scriptsize{$D_{\test{orig}}\rBrace{x,2}$}}}
+%             \put (91, 53){\rotatebox{0}{\scriptsize{$D_{\test{orig}}\rBrace{x,5}$}}}
+%             \put (91, 59){\rotatebox{0}{\scriptsize{$D_{\test{orig}}\rBrace{x,7}$}}}
+%             \put (91, 8){\rotatebox{0}{\scriptsize{$D_{\test{orig}}\rBrace{x,10}$}}}
+%             \put (50, 2.5){\rotatebox{0}{$x$}}
+%             \put (12, 5){\rotatebox{0}{$-\pi$}}
+%             \put (29, 5){\rotatebox{0}{$-\frac{\pi}{2}$}}
+%             \put (70, 5){\rotatebox{0}{$\frac{\pi}{2}$}}
+%             \put (89, 5){\rotatebox{0}{$\pi$}}
+%         \end{overpic}
+%     \end{center}
+%     \caption{
+%     Few illustrations of the Dirichlet kernel, for $N$ values of 2,5,7 and 10.
+%     }
+%     \label{fig_DirichletKernel}
+% \end{figure}
 \begin{figure}[t!]
     \begin{center}
         \begin{overpic}[width=0.65\linewidth, 

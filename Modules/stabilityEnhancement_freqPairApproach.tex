@@ -4,7 +4,7 @@ We now propose an architecture which obtains the desired beampattern $\Hr_{\Delt
 \subsection{Intuition}
 Bearing in mind that the system's phase alignment sensitivity resides in \eqref{eq_narmalized_pattern} via the  term $\exp\Brack{j\dPhi}=\exp\Brack{j\omega\Delta\tau_{pd}}$ and that the round-trip delay ($\tau_{pd}$) cannot be controlled, one may suggest to use lower frequencies. 
 Unfortunately, aiming for practical range estimation errors, the transmission of such low frequencies is physically unfeasible.
-As the medium for the wave's propagation in the context of localization is not free space, physical considerations are to be taken when choosing the frequency band of use.
+% As the medium for the wave's propagation in the context of localization is not free space, physical considerations are to be taken when choosing the frequency band of use.
 Following the thorough spectrum use overview in \cite{barclay2003propagation}, among the notable considerations for choosing frequency in localization related schemes are
 \begin{itemize}
     \item \textbf{Propagation efficiency}\\
@@ -12,7 +12,7 @@ Following the thorough spectrum use overview in \cite{barclay2003propagation}, a
     \item \textbf{Antenna length}\\
     As described in \cite{barclay2003propagation}, although low ($<30_{\text{KHz}}$) frequencies propagate efficiently in the earth-atmosphere wave guide \cite{wen2015foundations}, the wavelength is large ($\sim10_{\text{Km}}$), hence the needed antenna length is too large for any practical use.
     \item \textbf{Signal bandwidth}\\
-    As the carrier signal's frequency decreases, so does the available bandwidth due to aliasing.
+    As the carrier signal's frequency decreases, so does the available bandwidth.
 \end{itemize}
 Henceforth, we suggest simultaneous transmission of several frequencies instead of the unfeasible option of transmitting low frequencies. 
 In the following we suggest a dual frequency (DF) waveform, utilizing two harmonics, $\omega_1$ and $\omega_2$, and show that range error sensitivity may be resolved  as it will depend on the frequency difference $\omega_{1}-\omega_{2}$.
@@ -44,7 +44,7 @@ In the following we suggest a dual frequency (DF) waveform, utilizing two harmon
             \put (30.75, 25){\footnotesize{$\mathcal{F}_{\omega_{2}}$}}
         \end{overpic}
     \end{center}
-    \caption{Dual-frequency beamformer, consisting of two independent FB blocks and narrowband bandpass filters. The blocks marked by $\mathcal{F}_{\omega_{i}}$ compute the Fourier coefficients in $\omega_{i}$ and their outputs feed the harmonic mean calculator, which generates the DF beamformer's output.}
+    \caption{DF BF, consisting of two independent FB blocks and narrowband bandpass filters. The blocks marked by $\mathcal{F}_{\omega_{i}}$ compute the frequency response at $\omega_{i}$ and their outputs feed the harmonic mean calculator, which generates the DF BF's output.}
     \label{fig_app}
 \end{figure}
 In Fig.~\ref{fig_app}, we demonstrate the use of two independently configured FB instances (see also Fig.~\ref{fig:Proposed_spatialIIR_ARCH}), where each instance is designed to treat a specific frequency band.
@@ -104,10 +104,10 @@ is required.
 We now simulate \eqref{eqn_H_DF_general} for the DF structured FB,
 generalizing the $\coefSetName$ approach and setting
 \begin{equation*}
-    \vBetaCI{1}=\frac{-\vdHatIC{1}\exp\rBrace{j\rBrace{\phiIHat{1}-\phiIHat{2}}}}{\hat{\gI{1}}\norm{\vdHatI{1}}^2}.
+    \vBetaCI{1}=\frac{\vdHatIC{1}\exp\rBrace{j\rBrace{\phiIHat{1}-\phiIHat{2}}}}{\hat{\gI{1}}\norm{\vdHatI{1}}^2}.
 \end{equation*}
 % where $\vdHatI{1}$ is the estimated steering vector, as in \eqref{eq:d_hat}.
-With this choice, and similarly to \eqref{eq_narmalized_pattern}, \eqref{eqn_H_DF_general} becomes
+With this choice, denoted as the ``DF,CB`` beamformer, and similarly to \eqref{eq_narmalized_pattern}, \eqref{eqn_H_DF_general} becomes
 \begin{equation}
     \label{eqn_H_DF_CB}
     %\resizebox{.89\linewidth}{!}
@@ -121,9 +121,9 @@ With this choice, and similarly to \eqref{eq_narmalized_pattern}, \eqref{eqn_H_D
     }
 \end{equation}
 where $\kappa\triangleq{}r_{1}/r_{2}$ is the gain mismatch ratio.
-For close frequencies, one may assume that $r_{1}\approx{}r_{2}$, hence $\kappa$ tends towards unity, thus significantly mitigating the gain mismatch effect even when both feedback beamformers are mismatched.
+For close frequencies, one may assume that $r_{1}\approx{}r_{2}$, hence $\kappa$ tends towards unity, thus significantly mitigating the gain mismatch effect even when both FBs are mismatched.
 \par Simulating the DF architecture, configured to mitigate range estimation errors as in \eqref{eq_DF_phErr} and plotting its normalized (to $0$~dB peak gain) beampattern together with the perfectly range aligned scenario, we show in Fig.~\ref{fig_dualfreq_rangeErrorHighSnr} that the DF architecture achieves a near-optimal performance, despite the inherent range error of $\Delta{}R_{\text{rt}}=10$~m.
-In Fig.~\ref{fig_dualfreq_perfectAlignLowSnr}, we repeat the simulation while adding white Gaussian noise to the output of each feedback beamformer. Evidently, even in the noisy case, the DF beamformer achieves a close-to-ideal beampattern, while the SF beamformer suffers from severe distortions.
+In Fig.~\ref{fig_dualfreq_perfectAlignLowSnr}, we repeat the simulation while adding white Gaussian noise to the output of each FB. Evidently, even in the noisy case, the DF BF achieves a close-to-ideal beampattern, while the SF BF suffers from severe distortions.
 \begin{figure}[t!]
     \begin{center}
         \begin{overpic}[width=.65\linewidth, 
@@ -136,9 +136,9 @@ In Fig.~\ref{fig_dualfreq_perfectAlignLowSnr}, we repeat the simulation while ad
             \put (47,0){\footnotesize{$\thetaD/\pi$}}
         \end{overpic}
     \end{center}
-    \caption{Simulating a 3 element ULA with $r_1=0.6^{2},\; r_2=0.6$ (hence $\kappa=0.6$), assuming an infinite SNR. For each target direction $\thetaD$, the DF beamformer output $Z_\text{DF}$ is evaluated where the beamformer is set to enhance signals impinging from $\thetaD=\pi/2$. 
+    \caption{Simulating a 3 element ULA with $r_1=0.6^{2},\; r_2=0.6$ (hence $\kappa=0.6$), assuming an infinite SNR. For each target direction $\thetaD$, the DF BF output $Z_\text{DF}$ is evaluated where the beamformer is set to enhance signals impinging from $\thetaD=\pi/2$. 
     The (modulus $\lambda$) range error is $\Delta{}R_{\text{rt}}=0.3\lambda$.
-    The single frequency (SF) beamformer (red squares) and the dual-frequency (DF) solution (green diamonds) are compared to the ideal response  $\Delta{}R_{\text{rt}}=0$ (blue dots) as a reference. 
+    The SF BF (red squares) and the dual-frequency solution (green diamonds) are compared to the ideal response  $\Delta{}R_{\text{rt}}=0$ (blue dots) as a reference. 
     }
     \label{fig_dualfreq_rangeErrorHighSnr}
 \end{figure}
@@ -180,9 +180,9 @@ In Fig.~\ref{fig_dualfreq_perfectAlignLowSnr}, we repeat the simulation while ad
             \put (20, 42){\footnotesize{$\thetaD/\pi$}}
             \put (77, 42){\footnotesize{$\thetaD/\pi$}}
             \put (49, 2){\footnotesize{$\thetaD/\pi$}}
-            \put (16,52){\scriptsize{$\text{SNR}=6_{dB}$}}
-            \put (74,52){\scriptsize{$\text{SNR}=0_{dB}$}}
-            \put (44.5,12){\scriptsize{$\text{SNR}=-6_{dB}$}}
+            \put (19.75,52){\scriptsize{$\text{SNR}=6_{dB}$}}
+            \put (77,52){\scriptsize{$\text{SNR}=0_{dB}$}}
+            \put (47.5,12){\scriptsize{$\text{SNR}=-6_{dB}$}}
             \put (4,42.5){\footnotesize{(a)}}
             \put (60.5,42.5){\footnotesize{(b)}}
             \put (32,2){\footnotesize{(c)}}

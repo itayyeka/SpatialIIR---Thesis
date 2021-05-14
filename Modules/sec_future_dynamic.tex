@@ -1,27 +1,44 @@
 Revisiting \eqref{eqn:SingleSensorTemporalEquality}, a natural initial generalization would be to allow the target of interest to be dynamic, i.e. introducing a general 3D arbitrary target location $\vecnot{p}_{t}\rBrace{t}$.
 The location dynamics may be represented in terms of dynamic propagation delay, $\tau_{pd}\rBrace{t}$ and Doppler.
-It follows that an auxiliary temporal quantity should be defined, which for a given impinging signal, expresses it's transmission time. 
-Hence, we denote the moment of transmission $t_{i}\rBrace{t}$ as
+% It follows that an auxiliary temporal quantity should be defined, which for a given impinging signal, expresses it's transmission time.
+\par
+Following the basic steps of temporal analysis, as in Chapter.~\ref{chap:firstchap}, starts with expressing the impinging signal of a single sensor.
+As in the analysis of static target scenario, the signal consists of two contributions, i.e. the reflected emitted signal and the reflected feedback signal.
+Therefore, for each moment $t$, we should resolve the corresponding moment in which the current impinging signals were emitted by the array.
+\par
+To this end, we first denote $t_{\text{ref}}\rBrace{t}$ the moment in which the currently impinging signal was reflected by the target of interest.
+Another auxiliary quantity is reflection moment's corresponding target range $\tau_{\text{ref}}$ where the following relation holds
 \begin{equation}
-\label{eq_fut_dyn_ti}
-    t_{i}\rBrace{t} = \cBrace{t - 2\tau\ \middle\vert\ \tau = \frac{R\rBrace{t-\tau}}{c}}
+\label{eq_tRef_relation}
+    t-\frac{R\rBrace{t_{\text{ref}}\rBrace{t}}}{c} = t_{\text{ref}}\rBrace{t}.
 \end{equation}
-With $t_{i}$, we rewrite \eqref{eqn:SingleSensorTemporalEquality} as
+Assuming $t_{\text{ref}}\rBrace{t}$ is resolved, we denote the propagation delay at the reflection moment $\tau_{\text{ref}}\rBrace{t} = R\rBrace{t_{\text{ref}}\rBrace{t}}/c$ and express the emission moment as
+\begin{equation}
+\label{eq_tTX}
+    t_{\text{\tiny{TX}}}\rBrace{t} 
+    = 
+    t_{\text{ref}}\rBrace{t} - \tau_{\text{ref}}\rBrace{t} 
+    =
+    t - 2\tau_{\text{ref}}\rBrace{t}.
+\end{equation}
+With $t_{\text{\tiny{TX}}}$, we rewrite \eqref{eqn:SingleSensorTemporalEquality} as
 \begin{equation}
     \label{eq_fut_dyn_temp}
-    x_{n}(t) = g\rBrace{s\rBrace{t_{i}\rBrace{t}}
-    +\sum_{m=0}^{N-1}{\alpha^{*}_{m}x_{m}\rBrace{t_{i}\rBrace{t}}}}.
+    x_{n}(t) = g\rBrace{s\rBrace{t_{\text{\tiny{TX}}}\rBrace{t}}
+    +\sum_{m=0}^{N-1}{\alpha^{*}_{m}x_{m}\rBrace{t_{\text{\tiny{TX}}}\rBrace{t}}}}.
 \end{equation}
-For example, consider a target with constant, radial only (constant DOA) velocity $v$ with respect to the array which is initially positioned with distance of $R_{0}$ from the array.
+\par
+Obviously, to have a closed form expression for $x_{n}(t)$, there should be a model for the target's dynamics (i.e. $\vpt{}$).
+Such an example, is a target with constant radial (constant DOA) velocity $v$ with respect to the array which is initially positioned with distance of $R_{0}$ from the array.
 It follows that
 \begin{equation}
     \label{eq_fut_constV_Rt}
     R\rBrace{t} = R_{0} + vt
 \end{equation}
-which when plugged into \eqref{eq_fut_dyn_ti} gives rise to
+which when plugged into \eqref{eq_tRef_relation} gives rise to
 \begin{equation}
     \label{eq_fut_constV_ti}
-    t_{i}\rBrace{t}=\frac{c-v}{c+v}t-\frac{2R_{0}}{c+v}
+    t_{\text{\tiny{TX}}}\rBrace{t}=\frac{c-v}{c+v}t-\frac{2R_{0}}{c+v}
 \end{equation}
 and it follows that
 \begin{equation}
@@ -30,11 +47,11 @@ and it follows that
     +\sum_{m=0}^{N-1}{\alpha^{*}_{m}x_{m}\rBrace{\frac{c-v}{c+v}t-\frac{2R_{0}}{c+v}}}}.
 \end{equation}
 Then, similar steps as in Sec.~\ref{sec_introduceFeedback} are to be made to get an expression for the system's response $H$.
-It is expected that as in RADAR systems, the tracking of the object should now also take Doppler shifts as the returning signal is frequency shifted.
+It is expected that as in RADAR systems, the tracking of the object should now also take Doppler shifts into account.
 % One may consider the following research approaches for further investigation
 % \begin{itemize}
 %     \item \textbf{Modeling of target's location}
-%     \\Considering a constant velocity $\vecnot{v}_{\theta,\phi}$, of the target, where $v_{\theta}$ and $v_{\phi}$ are the radial and the tangent velocity components respectively, will result in a closed form expression for $t_{i}$, $$t_{i}=\frac{R\rBrace{t=0}+\rBrace{c+v_{\theta}}t}{c},$$ where $R\rBrace{t=0}$ is the initial distance to the target of interest and further development may lead to a closed form response like in the stationary case.
+%     \\Considering a constant velocity $\vecnot{v}_{\theta,\phi}$, of the target, where $v_{\theta}$ and $v_{\phi}$ are the radial and the tangent velocity components respectively, will result in a closed form expression for $t_{\text{\tiny{TX}}}$, $$t_{\text{\tiny{TX}}}=\frac{R\rBrace{t=0}+\rBrace{c+v_{\theta}}t}{c},$$ where $R\rBrace{t=0}$ is the initial distance to the target of interest and further development may lead to a closed form response like in the stationary case.
 %     In this manner, other components may be added to the positional equation.
 %     \item \textbf{Frame based processing}
 %     \\Considering low velocity of the target with respect to the wave's propagation's speed, one may consider treating the processor as pseudo-stationary and explore its implications for increasing velocities/processing duration. 

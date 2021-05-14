@@ -40,7 +40,7 @@ Using the plane wave notation
 \label{eq_prlm_waveEq_finSol}
 f\rBrace{t,\vecnot{x}}=A\exp{j\rBrace{\omega{t}-\vecnot{k}^{T}\vecnot{x}}},
 \end{equation}
-where $ \vecnot{x} = \vBrace{x,y,z}^{T} $ emphasizes the fact that for a given time, $t_{0}$, all points on a plane given by $k_{x}x+k_{y}y+k_{z}z = constant$ are with the same phase value where $\vecnot{k}\vecnot{x}=constant$ are planes of constant phase value.
+where $ \vecnot{x} = \vBrace{x,y,z}^{T} $ emphasizes the fact that for a given time, $t_{0}$, all points on a plane given by $k_{x}x+k_{y}y+k_{z}z = constant$ are with the same phase value where $\vecnot{k}^{T}\vecnot{x}=constant$ are planes of constant phase value.
 The wave propagation can be described as the traveling of the planes, stating that small steps of both space $\delta{\vecnot{x}}$ and time $\delta{t}$ result in the same wave value i.e. $f\rBrace{t+\delta{t},\vecnot{x}+\delta{\vecnot{x}}} = f\rBrace{t,\vecnot{x}}$, which yields
 \begin{equation}
 \omega\delta{t}-\vecnot{k}^{T}\delta\vecnot{x}=0.
@@ -59,23 +59,23 @@ Using \eqref{eq_prlm_waveEq_stepsEq} with $\delta{t} = \frac{2\pi}{\omega}$, we 
 \end{equation}
 Therefore, the wavenumber vector can be considered to represent spatial frequency, similarly to the manner $\omega$ represents temporal frequency.
 \par For example, in the context of ULA, assuming far field scenario, the impinging waves are treated as constant phase planes as in \eqref{eq_prlm_waveEq_finSol}.
-The spatial diversity of the ULA elements is expressed as a TOA difference of the impinging signal in each sensor which will be shown to provide clues for the signal's DOA as can be seen in Fig.~\ref{fig_ULA_sketch}.
+The spatial diversity of the ULA elements is expressed as a TOA difference of the impinging signal in each sensor which will be shown to provide clues for the signal's DOA (measured from the array's broadside) as can be seen in Fig.~\ref{fig_ULA_sketch}.
 \begin{figure}[h!]
     \begin{center}
         \begin{overpic}[width=0.6\linewidth, 
         % grid, 
         tics=10,trim=0 0 0 0]{./Media/arraySketch.png}
-        \put(33.25,2.25){\rotatebox{0}{\tiny{$d$}}}
-        \put(16,26){\rotatebox{-36}{\tiny{$c\tau=d\cos{\theta}$}}}
-        \put(45.5,15.75){\rotatebox{0}{$\theta$}}
-        \put(15,7){\rotatebox{0}{\tiny{0}}}
-        \put(28,7){\rotatebox{0}{\tiny{1}}}
-        \put(41,7){\rotatebox{0}{\tiny{2}}}
-        \put(80,7){\rotatebox{0}{\tiny{$N-1$}}}
-        \put(2,24){\rotatebox{-36}{\tiny{$t=0$}}}
-        \put(2,34){\rotatebox{-36}{\tiny{$t=\tau$}}}
-        \put(2,44){\rotatebox{-36}{\tiny{$t=2\tau$}}}
-        \put(40,44){\rotatebox{-36}{\tiny{$t=\rBrace{N-1}\tau$}}}
+        \put(57.5,2.25){\rotatebox{0}{\tiny{$d$}}}
+        \put(42,34){\rotatebox{-36}{\tiny{$c\tau=d\cos{\theta}$}}}
+        \put(19,15.75){\rotatebox{0}{$\theta$}}
+        \put(15,7){\rotatebox{0}{\tiny{$N-1$}}}
+        \put(65,7){\rotatebox{0}{\tiny{1}}}
+        \put(52,7){\rotatebox{0}{\tiny{2}}}
+        \put(80,7){\rotatebox{0}{\tiny{0}}}
+        \put(-5,29){\rotatebox{-36}{\tiny{$t=-\rBrace{N-1}\tau$}}}
+        \put(13,42){\rotatebox{-36}{\tiny{$t=-2\tau$}}}
+        \put(27,42){\rotatebox{-36}{\tiny{$t=-\tau$}}}
+        \put(42,42){\rotatebox{-36}{\tiny{$t=0$}}}
         \end{overpic}
     \end{center}
      \caption{An illustration of an $N$ element ULA, impinged with a plane wave arriving from a DOA of $\theta$.}

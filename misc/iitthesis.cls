@@ -314,7 +314,13 @@
  \cleardoublepage
 
  \ifbool{iitthesis-abbrevs}{
-  \makeabbreviationsAndNotation
+    \input{front/abbrevs}
+    \printglossary[nonumberlist,type=\acronymtype] % displays the Acronyms without the number list
+    \printglossary[nonumberlist,title={Notations}] %displays the glossary
+    % \printglossary[style=mystyle,nonumberlist,type=\acronymtype] % displays the Acronyms without the number list
+    % \printglossary[style=mystyle,nonumberlist,title={Notations}] %displays the glossary
+    \glsaddall % displays all the entries before it
+    \glsaddallunused
   \cleardoublepage
  }{ }
 }

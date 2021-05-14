@@ -1,18 +1,10 @@
 \chapter{Preliminaries}
 \label{chap:prelims}
-As a preliminary discussion to the presentation of our contribution, we overview some the key theoretical basis of the thesis.
-First, a short overview of array-processing is presented in Sec.~\ref{sec:prlm_sensorArrays}, accompanied by a complementary wave propagation discussion in Sec.~\ref{sec:prlm_propWaveField}.
-To accommodate the discussion for spatial filtering, we also mention the time-space relation of spatially sampled signals in Sec.~\ref{sec:prlm_timeSpaceSig}.
-In Sec.~\ref{sec:prlm_localization}, we further focus the spatial filtering discussion to localization and overview some of its fundamentals.
-Following the FIR/IIR filters related issue, which was previously mentioned in Chapter.~\ref{chap:intro}, we further elaborate and compare the two architectures in Sec.~\ref{sec:prlm_FIR_IIR}.
-To complete the basics overview, we also discuss array performance measures in Sec.~\ref{sec:prlm_array_perf} following classical array processing literature.
-% \begin{definition}
-% The \emph{von Neumann model} of a computer, also known as the \emph{Princeton architecture} is an architecture for digital computers, which consists of a processing units, containing an ALU and processing registers; a control unit consisting of an instruction register and a program counter; a memory unit which stores both data and instructions; and input-and-output mechanisms.
-% \end{definition}
-
-% \section{Digital Filter Design - Finite/Infinite Response Filters}
-% \label{sec:prlm_FILTERS}
-% \input{Modules/sec_prlm_FILTERS}
+In this chapter, we discuss the theoretical preliminaries for this thesis.
+First, a short overview of array-processing is presented in Sec.~\ref{sec:prlm_sensorArrays}, accompanied by a complementary wave propagation elementaries in Sec.~\ref{sec:prlm_propWaveField}.
+As a preface to spatial filtering, we mention the time-space relation of spatially sampled signals in Sec.~\ref{sec:prlm_timeSpaceSig}, which is followed by a discussion of classic spatial performance analysis methods in Sec.~\ref{sec:prlm_array_perf} and further elaboration on
+localization in Sec.~\ref{sec:prlm_localization}.
+Finally, Sec.~\ref{sec:prlm_FIR_IIR} reviews the FIR/IIR filters, presents the pros and cons of both architectures and serves as the foundation for this research's motivation.
 \section{Sensor arrays}
 \label{sec:prlm_sensorArrays}
 \input{Modules/sec_prlm_sensorArrays}
@@ -22,15 +14,12 @@ To complete the basics overview, we also discuss array performance measures in S
 \section{Spatio-temporal processing}
 \label{sec:prlm_timeSpaceSig}
 \input{Modules/sec_prlm_timeSpaceSig}
-\section{Localization}
-\label{sec:prlm_localization}
-\input{Modules/sec_prlm_localization}
-% \section{Sensor array performance measure}
-% \label{sec:prlm_sensorArrayPerf}
-% \input{Modules/sec_prlm_arrPerf}
-\section{The analogy between array processing and temporal digital filtering}
-\label{sec:prlm_FIR_IIR}
-\input{Modules/sec_prlm_FIR_IIR}
 \section{Array spatial performance}
 \label{sec:prlm_array_perf}
 \input{Modules/sec_prlm_array_perf}
+\section{Localization}
+\label{sec:prlm_localization}
+\input{Modules/sec_prlm_localization}
+\section{The analogy between array processing and temporal digital filtering}
+\label{sec:prlm_FIR_IIR}
+\input{Modules/sec_prlm_FIR_IIR}

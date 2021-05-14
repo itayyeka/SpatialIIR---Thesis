@@ -95,7 +95,7 @@ Aiming to maximize the FIM diagonal elements via denominator (i.e., $\lBrace{1-g
 \vAlphaC_{\text{CB,opt}}=\frac{\vdC\exp\rBrace{j\phi}}{\hat{g}\norm{\vd}^2},
 \end{equation}
 where $\hat{g}$ is the channel gain estimate.
-Considering narrowband signals, this choice of weights may be interpreted as a generalized version of the \emph{conventional beamformer} (CB) \cite{van2004optimum} which is a mere time shift (phase shift in narrowband signals) of the input signals as if the impinging wave is coming from the array's boresight direction (i.e. $\theta_{d}=\pi/2$) as illustrated in Fig.\ref{fig_CB_vanTrees}.
+Considering narrowband signals, this choice of weights may be interpreted as a generalized version of the CB \cite{van2004optimum} which is a mere coherent summation of the feedback signal.
 \begin{figure}[t!]
     \begin{center}
         \begin{overpic}[width=0.55\linewidth, 
@@ -106,7 +106,7 @@ Considering narrowband signals, this choice of weights may be interpreted as a g
     \end{center}
     \caption{
     % A visualization of the spatial area selectivity concept.
-    The \emph{conventional beamformer} - time shifting the input signals as if the impinging wave from a certain DOA arrives from the array's boresight.
+    The CB - time shifting the input signals as if the impinging wave from a certain DOA arrives from the array's boresight.
     }
     \label{fig_CB_vanTrees}
 \end{figure}

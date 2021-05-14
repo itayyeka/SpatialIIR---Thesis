@@ -1,17 +1,17 @@
 In this chapter, we revisit the most basic DOA estimation approach, i.e. beamforming, and present our novel feedback based architecture.
-The feedback based beamforming concept is introduced in Sec.~\ref{sec_introduceFeedback}.
-Then, we apply information theory related reasoning for the array setting in Sec.~\ref{sec_FIM}, namely we use the Fisher Information Matrix (FIM).
+The feedback based beamforming concept is elaborated in Sec.~\ref{sec_introduceFeedback}.
+Then, we apply information theory related reasoning for the array setting in Sec.~\ref{sec_FIM}, namely we use the FIM to design the coefficients of the suggested beamformer.
 The resultant beamformer's temporal response and spatial performance are analysed in Sec.~\ref{sec_stability} and Sec.~\ref{sec_Performance} respectively, assuming ideal noiseless scenario.
-Considering noisy setups, the beamformer's noise sensitivity is exemplified in Sec.\ref{sec_sim}, followed by a practical and robust dual-frequency beamformer which is presented in Sec.~\ref{sec_app}.
+Considering noisy setups, the beamformer's noise sensitivity is exemplified in Sec.~\ref{sec_sim}, followed by a practical and robust dual-frequency beamformer design which is presented in Sec.~\ref{sec_app}.
 
 \section{Notations and problem setup}
 \label{sec_introduceFeedback}
 In this section, a feedback-based architecture is proposed for spatial signal processing.
 Inspired by time domain ``Direct form II'' IIR filter design (see Fig.~\ref{fig_IIR_arch}), 
 we propose to use the same concept in the spatial domain.
-The suggested feedback beamformer (FB) architecture, where the output signal ($z$) is synthesized using weights $\vBeta$ and the weights $\vAlpha$ synthesize the feedback transmission ($\Tx$), is presented in Fig.~\ref{fig:Proposed_spatialIIR_ARCH}. The beamformer's output and the feedback signal are synthesized using two independently configured beamformers, $s$ is the system's stimulus and an additive noise (n) is assumed at the array's output.
+The suggested FB architecture, where the output signal ($z$) is synthesized using weights $\vBeta$ and the weights $\vAlpha$ synthesize the feedback transmission ($\Tx$), is presented in Fig.~\ref{fig:Proposed_spatialIIR_ARCH}. The beamformer's output and the feedback signal are synthesized using two independently configured beamformers, $s$ is the system's stimulus and an additive noise (n) is assumed at the array's output.
 Also, the FB block is marked (dashed line) for later use.
-Note that setting $\vAlpha=\vecnot{0}$ (i.e., cancelling the feedback) degenerates the system to a plain delay-and-sum (DS) beamformer.
+Note that setting $\vAlpha=\vecnot{0}$ (i.e., cancelling the feedback) degenerates the system to the convectional beamformer (CB) beamformer.
 \begin{figure}[t!]
     \begin{center}
         \begin{overpic}[width=0.5\linewidth, 
@@ -38,9 +38,9 @@ Note that setting $\vAlpha=\vecnot{0}$ (i.e., cancelling the feedback) degenerat
         \end{overpic}
     \end{center}
     \caption{
-    The proposed feedback beamformer.
+    The proposed FB.
     The spatial feedback is obtained by continuous re-transmission of $\Tx$ to the target at $\vpt$.
-    We designate the feedback beamformer block (dashed line) for later use.
+    We designate the FB block (dashed line) for later use.
     }
     \label{fig:Proposed_spatialIIR_ARCH}
 \end{figure}
@@ -54,10 +54,12 @@ Note that setting $\vAlpha=\vecnot{0}$ (i.e., cancelling the feedback) degenerat
 \input{./Modules/sec_stability.tex}
 \section{Performance Analysis}
 \label{sec_Performance}
-In this section we analyze the suggested FB (see Fig.~\ref{fig:Proposed_spatialIIR_ARCH}), considering some fundamental properties which are commonly used to asses array performance and discussed in Sec.~\ref{sec:prlm_array_perf}: Beamwidth, peak-to-sidelobe level, and directivity. Each property is then compared to traditional passive ULAs, showing that significantly improved performances are obtainable with spatial feedback integration.
+In this section we analyze the suggested FB (see Fig.~\ref{fig:Proposed_spatialIIR_ARCH}), considering some fundamental properties which are commonly used to asses array performance and were discussed in Sec.~\ref{sec:prlm_array_perf}: Beamwidth, peak-to-sidelobe level, and directivity. Each property is then compared to traditional passive ULAs, showing that significantly improved performances are obtainable with spatial feedback integration.
 \subsection{The normalized beampattern}
 \label{subsection_spatialIIR_normBP}
-Applying the \emph{normalized beampattern} concept of Sec.~\ref{sec:prlm_array_perf} to this work, we set $\vecnot{\beta}_{\coefSetName,\text{opt}}=\vecnot{\alpha}_{\coefSetName,\text{opt}},$ giving rise to
+Applying the \emph{normalized beampattern} notation of Sec.~\ref{sec:prlm_array_perf}, we set $\vecnot{\beta}_{\coefSetName}=\vecnot{\alpha}_{\coefSetName}.$ 
+Considering the unavoidable errors mentioned in \ref{subsec_error_trms} (i.e. $\Delta\theta, \Delta\phi$ and $r$), we define $\HrTPr$ as the general scenario normalized array response.
+We choose to normalize the spatial response according to $H_{0}$ (of \eqref{eq:SF_CB_gainMismatch}), giving rise to
 \begin{equation}
     \label{eq_narmalized_pattern}
     %\resizebox{.89\linewidth}{!}{
@@ -66,7 +68,7 @@ Applying the \emph{normalized beampattern} concept of Sec.~\ref{sec:prlm_array_p
         \frac{
         \HbaFB
         }{
-        H_{\vecnot{\beta}_{\coefSetName,\text{opt}},\vecnot{\alpha}_{\coefSetName,\text{opt}}}
+        H_{0}
         }\\
         &=
         \frac{
@@ -180,21 +182,52 @@ Also, for $N\geq2$, $\lim_{r\rightarrow 1}\mathcal{D}\rBrace{N,r}=\infty$, imply
 \lim_{N\to\infty}\frac{\mathcal{D}\rBrace{N,r}}{\mathcal{D}\rBrace{N,0}}
 =\frac{N/\rBrace{1-r}}{N}=\frac{1}{1-r}.
 \end{equation}
-\begin{figure}[t]
-    \begin{center}
-        \begin{overpic}[width=0.75\linewidth, 
-        %grid, 
-        tics=10,trim=0 0 0 0]{./Media/directivity_expr.eps}
-            \put (20, 10){\footnotesize{$N$}}
-            \put (72, 6){\footnotesize{$r$}}
-            \put (16.5, 70){\footnotesize{Numerical integration}}
-            \put (16.5, 65){\footnotesize{$\rBrace{N-r}/\rBrace{1-r}$}}
-            \put (-9, 45){\footnotesize{$\mathcal{D}\rBrace{N,r}$}}
-        \end{overpic}
-    \end{center}
-     \caption{Plot of $\mathcal{D}\rBrace{N,r}$, computed using numerical integration (surface), shown to perfectly match the analytic expression (black diamonds) presented in \eqref{eq_D_result}.}
-    \label{fig_directivity}
+\begin{figure}
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \begin{center}
+            \begin{overpic}[width=\linewidth, 
+                %grid, 
+                tics=10,trim=0 0 0 0]{./Media/directivity_expr.eps}
+                    \put (20, 10){\footnotesize{$N$}}
+                    \put (72, 6){\footnotesize{$r$}}
+                    \put (16.5, 70){\footnotesize{Numerical integration}}
+                    \put (16.5, 65){\footnotesize{$\rBrace{N-r}/\rBrace{1-r}$}}
+                    \put (-9, 45){\footnotesize{$\mathcal{D}\rBrace{N,r}$}}
+            \end{overpic}
+        \end{center}
+         \caption{Plot of $\mathcal{D}\rBrace{N,r}$, computed using numerical integration (surface), shown to perfectly match the analytic expression (black diamonds) presented in \eqref{eq_D_result}.}
+        \label{fig_directivity}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \begin{center}
+            \begin{overpic}[width=\linewidth, 
+                % grid, 
+                tics=10,trim=0 0 0 0]{./Media/directivityErr.png}
+                    \put (18, 6){\footnotesize{$N$}}
+                    \put (72, 3){\footnotesize{$r$}}
+                    \put (0, 68){\footnotesize{Error}}
+            \end{overpic}
+        \end{center}
+        \caption{The error between numerical calculation and the analytic expression.}
+        \label{fig_directivityErr}
+    \end{minipage}
 \end{figure}
+% \begin{figure}[t]
+%     \begin{center}
+%         \begin{overpic}[width=0.75\linewidth, 
+%         %grid, 
+%         tics=10,trim=0 0 0 0]{./Media/directivity_expr.eps}
+%             \put (20, 10){\footnotesize{$N$}}
+%             \put (72, 6){\footnotesize{$r$}}
+%             \put (16.5, 70){\footnotesize{Numerical integration}}
+%             \put (16.5, 65){\footnotesize{$\rBrace{N-r}/\rBrace{1-r}$}}
+%             \put (-9, 45){\footnotesize{$\mathcal{D}\rBrace{N,r}$}}
+%         \end{overpic}
+%     \end{center}
+%      \caption{Plot of $\mathcal{D}\rBrace{N,r}$, computed using numerical integration (surface), shown to perfectly match the analytic expression (black diamonds) presented in \eqref{eq_D_result}.}
+%     \label{fig_directivity}
+% \end{figure}
 \subsection{Summary}
 To conclude this section, we summarize the feedback integration related performance improvements in Table.~\ref{table_arrayPerformance}.
 \begin{table}[h!]
@@ -216,7 +249,7 @@ To conclude this section, we summarize the feedback integration related performa
     \label{table_arrayPerformance}
 \end{table}
 Also, in Fig.~\ref{fig_perf} we demonstrate the HPBW and sidelobe attenuation for 3 elements ULA.
-As the expressions for HPBW and sidelobe-attenuation are relevant for $\sim{}N>20$, we also simulate 20 elements ULA for in Fig.~\ref{fig_perf20}. 
+As the expressions for HPBW and sidelobe-attenuation are relevant for $\sim{}N>20$, we also simulate 20 elements ULA in Fig.~\ref{fig_perf20}. 
 In Table.~\ref{table_arrayPerfEmp} we show the coherency between the results and the performance related expressions of Table.~\ref{table_arrayPerformance}.
 As predicted, the results of Fig.~\ref{fig_perf20} are consistent with the theoretical expressions.
 \begin{figure}[t]
@@ -241,7 +274,7 @@ As predicted, the results of Fig.~\ref{fig_perf20} are consistent with the theor
             \put (84.25, 13.5){\tiny{$-41.6_{dB}$}}
         \end{overpic}
     \end{center}
-     \caption{Simulating 3 elements ULA based feedback beamformer for $r$ values of 0, 0.3, 0.6 and 0.8.
+     \caption{Simulating 3 elements ULA based FB for $r$ values of 0, 0.3, 0.6 and 0.8.
      The HPBW is marked with vertical red dashed line, where an auxiliary horizontal line of $\abs{H}^{2} = 1/2$ is also provided.
      The sidelobe attenuation is cited in each plot in a textual fashion.}
     \label{fig_perf}
@@ -274,7 +307,7 @@ As predicted, the results of Fig.~\ref{fig_perf20} are consistent with the theor
     \label{fig_perf20}
 \end{figure}
 \begin{table}[h!]
-    \caption{Performances of conventional beamformer $r=0$ and the proposed Feedback-Beamforming Architecture, for several $r$ values.
+    \caption{Performances of CB $r=0$ and the proposed Feedback-Beamforming Architecture, for several $r$ values.
     Also comparison to expected theoretical expressions is provided.}
     \centering
     %\resizebox{1\linewidth}{!}

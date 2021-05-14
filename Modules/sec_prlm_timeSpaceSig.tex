@@ -3,17 +3,17 @@ A basic application of the sensor array is the beamformer, designed to enhance s
 \begin{figure}[ht!]
     \begin{center}
         \begin{overpic}[width=0.6\linewidth, 
-        %grid, 
+        % grid, 
         tics=10,trim=0 0 0 0]{./Media/arrayProc.png}
-        \put(45,33.25){\rotatebox{0}{$\theta$}}
-        \put(15,25){\rotatebox{0}{\tiny{0}}}
-        \put(28,25){\rotatebox{0}{\tiny{1}}}
-        \put(41,25){\rotatebox{0}{\tiny{2}}}
-        \put(80,25){\rotatebox{0}{\tiny{$N-1$}}}
-        \put(16,20){\rotatebox{0}{\tiny{$\omega_{0}$}}}
-        \put(29.5,20){\rotatebox{0}{\tiny{$\omega_{1}$}}}
-        \put(42,20){\rotatebox{0}{\tiny{$\omega_{2}$}}}
-        \put(81,20){\rotatebox{0}{\tiny{$\omega_{N-1}$}}}
+        \put(19.5,29.5){\rotatebox{0}{$\theta$}}
+        \put(15,21.5){\rotatebox{0}{\tiny{$N-1$}}}
+        \put(65,21.5){\rotatebox{0}{\tiny{1}}}
+        \put(52,21.5){\rotatebox{0}{\tiny{2}}}
+        \put(80,21.5){\rotatebox{0}{\tiny{0}}}
+        \put(16,18){\rotatebox{0}{\tiny{$\omega_{N-1}$}}}
+        \put(54,18){\rotatebox{0}{\tiny{$\omega_{2}$}}}
+        \put(67,18){\rotatebox{0}{\tiny{$\omega_{1}$}}}
+        \put(81,18){\rotatebox{0}{\tiny{$\omega_{0}$}}}
         \put(50.5,3.5){\rotatebox{0}{\tiny{$z\rBrace{t}$}}}
         \end{overpic}
     \end{center}
@@ -23,15 +23,14 @@ A basic application of the sensor array is the beamformer, designed to enhance s
 In complimentary to Fig.~\ref{fig_ULA_sketch}, Fig.~\ref{fig_ULA_imping} adds the processor layer of the beamformer.
 \par A temporal snapshot measured by the array at time $t$ is
 \begin{equation}
-\vecnot{f}\rBrace{t,\vecnot{p}} = \vBrace{f\rBrace{t,p_{0}},\dots,f\rBrace{t,p_{N-1}}}^{T},
+\vecnot{f}\rBrace{t,\vecnot{p}} = \vBrace{f\rBrace{t,p_{0}},\dots,f\rBrace{t,p_{N-1}}}^{T}.
 \end{equation}
-where $p_{n}$ denotes the $n$-th sensor position, $t$ denotes the continuous-time variable and $^{T}$ denotes the transpose operation. 
-Considering the \emph{conventional beamformer} \cite{van2004optimum}, the output ($z\rBrace{t}$) is expressed by:
+Considering the CB \cite{van2004optimum}, the output ($z\rBrace{t}$) is expressed by:
 \begin{equation}
 z\rBrace{t} = \sum_{n=0}^{N-1}{f\rBrace{t,p_{n}}\omega_{n}^{*}},
 \end{equation}
 where $\omega_{n}$ is a complex weight used for the $n$'th sensor's output, as shown in Fig.~\ref{fig_ULA_imping} and $^{*}$ denotes complex conjugation. 
-Consider $s\rBrace{t} = e^{j\omega{t}}$ as a plane wave propagating at temporal frequency $\omega$, and $\theta \in \vBrace{-\frac{\pi}{2},\frac{\pi}{2}}$ as the direction of arrival (DOA) angle measured with respect to the broadside of the linear array, as shown in Fig.~\ref{fig_ULA_imping}.
+Consider $s\rBrace{t} = e^{j\omega{t}}$ as a plane wave propagating at temporal frequency $\omega$, and $\theta \in \vBrace{-\frac{\pi}{2},\frac{\pi}{2}}$ as the DOA angle measured with respect to the broadside of the linear array, as shown in Fig.~\ref{fig_ULA_imping}.
 The wave signal, spatially sampled by the sensor array inputs is
 \begin{equation}
 \label{eq_prlm_timeSpace_outputVec}

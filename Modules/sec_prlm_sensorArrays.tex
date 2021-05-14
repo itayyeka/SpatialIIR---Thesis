@@ -3,7 +3,7 @@ The samples from the entire array are then fused together in order to extract th
 The spatial diversity of the sampled data allows the extraction of spatial features.
 Sensor arrays are used in numerous applications, ranging from source localization, communication, medical applications, astronomy etc.
 \par 
-When designing a sensor array, multiple consideration are to be taken into account, ranging from physical characteristics e.g. area, weight and carrying platform, through performance related considerations such as accuracy, spatial selectivity, signal to noise ratio and even the financial aspect.
+When designing a sensor array, multiple consideration are to be taken into account, ranging from physical characteristics e.g. area, weight and carrying platform, through performance related considerations such as accuracy, spatial selectivity, SNR and even the financial aspect.
 The most fundamental array specification is its geometry, for it dictates the spatial relations between simultaneous samples measured by the array's sensors, which also greatly influences the processing methods of the raw-data.
 A basic example of a sensor array is the ULA (see Fig.~\ref{fig_ULA}), where its elements are uniformly spaced on a straight line with distance $d$ between each pair of sensors.
 Considering an array of $N$ elements, the sensors are positioned at
@@ -21,7 +21,7 @@ where $n$ is the sensors index; $p_{n}$ denotes the position of the $n$'th senso
         \put (83.25, 28.5) {\tiny{$\rBrace{N-1}\cdot{}d$}}
         \end{overpic}
     \end{center}
-     \caption{A uniform linear array of size $N$ and spacing $d$.}
+     \caption{A ULA of size $N$ and spacing $d$.}
     \label{fig_ULA}
 \end{figure}
 \par To properly formulate the discussed additional spatial information when using sensor arrays, a quick overview on wave propagation is due and presented in the following section (Sec.~\ref{sec:prlm_propWaveField}).
