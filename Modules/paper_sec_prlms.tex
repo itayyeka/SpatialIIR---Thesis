@@ -11,7 +11,7 @@ Inspired by time domain ``Direct form II'' IIR filter design (see Fig.~\ref{fig_
 we propose to use the same concept in the spatial domain.
 The suggested FB architecture, where the output signal ($z$) is synthesized using weights $\vBeta$ and the weights $\vAlpha$ synthesize the feedback transmission ($\Tx$), is presented in Fig.~\ref{fig:Proposed_spatialIIR_ARCH}. The beamformer's output and the feedback signal are synthesized using two independently configured beamformers, $s$ is the system's stimulus and an additive noise (n) is assumed at the array's output.
 Also, the FB block is marked (dashed line) for later use.
-Note that setting $\vAlpha=\vecnot{0}$ (i.e., cancelling the feedback) degenerates the system to the convectional beamformer (CB) beamformer.
+Note that setting $\vAlpha=\vecnot{0}$ (i.e., cancelling the feedback) degenerates the system to the conventional beamformer (CB).
 \begin{figure}[t!]
     \begin{center}
         \begin{overpic}[width=0.5\linewidth, 
@@ -19,14 +19,14 @@ Note that setting $\vAlpha=\vecnot{0}$ (i.e., cancelling the feedback) degenerat
         tics=10,trim={0 0 0 0}]{./Media/SpatialIIR-diagram/SpatialIIR_VER9.png}
             \put (14, 39){\footnotesize{$\sum_{n=0}^{N-1}\beta^{*}_{n}x_{n}$}}
             \put (54, 39){\footnotesize{$\sum_{n=0}^{N-1}\alpha^{*}_{n}x_{n}$}}
-            \put (24.25, 50){\footnotesize{$x_{0}$}}
-            \put (35, 50){\footnotesize{$x_{1}$}}
-            \put (55, 50){\footnotesize{$x_{N-1}$}}
+            \put (27, 53){\footnotesize{$x_{N-1}$}}
+            \put (37.5, 53){\footnotesize{$x_{N-2}$}}
+            \put (58, 53){\footnotesize{$x_{0}$}}
             \put (30.5, 66){\footnotesize{$\delta$}}
             \put (89, 96){\footnotesize{$\vpt$}}
-            \put (58, 58){\footnotesize{$\vpi{N-1}$}}
-            \put (37, 58){\footnotesize{$\vpi{1}$}}
-            \put (26.5, 58){\footnotesize{$\vpi{0}$}}
+            \put (60, 60.5){\footnotesize{$\vpi{0}$}}
+            \put (39, 60.5){\footnotesize{$\vpi{N-2}$}}
+            \put (28, 60.5){\footnotesize{$\vpi{N-1}$}}
             \put (41.5, 64.5){\footnotesize{$\theta_{d}$}}
             \put (19, 11.25){\large{$+$}}
             \put (61.25, 27.25){\large{$+$}}
@@ -171,7 +171,7 @@ In the context of this work, the directivity is expressed as
 \begin{equation}\label{eq_D}
     \mathcal{D}\rBrace{N,r} = \frac{\Hr_{\Delta\theta=0,\Delta\phi=0,r}}{\frac{1}{2\pi}\int_{0}^{2\pi}\Hr_{\Delta\theta,\Delta\phi=0,r}\ d\Delta\theta} = \frac{2\pi}{\int_{0}^{2\pi}\Hr_{\Delta\theta,\Delta\phi=0,r}\ d\Delta\theta},
 \end{equation}
-Plugging \eqref{eq_Hdphi0} within \eqref{eq_D} and by numerical evaluation (see App.~\ref{apndx_directivityFit} and the complementary Fig.~\ref{fig_directivity}) we suggest to approximate the directivity with 
+Plugging \eqref{eq_Hdphi0} within \eqref{eq_D} and by numerical evaluation (see App.~\ref{apndx_directivityFit} and the complementary Fig.~\ref{fig_directivity} and Fig.~\ref{fig_directivityErr}) we suggest to approximate the directivity with 
 \begin{equation}\label{eq_D_result}
     \mathcal{D}\rBrace{N,r} \approx \frac{N-r}{1-r},
 \end{equation}
@@ -231,13 +231,13 @@ Also, for $N\geq2$, $\lim_{r\rightarrow 1}\mathcal{D}\rBrace{N,r}=\infty$, imply
 \subsection{Summary}
 To conclude this section, we summarize the feedback integration related performance improvements in Table.~\ref{table_arrayPerformance}.
 \begin{table}[h!]
-    \caption{Performances of Classical ULA and the Proposed Feedback-Beamforming Architecture, with a Gain Mismatch $r$.}
+    \caption{Performances of CB and the Proposed Feedback-Beamforming Architecture, with a Gain Mismatch $r$.}
     \centering
     %\resizebox{1\linewidth}{!}
     {
         \begin{tabular}{||c c c c||}
             \hline
-            & ULA & \thead{FEEDBACK\\BEAMFORMING} & IMPROVEMENT \\ [0.5ex] 
+            & CB & \thead{FEEDBACK\\BEAMFORMING} & IMPROVEMENT \\ [0.5ex] 
             \hline\hline
             HPBW & $ 1.4/N$ & $1.4/\rBrace{f(r)N}$ & Narrower by a factor of $f\rBrace{r}$\\ 
             \thead{FIRST\\SIDELOBE\\GAIN} & $2/3\pi$ & $2\rBrace{1-r}/3\pi$ & \thead{smaller by a factor of $1-r$\\for $N\gg{}1$} \\
@@ -250,7 +250,7 @@ To conclude this section, we summarize the feedback integration related performa
 \end{table}
 Also, in Fig.~\ref{fig_perf} we demonstrate the HPBW and sidelobe attenuation for 3 elements ULA.
 As the expressions for HPBW and sidelobe-attenuation are relevant for $\sim{}N>20$, we also simulate 20 elements ULA in Fig.~\ref{fig_perf20}. 
-In Table.~\ref{table_arrayPerfEmp} we show the coherency between the results and the performance related expressions of Table.~\ref{table_arrayPerformance}.
+In Table.~\ref{table_arrayPerfEmp} we show the consistency between the results and the performance related expressions of Table.~\ref{table_arrayPerformance}.
 As predicted, the results of Fig.~\ref{fig_perf20} are consistent with the theoretical expressions.
 \begin{figure}[t]
     \begin{center}

@@ -2,12 +2,12 @@ Revisiting \eqref{eqn:SingleSensorTemporalEquality}, a natural initial generaliz
 The location dynamics may be represented in terms of dynamic propagation delay, $\tau_{pd}\rBrace{t}$ and Doppler.
 % It follows that an auxiliary temporal quantity should be defined, which for a given impinging signal, expresses it's transmission time.
 \par
-Following the basic steps of temporal analysis, as in Chapter.~\ref{chap:firstchap}, starts with expressing the impinging signal of a single sensor.
+Following the basic steps of temporal analysis, as in Chapter.~\ref{chap:firstchap}, we start with expressing the impinging signal of a single sensor.
 As in the analysis of static target scenario, the signal consists of two contributions, i.e. the reflected emitted signal and the reflected feedback signal.
 Therefore, for each moment $t$, we should resolve the corresponding moment in which the current impinging signals were emitted by the array.
 \par
-To this end, we first denote $t_{\text{ref}}\rBrace{t}$ the moment in which the currently impinging signal was reflected by the target of interest.
-Another auxiliary quantity is reflection moment's corresponding target range $\tau_{\text{ref}}$ where the following relation holds
+To this end, we first denote $t_{\text{ref}}\rBrace{t}$ as the moment in which the currently impinging signal was reflected by the target of interest.
+Another auxiliary quantity is the reflection moment's corresponding target range $\tau_{\text{ref}}$ where the following relation holds
 \begin{equation}
 \label{eq_tRef_relation}
     t-\frac{R\rBrace{t_{\text{ref}}\rBrace{t}}}{c} = t_{\text{ref}}\rBrace{t}.
@@ -36,10 +36,18 @@ It follows that
     R\rBrace{t} = R_{0} + vt
 \end{equation}
 which when plugged into \eqref{eq_tRef_relation} gives rise to
+
 \begin{equation}
     \label{eq_fut_constV_ti}
-    t_{\text{\tiny{TX}}}\rBrace{t}=\frac{c-v}{c+v}t-\frac{2R_{0}}{c+v}
+    %\resizebox{.89\linewidth}{!}{
+    \begin{split}
+        t_{\text{ref}}\rBrace{t} &= \frac{c}{c+v}t-\frac{R_{0}}{c+v} \\
+        \tau_{\text{ref}}\rBrace{t} &= \frac{R_{0}+vt}{c+v} \\
+        t_{\text{\tiny{TX}}}\rBrace{t} &= t-2\tau_{\text{ref}}\rBrace{t} \\ 
+        &= \frac{c-v}{c+v}t-\frac{2R_{0}}{c+v} \\
+    \end{split}
 \end{equation}
+
 and it follows that
 \begin{equation}
     \label{eq_fut_constV_xn}

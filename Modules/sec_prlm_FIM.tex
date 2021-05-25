@@ -2,7 +2,7 @@ In the parameter estimation problems, we obtain information about the parameter 
 A natural question is: how much information can a sample of data provide about the unknown parameter? 
 To this end, the FIM, which is the common tools for assessing the amount of available information in the sampled data is overviewed in the following.
 \par
-Consider a random variable $x$ for which the pdf is $f\rBrace{x|\theta}$, where $\theta$ is an unknown parameter and $\theta\in\Theta$, with $\Theta$ is the parameter space.
+Consider a random variable $x$ for which the PDF is $f\rBrace{x|\theta}$, where $\theta$ is an unknown parameter and $\theta\in\Theta$, with $\Theta$ is the parameter space.
 Intuitively, if an event has small probability, then the occurrence of this event brings us much information.
 For a random variable $X \sim f\rBrace{x|\theta}$, if $\theta$ were the true value of the parameter, the likelihood function should take a big value, or equivalently, the derivative log-likelihood function should be close to zero, and this is the basic principle of maximum likelihood estimation.
 We define $l\rBrace{x|\theta} = \log{f\rBrace{x|\theta}}$ as the log-likelihood function which follows that the Fisher information may be expressed \cite{van2004detection} as 
@@ -11,14 +11,14 @@ We define $l\rBrace{x|\theta} = \log{f\rBrace{x|\theta}}$ as the log-likelihood 
     I\rBrace{\theta} = -E_{\theta}\cBrace{l^{\prime\prime}\rBrace{x|\theta}}=-\int{\vBrace{\frac{\partial^{2}}{\partial\theta^{2}}\log{f\rBrace{x|\theta}}f\rBrace{x|\theta}}dx}
 \end{equation}.
 \subsection{Cram\'er-Rao Lower Bound and Asymptotic Distribution of Maximum Likelihood Estimators}
-In practical applications, where signal is noised and parameters cannot be accurately estimated, having a closed form expression for the FIM naturally leads to seek for a performance bound that will help the user to know when available information is fully utilized.
+In practical applications, where signal is noisy and parameters cannot be accurately estimated, having a closed form expression for the FIM naturally leads to seek for a performance bound that will help the user to know when available information is fully utilized.
 Such a bound for unbiased estimators is \cite{van2004detection}
 \begin{equation*}
-    \text{Var}_{\theta}\cBrace{\hat{\theta}}\geq\frac{1}{nI\rBrace{\theta}}.
+    \text{Var}_{\theta}\cBrace{\hat{\theta}}\geq{}I^{-1}\rBrace{\theta}.%\frac{1}{nI\rBrace{\theta}}.
 \end{equation*}
-The right hand side is always called the Cram\'er-Rao lower bound (CRLB): under certain conditions, no other unbiased estimator of the parameter $\theta$ based on an i.i.d sample of size $n$ can have a variance smaller than CRLB.
+The right hand side is the CRLB: under certain conditions, no other unbiased estimator of the parameter $\theta$ can have a variance smaller than CRLB.
 \subsection{The Multiple Parameter Case}
-Suppose now there are more than one parameters in the distribution model, that is, the random variable $X\sim{}f\rBrace{x|\vecnot{\theta}}$ with $\vecnot{\theta}=\rBrace{\theta_{0},\dot,\theta_{k-1}}^{T}$.
+Suppose now there are more than one parameter in the distribution model, that is, the random variable $X\sim{}f\rBrace{x|\vecnot{\theta}}$ with $\vecnot{\theta}=\rBrace{\theta_{0},\dot,\theta_{k-1}}^{T}$.
 We denote the log-likelihood function as
 \begin{equation*}
     l\rBrace{\vecnot{\theta}}=\log{f\rBrace{x|\vecnot{\theta}}},
@@ -43,7 +43,7 @@ Considering unbiased estimators, the CRLB for the multi-parameter case can be sh
     \text{Cov}_{\vecnot{\theta}}\cBrace{\hat{\vecnot{\theta}}\rBrace{\vecnot{X}}}\geq{}I^{-1}\rBrace{\vecnot{\theta}}
 \end{equation}
 where the matrix inequality $A\geq{}B$ means that $A-B$ is positive semi-definite.
-From \eqref{eq_prlm_multiVar_CRLB}, it is obvious that when $I$'th determinant is increased, the CRLB decreases which implicates that the measuring is more informative and though not necessarily obtainable, an optimal estimator will achieve higher accuracy in such scenario.
+From \eqref{eq_prlm_multiVar_CRLB}, it is obvious that when $I$'th determinant is increased, the CRLB decreases which implicates that the data is more informative and though not necessarily obtainable, an optimal estimator will achieve higher accuracy in such scenario.
 \subsection{Frequency Domain Cram\'er-Rao Bound for Gaussian Processes}
 The interesting work of \cite{zeira1990frequency} (which also specifically states its contribution to localization applications) enables the generalization of the CRLB to the frequency domain, which is of high relevance to this work (see Sec.\ref{sec_FIM}).
 Assuming Gaussian processes, the results of \cite{whittle1953analysis} are utilized together with further development to find that 

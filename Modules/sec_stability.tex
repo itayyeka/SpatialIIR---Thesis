@@ -36,30 +36,10 @@ And plugging \eqref{eq:alpha_beta_opt} into \eqref{eqn:GeneralFeedbackTransferFu
         \end{split}
     }
 \end{equation}
-As anticipated from \eqref{eq:SF_CB_gainMismatch} and confirmed with the simulations presented in Fig.\ref{fig_stability}, for $r\geq1$ the system is not stable, for the received amplitude may increase (in absolute value) to infinite values.
+As anticipated from \eqref{eq:SF_CB_gainMismatch} and confirmed with the simulations presented in Fig.\ref{fig_stability}, for $r\geq1$ the system is not stable, for the received amplitude may increase (in absolute value) to infinity.
 In Fig.~\ref{fig_stabilityVal}, we plot the final amplitude value after 100 iterations of the signal being retransmitted between the array and the target of interest and find that the final values substantially increase as $r\to{1}$.
 This issue will have to be taken into consideration when one designs such an array for practical applications but currently this is outside the scope of this work.
-\begin{figure}[t!]
-    \begin{center}
-        \begin{overpic}[width=0.55\linewidth, 
-        %grid, 
-        tics=10,trim=0 0 0 0]{./Media/fig_stabilization.png}
-            \put (46, -5){\rotatebox{0}{$t/\tau_{pd}$}}
-            \put (-6, 38){\rotatebox{90}{$\abs{z\rBrace{t}}$}}
-            \put (46, 18.5){\rotatebox{0}{$r=0.6$}}
-            \put (46, 35){\rotatebox{0}{$r=0.9$}}
-            \put (46, 54){\rotatebox{0}{$r=1$}}
-            \put (18, 60){\rotatebox{0}{$r=1.1$}}
-            \put (0.75, 80){\rotatebox{0}{dB}}
-        \end{overpic}
-    \end{center}
-    \caption{
-    Simulating a 3 element ULA based FB, steered to a target which resides in the direction $\theta_{s} = \pi/2$ and plotting temporal response (dB) for multiple $r$ values.
-    The horizontal axis ($t/\tau_{pd}$) is the time, normalized to the signal's round-trip duration to the target and back.
-    }
-    \label{fig_stability}
-\end{figure}
-As a final observation, we address the ``discrete`` behaviour of $z$, i.e. the value (most noticeable in the $r=1.1$ plot) seems to be piecewise constant.
+As a final observation, we address the ``discrete`` behaviour of $z$, i.e. the value (most noticeable in the $r=1.1$ plot in Fig.~\ref{fig_stability}) seems to be piecewise constant.
 This phenomenon corresponds with the propagation latency of the signal's round trip to the target and back.
 In each iteration the mainlobe sharpens, as can be seen in Fig.~\ref{fig_beamThinning}.
 The reader may notice in Fig.~\ref{fig_beamThinning} that the $t=1\cdot{}\tau_{pd}$ plot is actually the conventional beampattern, for the feedback signal has not yet re-impinged the array.
@@ -90,6 +70,26 @@ The reader may notice in Fig.~\ref{fig_beamThinning} that the $t=1\cdot{}\tau_{p
     \begin{center}
         \begin{overpic}[width=0.55\linewidth, 
         %grid, 
+        tics=10,trim=0 0 0 0]{./Media/fig_stabilization.png}
+            \put (46, -5){\rotatebox{0}{$t/\tau_{pd}$}}
+            \put (-6, 38){\rotatebox{90}{$\abs{z\rBrace{t}}$}}
+            \put (46, 18.5){\rotatebox{0}{$r=0.6$}}
+            \put (46, 35){\rotatebox{0}{$r=0.9$}}
+            \put (46, 54){\rotatebox{0}{$r=1$}}
+            \put (18, 60){\rotatebox{0}{$r=1.1$}}
+            \put (0.75, 80){\rotatebox{0}{dB}}
+        \end{overpic}
+    \end{center}
+    \caption{
+    Simulating a 3 element ULA based FB, steered to a target which resides in the direction $\theta_{s} = \pi/2$ and plotting temporal response (dB) for multiple $r$ values.
+    The horizontal axis ($t/\tau_{pd}$) is the time, normalized to the signal's round-trip duration to the target and back.
+    }
+    \label{fig_stability}
+\end{figure}
+\begin{figure}[t!]
+    \begin{center}
+        \begin{overpic}[width=0.55\linewidth, 
+        %grid, 
         tics=10,trim=0 0 0 0]{./Media/fig_stabilizationVal.png}
             \put (0, 82){\rotatebox{0}{dB}}
             \put (-6, 30){\rotatebox{90}{$\lim_{t\to\infty}\abs{z\rBrace{t}}$}}
@@ -97,12 +97,13 @@ The reader may notice in Fig.~\ref{fig_beamThinning} that the $t=1\cdot{}\tau_{p
         \end{overpic}
     \end{center}
     \caption{
-    After simulating the same setup as in Fig.\ref{fig_stability}, we plot the final received amplitude in dB with different choices of $r$.
+    After simulating the same setup as in Fig.~\ref{fig_stability}, we plot the final received amplitude in dB with different choices of $r$.
     }
     \label{fig_stabilityVal}
 \end{figure}
-\par The second question to be asked regards the settling time of the system, for in Fig.~\ref{fig_stability} we easily observe that the settling time of $r=0.6$ (i.e. $\sim{}10$ signal round trips) is substantially shorter than its matching value ($\sim{}50$) when $r=0.9$.
-To better understand the phenomenon in Fig.~\ref{fig_stabilityDur}, we plot for each $r$ value, its corresponding settling time.
+\par The second question to be asked regards the settling time of the system.
+For example, in Fig.~\ref{fig_stability} we easily observe that the settling time for $r=0.6$ ($\sim{}10$ signal round trips) is substantially shorter than its matching value ($\sim{}50$) when $r=0.9$.
+To better understand the phenomenon, we plot for each $r$ value, its corresponding settling time in Fig.~\ref{fig_stabilityDur}.
 Although outside of this work's scope, this issue will obviously be of great importance when considering dynamic targets, as will be discussed in the ``future research`` part of the concluding Chapter.~\ref{chap:conclusion}.
 \begin{figure}[t!]
     \begin{center}
@@ -114,9 +115,9 @@ Although outside of this work's scope, this issue will obviously be of great imp
         \end{overpic}
     \end{center}
     \caption{
-    Simulation of same setup as in Fig.\ref{fig_stability}.
+    Simulation of same setup as in Fig.~\ref{fig_stability}.
     For each $r$ (the horizontal axis), we plot the time (the vertical axis) where the received amplitude entered the $1\%$ sleeve around its final value.
-    The plotted time is also in units of $\tau_{\text{pd}}$ normalized as in Fig.\ref{fig_stability}.
+    The plotted time is also normalized in units of $\tau_{\text{pd}}$ as in Fig.~\ref{fig_stability}.
     }
     \label{fig_stabilityDur}
 \end{figure}
@@ -133,8 +134,8 @@ As we intend to compare the results to \cite{van2004optimum}, we consider a ULA,
 Observing that
 \begin{equation*}
     \begin{split}
-        \hat{\vecnot{d}}^{H}\vecnot{d} =&\ \vecnot{d}^{H}\hat{\vecnot{d}}\\
-        =&\ \sum_{n=0}^{N-1}\exp{\rBrace{jn\Delta\theta}} \\
+        % \hat{\vecnot{d}}^{H}\vecnot{d} =&\ \vecnot{d}^{H}\hat{\vecnot{d}}\\
+        \hat{\vecnot{d}}^{H}\vecnot{d} =&\ \sum_{n=0}^{N-1}\exp{\rBrace{jn\Delta\theta}} \\
         =&\ \frac{\exp{\rBrace{jN\Delta\theta}}-1}{\exp{\rBrace{j\Delta\theta}}-1}\\
         =&\ \frac{\exp{\rBrace{jN\Delta\theta/2}}}{\exp{\rBrace{j\Delta\theta/2}}}\cdot
         \frac{\exp{\rBrace{jN\Delta\theta/2}}-\exp{\rBrace{-jN\Delta\theta/2}}}

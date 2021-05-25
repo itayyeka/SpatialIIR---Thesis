@@ -1,7 +1,8 @@
 As in Sec.~\ref{sec:prlm_FIR_IIR}, an $N$-element array is considered and some notations are revisited for an easier reading of this chapter.
 The array's $n$'th sensor is positioned at $\vpi{n},\;\text{for}\; n=0,\ldots,N-1$ and we set $\vpi{0}$ as the axis reference point while the target of interest is positioned at $\vpt$ and define its distance from the array as $R = \norm{\vpt-\vpi{0}}$.
-The gain of the reimpinging signal is denoted as $g$ which encapsulates both propagation related gain and the target's radar cross section (RCS). 
-We also place a transmitter at $\vpi{0}$, where the transmitted signal $s$, is reflected back from the target and re-impinges the array with a total delay of $\tau_{\text{pd}}=2R/c$ seconds, denoting $c$ as the propagation velocity of the signal in the medium.
+The gain of the reimpinging signal is denoted as $g$ which encapsulates both propagation related attenuation and the target's radar cross section (RCS). 
+We also place a transmitter at $\vpi{0}$.
+The transmitted signal $s$, is reflected back from the target and re-impinges the array with a total delay of $\tau_{\text{pd}}=2R/c$ seconds, denoting $c$ as the propagation velocity of the signal in the medium.
 Time domain analysis of the proposed feedback based architecture, considering both propagation delay and attenuation, gives rise to
 \begin{equation}
     \label{eqn:SingleSensorTemporalEquality}
@@ -35,7 +36,7 @@ we find that it can be simplified to
 $$
 \F{\vx} =g\rBrace{I-g\vd\vAlphaH{}e^{-j\omega\tau_{pd}}}^{-1}\vd\F{s}\exp{\rBrace{-j\omega\tau_{pd}}}.
 $$
-Then, denoting
+We also denote
 \[
 \phi\triangleq\omega\tau_{pd}
 \]

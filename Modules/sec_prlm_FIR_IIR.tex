@@ -4,7 +4,7 @@ As stated in \cite{oppenheim1975digital} (and numerous other sources), two key f
 This section will briefly overview the design methods and the analogy of ULA based beamforming to the temporal FIR filtering, as implied in Chapter.~\ref{chap:intro}.
 \begin{itemize}
     \item \textbf{FIR design}\\
-    The FIR filter is a merely a delay-and-sum mechanism, therefore its memory is finite and equal to the number of taps in the final filter's configuration as in Fig.~\ref{fig_FIR_arch}.
+    The FIR filter is a merely a delay-and-sum mechanism, therefore its memory is finite and equals to the number of taps in the final filter's configuration as in Fig.~\ref{fig_FIR_arch}.
     \item \textbf{IIR design}\\
     IIR filters may be viewed as a generalization of the FIR delay-and-sum architecture, where delayed instances of the array's output are fed back to the summation as in Fig.~\ref{fig_IIR_arch}, generating an infinite loop where each output sample is affected by all past input samples. 
 \end{itemize}
@@ -57,13 +57,13 @@ This section will briefly overview the design methods and the analogy of ULA bas
 % To this end, a brief overview on ULA beamforming and its resemblance to FIR filter design are presented next.
 \par 
 % Consider an $N$-element ULA with inter-element spacing $d$, where its $n$'th sensor is positioned at $\vpi{n},\;\text{for}\; n=0,\ldots,N-1$. We set $\vpi{0}$ as the axis reference point and assume that the target of interest is positioned at $\vpt$.
-We consider the same ULA as in Sec.~\ref{sec:prlm_propWaveField}, where a target of interest is placed at $\vpt$.
-Focusing on a far field localization problem, DOA and target range are to be estimated. 
-For simplicity, we assume an anechoic environment, an array of identical omni-directional sensors and a stationary target of interest.
+% We consider the same ULA as in Sec.~\ref{sec:prlm_propWaveField}, where a target of interest is placed at $\vpt$.
+% Focusing on a far field localization problem, DOA and target range are to be estimated. 
+% For simplicity, we assume an anechoic environment, an array of identical omni-directional sensors and a stationary target of interest.
 % In the following, we place a transmitter is at $\vpi{0}$, which emits the signal $s$.
 % Also, we also consider a reflective target, with distance $R = \norm{\vpt-\vpi{0}}$ from the array.
 % Then, the reflected signal re-impinges the array, with a total time delay of $\tau_{\text{pd}}=2R/c$ seconds, where $c$ represents the propagation velocity of the signal in the medium.
-\par As in RADAR applications, the target is assumed to emit a signal $s\rBrace{t}$, where for convenience $s\rBrace{t=0}$ is the signal which impinges $\vpi{0}$ .
+% \par As in RADAR applications, the target is assumed to emit a signal $s\rBrace{t}$, where for convenience $s\rBrace{t=0}$ is the signal which impinges $\vpi{0}$ .
 Let $x_{n}(t)$ be the measured signal at the $n$'th sensor
 \begin{equation}
 x_{n}(t) = s\Brack{t-\tau_{n}},
@@ -73,17 +73,17 @@ where, $\tau_{n}=n\tau_{\theta_{d}}=nd\cos\Brack{\thetaD}/c$ represents the time
 % and $g$, being a scalar in an anechoic environment, is the channel's gain, related to both propagation and the target's radar cross section (RCS).
 Defining $\vecnot{x}\rBrace{t}\triangleq\vBrace{x_{0}\rBrace{t}\hdots{}x_{N-1}\rBrace{t}}^{T}$ and its Fourier transform, $\vecnot{\F{x}}\rBrace{\omega}\triangleq\vBrace{X_{0}\rBrace{\omega},\hdots,X_{N-1}\rBrace{\omega}}^{T}$, one may write 
 \[
-\vecnot{\F{x}}\rBrace{\omega,\theta_{d}}=\vecnot{d}\rBrace{\omega}\F{s}\rBrace{\omega}
+\vecnot{\F{x}}\rBrace{\omega,\theta_{d}}=\vecnot{d}\rBrace{\omega,\theta_{d}}\F{s}\rBrace{\omega}
 \]
-where $S\rBrace{\omega}$ is the Fourier transform of $s\rBrace{t}$ and $\vdO$ denotes the steering vector whose $n$'th element is
+where $S\rBrace{\omega}$ is the Fourier transform of $s\rBrace{t}$ and $\vecnot{d}_{\theta_{d}}$ denotes the steering vector whose $n$'th element is
 \begin{equation}
     \label{eq:d}
-    d_{n}\rBrace{\omega,\theta_{d}} = \exp{\rBrace{-j\omega\tau_{n}\rBrace{\theta}}}.
+    d_{n}\rBrace{\omega,\theta_{d}} = \exp{\rBrace{-j\omega\tau_{n}\rBrace{\theta_{d}}}}.
 \end{equation}
 Denoting the beamformer's weights as $\vBeta\rBrace{\omega}$ and the beamformer's output as $z$, we express the latter in the frequency domain
 \begin{equation}
     \label{eq_Z}
-    Z\rBrace{\omega,\theta_{d}} = \vecnot{\beta}^{T}\rBrace{\omega}\vecnot{d}\rBrace{\omega}\F{s}\rBrace{\omega}.
+    Z\rBrace{\omega,\theta_{d}} = \vecnot{\beta}^{T}\rBrace{\omega}\vecnot{d}_{\theta_{d}}\rBrace{\omega}\F{s}\rBrace{\omega}.
 \end{equation}
 Defining the electric phase to be
 \begin{equation}\label{eq:thetaULA}
@@ -91,7 +91,7 @@ Defining the electric phase to be
 \end{equation}
 we rewrite \eqref{eq_Z} as 
 \[
-Z\rBrace{\omega,\theta} = \F{s}\rBrace{\omega}\sum_{n=0}^{N-1}\beta_{n}\rBrace{\omega}\exp\Brack{-jn\theta},
+Z\rBrace{\omega,\theta} = \F{s}\rBrace{\omega}\sum_{n=0}^{N-1}\beta_{n}\rBrace{\omega}\exp\Brack{-jn\theta\rBrace{\omega}},
 \]
 hence in the ULA case, aiming for a desired spatial response, the weights vector $\vecnot{\beta}\rBrace{\omega}$ configuration is mathematically equivalent to an FIR filter design~\cite{van1988beamforming,benesty2018} as illustrated in Fig.~\ref{fig_analogyULAFIR}.
 \begin{figure}[h!]
@@ -117,10 +117,10 @@ In the spatial processing context, this implies improved spatial performance, us
 However, a well known \cite{oppenheim1975digital} fact in digital signal processing is that the filter latency may be frequency dependant.
 When the dependence is linear, it implies that the phase response derivative (i.e. signal latency) is constant such that there is no dispersion.
 Due to this important property, applications which are sensitive to signal distortions, especially communication based systems, are based on FIR architecture, for it is possible to design it as linear phase filter.
-Also notable is the stability issues of the IIR filter.
+Also notable is the inherent stability of the FIR filter.
 % Acquainted with the analogy between frequency and DOA, it seems that when localization applications are considered, where the DOA resolution criteria is more important than the consistency of detection latency between separate DOAs, the linear phase property is less relevant.
 % This observation, together with the IIR's efficiency motivate the search for the spatial structure which will be analogous to the IIR filter.
-Motivated by the IIR efficiency, we wish to find the spatial structure that will be analogous to the IIR filer design.
+Nevertheless, motivated by the IIR efficiency, we wish to find the spatial structure that will be analogous to the IIR filter design.
 To this end, we aim to incorporate a spatial feedback which will serve as the temporal feedback in the IIR architecture ($\alpha_{1}, \alpha_{2}$ in Fig.~\ref{fig_IIR_arch}) as illustrated in Fig.~\ref{fig_analogyIIRFB}.
 \begin{figure}[h!]
     \begin{center}

@@ -6,16 +6,16 @@ The array sensors' spatial diversity enables the extraction of spatial informati
 \par The ULA has always been a point of interest, due to its simplicity of analysis \cite{van2004optimum,benesty2018}. 
 The array size and the number of its elements ($N$) have significant influence on the obtained array performance, such as SNR improvement, spatial separation capabilities and its spatial response's degrees of freedom (DOF).
 \par Early algorithms for direction of arrival (DOA) estimation were based on the beamforming concept \cite{krim1996two}, where the array's reception beam is steered (mechanically or electronically) to multiple directions in search of received energy peaks which are interpreted as valid emitters.
-One notable improvement to the convectional beamformer \cite{van2004optimum} was Capon's beamformer  (aka minimum variance distortionless response (MVDR) in acoustics related literature) which attempts to minimize the power contributed by noise and any signals coming from other directions than the DOA of interest, while maintaining a fixed gain
+One notable improvement to the conventional beamformer \cite{van2004optimum} was Capon's beamformer  (aka minimum variance distortionless response (MVDR)) which attempts to minimize the power contributed by noise and any signals coming from other directions than the DOA of interest, while maintaining a fixed gain
 in the desired direction.
 \par The most practically used approach in DOA estimators, referred as the subspace based estimation, involves invariant subspace analysis of observed covariance matrices.
 Early research includes PCA and errors-in-variables time series analysis \cite{krim1996two}.
 However, the tremendous interest in the subspace approach is mainly due to the introduction of the
-MUSIC (Multiple SIgnal Classification) algorithm \cite{schmidt1986multiple} which decomposes the estimated covariance matrix to its signal and noise eigenvectors, using orthogonal projection exploiting the fact that the noise sub space is orthogonal to the signal subspace.
+MUSIC (Multiple SIgnal Classification) algorithm \cite{schmidt1986multiple} which decomposes the estimated covariance matrix to its signal and noise eigenvectors, using orthogonal projection exploiting the fact that the noise subspace is orthogonal to the signal subspace.
 It is interesting to note that while earlier works were mostly derived in the context of time series analysis and only later applied to the sensor array problems, MUSIC was originally presented as a DOA estimator.
 \par A less practical, but optimal in the sense of root mean square error (RMSE) \cite{krim1996two}, is the maximum likelihood (ML) approach which tries to find the most probable DOA assuming a known PDF.
 Though this approach served as a basis for extensive research, leading to more advanced concepts such as the independent component analysis (ICA) \cite{hyvarinen1999survey}, in the context of practical DOA estimation it's computational effort is high.
-Adding the fact that sub-optimal methods such as MUSIC were proven to achieve the Cram\'er Rao bound (CRB) under some practical assumptions (e.g. non-coherent signals) \cite{stoica1989music}, these sub optimal estimators are substantially more common in practice. 
+Adding the fact that sub-optimal methods such as MUSIC were proven to achieve the Cram\'er Rao lower bound (CRLB) under some practical assumptions (e.g. non-coherent signals) \cite{stoica1989music}, these sub optimal estimators are substantially more common in practice. 
 \par In pursuit of spatial performance improvement, namely higher spatial separation and selectivity of arriving signals, many approaches were suggested.  
 One approach, commonly referenced as ``virtual arrays'' \cite{pal2010nested,chevalier2005virtual,dogan1995applications} deals with the extraction of samples originated in sensors that do not really exist, by using high (higher than 2) order statistics and manipulating multiple statistical cross-terms in order to estimate statistical characteristics of signals impinging in missing sensors.
 \par Using a similar approach, the $2q$-MUSIC algorithm \cite{chevalier2006high}, enables the use of $N^{2q}$ ``virtual elements'', by calculating the $q$'th order statistics.
@@ -78,15 +78,15 @@ This issue manifests as a ``bend`` close to the sampling frequencies (see Fig.~\
 In this thesis, we propose a new feedback based beamformer architecture which acts as an actual spatial IIR filter while avoiding any temporal processing to the signal.
 The reader may observe that the presented research stages lead one to the other as each analysis of the proposed methods uncovered issues that are addressed in the following.
 \par
-First, as in the early stages of the research, the analogy between a spatial (the ULA) and temporal (the FIR) processors, led us to search for the spatial counterpart of another temporal (the IIR) processor, aiming to translate its advantages from the temporal domain to the spatial domain.
-Also, classic spatial analysis tools have been gathered to serve as objective tests to the proposed solutions.
+First, as in the early stages of the research, the analogy between a spatial (the ULA) and temporal (the FIR) processors, led us to search for the spatial counterpart of another temporal (the IIR) processor, aiming to transfer its advantages from the temporal domain to the spatial domain.
+Also, classic spatial analysis tools have been gathered to serve as performance measures to asses to the proposed solutions.
 \par
 In the second part of the research we present the basic spatial architecture, called FB, introducing the concept of spatial feedback.
 The array configuration is rigorously justified, e.g. the setting of the coefficients is done with the use of the Fisher Information Matrix (FIM).
-Analysis of the spatial structure proves that the desired recursive spatial response is achievable and we show that the advantages of the proposed solution may be expressed with the classic analysis framework.
+Analysis of the spatial structure proves that the desired recursive spatial response is achievable and we show that the advantages of the proposed solution may be expressed within the classical analysis framework.
 As we aim to present a practical architecture, estimation errors were taken into consideration and unveiled some sensitivities that should have been addressed.
 \par
-After close inspection, we conclude in the third part that the carrier frequencies cause this sensitivity and search for ways to mitigate it.
+After close inspection, we conclude in the third part that the range estimation errors cause this sensitivity and search for ways to mitigate it.
 To this end, we present a more sophisticated design, based on the basic architecture, achieving a practical low sensitivity spatial processor which successfully extracts spatial information from two independent close frequency FB units.
 We then simulate the proposed solution and find that in addition to its low sensitivity, it also outperforms the classic beamformers, such as the conventional beamformer (CB) in low SNR. 
 % In this thesis, we propose a new feedback based beamformer architecture which acts as an actual spatial IIR filter while avoiding any temporal processing to the signal.
@@ -106,10 +106,10 @@ Note that the initial stimulus can be generated by the target or the array itsel
 Furthermore, as opposed to the passive target case (i.e., a target which merely reflects the impinging signal), one may consider a cooperative target, which receives, enhances and re-transmits the signal back to the array.
 \section{Thesis Organization}
 \par This thesis is organized as follows.
-In Chapter~\ref{chap:prelims}, we cover basic concepts of array processing, followed by some emphasize on the localization field of research and finalize with the basic concepts which drive the motivation for this research.
+In Chapter~\ref{chap:prelims}, we cover basic concepts of array processing, followed by some emphasize in the field of localization and finalize with the basic concepts which drive the motivation for this research.
 \par In Chapter.~\ref{chap:firstchap} the basic FB is presented and thoroughly analysed, followed by the presentation of the more robust architecture, which uses the former as a building block.
 Simulations are also provided, supporting the analytical analysis.
 \par In Chapter.~\ref{chap:conclusion} we discuss the results and conclude our findings. We finalize by also proposing some leads to future research.
-\par In this work, we use the following conventions; vectors and matrices are denoted by lower and upper case bold italic letters respectively. 
-$v_{i}$ and $A_{ij}$ are the $i$-th element of the vector $\vecnot{v}$ and the $i,j$-th element of the matrix $\vecnot{A}$.
-Also, $\vecnot{A}^{T}$, $\vecnot{A}^{*}$ and $\vecnot{A}^{H}$ are the transpose, conjugate and Hermitian transpose of the matrix $\vecnot{A}$ respectively.
+% \par In this work, we use the following conventions; vectors and matrices are denoted by lower and upper case bold italic letters respectively. 
+% $v_{i}$ and $A_{ij}$ are the $i$-th element of the vector $\vecnot{v}$ and the $i,j$-th element of the matrix $\vecnot{A}$.
+% Also, $\vecnot{A}^{T}$, $\vecnot{A}^{*}$ and $\vecnot{A}^{H}$ are the transpose, conjugate and Hermitian transpose of the matrix $\vecnot{A}$ respectively.
